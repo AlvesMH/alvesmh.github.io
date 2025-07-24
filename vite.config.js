@@ -3,5 +3,6 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: '/', // user/org site -> served from root
+  base: '/', // user/org site => root
 });
+
