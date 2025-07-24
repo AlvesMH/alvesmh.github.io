@@ -1,0 +1,11 @@
+name: blog
+channels:
+  - conda-forge         # more up‑to‑date Node builds
+  - defaults
+dependencies:
+  # --- runtimes ---
+  - nodejs=20           # includes npm
+  # --- handy CLI tools (optional) ---
+  - git                 # so CI & VS Code terminals “just work”
+  - python=3.11         # only if you plan to add scripts or Jupyter notes
+  - pip                 # pairs with the Python line above
