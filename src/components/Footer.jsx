@@ -1,5 +1,6 @@
 import React from 'react';
 import { BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => (
   <footer className="bg-white border-t border-gray-200 py-12">
@@ -14,15 +15,16 @@ const Footer = () => (
         <p className="text-gray-600 mb-6">
           Sharing knowledge, one post at a time.
         </p>
+        {/* Footer navigation links using React Router */}
         <div className="flex justify-center space-x-6 mb-6">
           {['Home', 'About', 'Archive', 'Contact'].map((item) => (
-            <a
+            <Link
               key={item}
-              href={`#${item.toLowerCase()}`}
+              to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
               className="text-gray-400 hover:text-blue-600 transition-colors"
             >
               {item}
-            </a>
+            </Link>
           ))}
         </div>
         <div className="text-sm text-gray-500">

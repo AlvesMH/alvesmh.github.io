@@ -1,3 +1,7 @@
+import React from "react";
+import ReactMarkdown from "react-markdown"; 
+import MarkdownRenderer from "../components/MarkdownRenderer";
+
 export const POSTS = [
   {
     id: 1,
@@ -7,7 +11,12 @@ export const POSTS = [
     category: 'technical',
     date: '2024-01-15',
     readTime: '8 min read',
-    tags: ['React', 'JavaScript', 'Frontend']
+    tags: ['React', 'JavaScript', 'Frontend'],
+    component: React.lazy(() =>
+      import("../posts/understanding-react-hooks.md?raw").then((m) => ({
+        default: () => <MarkdownRenderer source={m.default} />,
+      }))
+    ),
   },
   {
     id: 2,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Hero = () => (
   <section className="py-16 px-4 sm:px-6 lg:px-8">
@@ -16,23 +17,24 @@ const Hero = () => (
           </span>
         </h2>
         <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-          A space where I share my journey through technology, academia, and
-          personal growth. Join me as I explore ideas, solve problems, and
-          document my learning.
+          A space where I share my journey through technology, academia, and personal growth.
+          Join me as I explore ideas, solve problems, and document my learning.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* Link to latest posts section on Home page (scrolls within home) */}
           <a
             href="#latest"
             className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-center"
           >
             Read Latest Posts
           </a>
-          <a
-            href="#about"
+          {/* Link to About page */}
+          <Link
+            to="/about"
             className="border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-colors text-center"
           >
             About Me
-          </a>
+          </Link>
         </div>
       </motion.div>
     </div>

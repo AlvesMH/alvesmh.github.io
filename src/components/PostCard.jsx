@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Calendar, Tag, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const PostCard = ({ post, animationDelay = 0 }) => (
   <motion.article
@@ -19,13 +20,13 @@ const PostCard = ({ post, animationDelay = 0 }) => (
         <span>•</span>
         <span>{post.readTime}</span>
       </div>
-
-      <h3 className="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors cursor-pointer">
-        {post.title}
+      <h3 className="text-2xl font-bold mb-3">
+        {/* Post title links to the full post page */}
+        <Link to={`/post/${post.id}`} className="text-gray-900 hover:text-blue-600 transition-colors">
+          {post.title}
+        </Link>
       </h3>
-
       <p className="text-gray-600 mb-4 leading-relaxed">{post.excerpt}</p>
-
       <div className="flex flex-wrap gap-2 mb-4">
         {post.tags.map((tag) => (
           <span
@@ -37,11 +38,13 @@ const PostCard = ({ post, animationDelay = 0 }) => (
           </span>
         ))}
       </div>
-
-      <button className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors">
-        Read More
-        <ArrowRight className="w-4 h-4" />
-      </button>
+      {/* 'Read More' link navigates to the post's page */}
+      <Link 
+        to={`/post/${post.id}`} 
+        className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+      >
+        Read More <ArrowRight className="w-4 h-4" />
+      </Link>
     </div>
   </motion.article>
 );
