@@ -11,14 +11,14 @@ const Hero = () => (
         transition={{ duration: 0.8 }}
       >
         <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-          Welcome to My{' '}
+          Welcome to {' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-            Digital Garden
+            My Blog
           </span>
         </h2>
         <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-          A space where I share my journey through technology, academia, and personal growth.
-          Join me as I explore ideas, solve problems, and document my learning.
+          A space where I explore ideas about how technology shapes our daily lives and businesses, academia, and personal growth. 
+          
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {/* Link to latest posts section on Home page (scrolls within home) */}

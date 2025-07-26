@@ -1,99 +1,120 @@
 import React from "react";
-import ReactMarkdown from "react-markdown"; 
+import ReactMarkdown from "react-markdown";
 import MarkdownRenderer from "../components/MarkdownRenderer";
 
 export const POSTS = [
   {
     id: 1,
-    title: 'Understanding React Hooks in Depth',
+    title: 'The AI Economy: New Rules for a New Game',
     excerpt:
-      'A comprehensive guide to React Hooks, covering useState, useEffect, and custom hooks with practical examples.',
-    category: 'technical',
-    date: '2024-01-15',
-    readTime: '8 min read',
-    tags: ['React', 'JavaScript', 'Frontend'],
-    component: React.lazy(() =>
-      import("../posts/understanding-react-hooks.md?raw").then((m) => ({
-        default: () => <MarkdownRenderer source={m.default} />,
-      }))
-    ),
+      'How artificial intelligence is rewriting the economic playbook, transforming productivity, investment, and global competitiveness.',
+    category: 'economy',
+    date: '2025-07-01',
+    readTime: '10 min read',
+    tags: ['AI', 'Economy', 'Productivity'],
   },
   {
     id: 2,
-    title: 'The Future of Web Development',
+    title: 'Superintelligence: Promise or Peril?',
     excerpt:
-      "Exploring emerging trends in web development and how they're shaping the future of the internet.",
-    category: 'thoughts',
-    date: '2024-01-10',
-    readTime: '6 min read',
-    tags: ['Web Dev', 'Trends', 'Technology']
+      'Examining the extraordinary economic growth AI could unlock—and the societal challenges of adapting to rapid technological change.',
+    category: 'ethics',
+    date: '2025-06-20',
+    readTime: '12 min read',
+    tags: ['AI', 'Superintelligence', 'Society'],
   },
   {
     id: 3,
-    title: 'Machine Learning Basics for Developers',
+    title: 'AI and the Great Divide',
     excerpt:
-      'An introduction to machine learning concepts tailored for software developers with no prior ML experience.',
-    category: 'technical',
-    date: '2024-01-05',
-    readTime: '12 min read',
-    tags: ['ML', 'AI', 'Python']
+      "Why artificial intelligence could intensify economic disparities, creating a stark divide between AI 'haves' and 'have-nots'.",
+    category: 'inequality',
+    date: '2025-06-10',
+    readTime: '8 min read',
+    tags: ['AI', 'Economics', 'Inequality'],
   },
   {
     id: 4,
-    title: 'Building a Personal Brand in Tech',
+    title: 'Humanizing Machines: A Conversation with Geoffrey Hinton',
     excerpt:
-      'Strategies for establishing yourself in the tech industry through consistent content creation and networking.',
-    category: 'career',
-    date: '2023-12-28',
-    readTime: '7 min read',
-    tags: ['Career', 'Branding', 'Networking']
+      'Insights from AI pioneer Geoffrey Hinton on how machine learning mirrors human cognition, reshaping our understanding of intelligence.',
+    category: 'interview',
+    date: '2025-05-30',
+    readTime: '15 min read',
+    tags: ['AI', 'Cognition', 'Geoffrey Hinton'],
   },
   {
     id: 5,
-    title: 'CSS Grid vs Flexbox: When to Use What',
+    title: "Productivity Renaissance: AI's Next Frontier",
     excerpt:
-      'A practical comparison of CSS Grid and Flexbox with real-world examples and use cases.',
-    category: 'technical',
-    date: '2023-12-20',
-    readTime: '10 min read',
-    tags: ['CSS', 'Frontend', 'Design']
+      "Exploring how generative AI tools are boosting productivity, reshaping labor markets, and redefining economic potential.",
+    category: 'productivity',
+    date: '2025-05-15',
+    readTime: '9 min read',
+    tags: ['AI', 'Productivity', 'Labor Markets'],
   },
   {
     id: 6,
-    title: 'The Art of Code Review',
+    title: "Blockchain's Invisible Revolution",
     excerpt:
-      'Best practices for conducting effective code reviews that improve code quality and team collaboration.',
-    category: 'career',
-    date: '2023-12-15',
-    readTime: '9 min read',
-    tags: ['Code Review', 'Teamwork', 'Quality']
+      "Beyond cryptocurrencies, blockchain's transformative impact on trust, transparency, and efficiency in global markets.",
+    category: 'blockchain',
+    date: '2025-05-01',
+    readTime: '11 min read',
+    tags: ['Blockchain', 'Trust', 'Markets'],
   },
   {
     id: 7,
-    title: 'Academic Research in Computer Science',
+    title: 'AI, Aging, and the Future of Work',
     excerpt:
-      'My journey through academic research and the lessons learned from publishing my first paper.',
-    category: 'academic',
-    date: '2023-12-10',
-    readTime: '15 min read',
-    tags: ['Research', 'Academia', 'Publishing']
+      'How automation and intelligent technology can address aging demographics, altering workplace dynamics and retirement.',
+    category: 'future-of-work',
+    date: '2025-04-20',
+    readTime: '10 min read',
+    tags: ['AI', 'Aging', 'Workplace'],
   },
   {
     id: 8,
-    title: 'Balancing Work and Personal Projects',
+    title: 'Democratizing Intelligence or Accelerating Inequality?',
     excerpt:
-      'How to manage your time effectively between professional responsibilities and passion projects.',
-    category: 'thoughts',
-    date: '2023-12-05',
-    readTime: '6 min read',
-    tags: ['Productivity', 'Time Management', 'Projects']
-  }
+      'Assessing whether AI technologies can truly democratize opportunity, or if they inevitably reinforce existing social stratifications.',
+    category: 'society',
+    date: '2025-04-05',
+    readTime: '9 min read',
+    tags: ['AI', 'Democratization', 'Inequality'],
+  },
+  {
+    id: 9,
+    title: 'Mind Over Machines: Psychological Impacts of AI Integration',
+    excerpt:
+      'Understanding how increasing AI presence affects human psychology, relationships, and societal values.',
+    category: 'psychology',
+    date: '2025-03-25',
+    readTime: '8 min read',
+    tags: ['AI', 'Psychology', 'Society'],
+  },
+  {
+    id: 10,
+    title: 'Strategizing for an AI-Driven Future',
+    excerpt:
+      'Key strategies businesses must adopt today to leverage AI, mitigate disruption, and thrive in a rapidly evolving technological landscape.',
+    category: 'strategy',
+    date: '2025-03-10',
+    readTime: '12 min read',
+    tags: ['AI', 'Business Strategy', 'Future'],
+  },
 ];
 
 export const CATEGORIES = [
   { id: 'all', name: 'All Posts' },
-  { id: 'technical', name: 'Technical' },
-  { id: 'academic', name: 'Academic' },
-  { id: 'career', name: 'Career' },
-  { id: 'thoughts', name: 'Thoughts' }
+  { id: 'economy', name: 'AI & Economy' },
+  { id: 'ethics', name: 'AI Ethics & Risks' },
+  { id: 'inequality', name: 'Inequality & Society' },
+  { id: 'interview', name: 'Interviews & Insights' },
+  { id: 'productivity', name: 'Productivity & Work' },
+  { id: 'blockchain', name: 'Blockchain & Trust' },
+  { id: 'future-of-work', name: 'Future of Work' },
+  { id: 'society', name: 'Society & AI' },
+  { id: 'psychology', name: 'AI & Psychology' },
+  { id: 'strategy', name: 'AI Strategy' }
 ];

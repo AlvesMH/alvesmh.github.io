@@ -1,21 +1,42 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import emailjs from 'emailjs-com';
 
 const ContactPage = () => {
-  // Local state for form fields
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // For now, simply reset the form and log the input (could integrate with an API or email service)
-    console.log('Contact form submitted:', { name, email, message });
-    setName('');
-    setEmail('');
-    setMessage('');
-    alert('Thank you! Your message has been sent.');
+
+    const templateParams = {
+      from_name: name,
+      reply_to: email,
+      message: message,
+    };
+
+    emailjs
+      .send(
+        'service_bctna4s',
+        'template_sv20dnn',
+        templateParams,
+        'ibp7jwT-ZHpC4eW6u'
+      )
+      .then(
+        () => {
+          setStatus('✅ Your message has been sent!');
+          setName('');
+          setEmail('');
+          setMessage('');
+        },
+        (error) => {
+          console.error('EmailJS Error:', error);
+          setStatus('❌ Something went wrong. Please try again.');
+        }
+      );
   };
 
   return (
@@ -50,6 +71,8 @@ const ContactPage = () => {
           Send Message
         </Button>
       </form>
+
+      {status && <p className="mt-4 text-center text-gray-700">{status}</p>}
     </main>
   );
 };

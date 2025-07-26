@@ -1,11 +1,34 @@
 import React, { useState } from 'react';
+import emailjs from 'emailjs-com';
 
 const NewsletterCard = () => {
   const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setEmail('');
-    // TODO: hook up to a mailing service
+
+    const templateParams = {
+      subscriber_email: email,
+    };
+
+    emailjs
+      .send(
+        'service_bctna4s',
+        'template_sv20dnn',
+        templateParams,
+        'ibp7jwT-ZHpC4eW6u'
+      )
+      .then(
+        () => {
+          setStatus('✅ You have subscribed successfully!');
+          setEmail('');
+        },
+        (error) => {
+          setStatus('❌ Something went wrong. Please try again.');
+          console.error('EmailJS Error:', error);
+        }
+      );
   };
 
   return (
@@ -31,6 +54,8 @@ const NewsletterCard = () => {
           Subscribe
         </button>
       </form>
+
+      {status && <p className="mt-3 text-sm">{status}</p>}
     </div>
   );
 };

@@ -10,10 +10,10 @@ const Footer = () => (
           <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
             <BookOpen className="w-5 h-5 text-white" />
           </div>
-          <span className="text-xl font-bold text-gray-900">DevBlog</span>
+          <span className="text-xl font-bold text-gray-900">Synthesia Blog</span>
         </div>
         <p className="text-gray-600 mb-6">
-          Sharing knowledge, one post at a time.
+          Sharing ideas, one post at a time.
         </p>
         {/* Footer navigation links using React Router */}
         <div className="flex justify-center space-x-6 mb-6">
@@ -28,7 +28,7 @@ const Footer = () => (
           ))}
         </div>
         <div className="text-sm text-gray-500">
-          © {new Date().getFullYear()} DevBlog. Built with React and hosted on GitHub Pages.
+          © {new Date().getFullYear()} Synthesia Blog. Built with React.
         </div>
       </div>
     </div>
