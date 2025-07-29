@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 
 const ContactPage = () => {
   const [name, setName] = useState('');
@@ -20,10 +20,10 @@ const ContactPage = () => {
 
     emailjs
       .send(
-        'service_bctna4s',
-        'template_sv20dnn',
+        import.meta.env.VITE_EMAILJS_SERVICE,
+        import.meta.env.VITE_EMAILJS_TEMPLATE,
         templateParams,
-        'ibp7jwT-ZHpC4eW6u'
+        import.meta.env.VITE_EMAILJS_KEY
       )
       .then(
         () => {
