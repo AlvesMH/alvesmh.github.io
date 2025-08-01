@@ -120,3 +120,4 @@ export const CATEGORIES = [
   { id: 'future-of-work', name: 'Future-of-Work' },
   { id: 'society', name: 'Society' },
 ];
+

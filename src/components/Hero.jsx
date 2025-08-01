@@ -17,8 +17,7 @@ const Hero = () => (
           </span>
         </h2>
         <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-          A space where I explore ideas about how technology shapes our daily lives and businesses, academia, and personal growth. 
-          
+          A space where I explore ideas about how technology shapes our daily lives and businesses, academia, and personal growth.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           {/* Link to latest posts section on Home page (scrolls within home) */}

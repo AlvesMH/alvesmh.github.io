@@ -19,4 +19,3 @@ const MarkdownRenderer = ({ source }) => (
 );
 
 export default MarkdownRenderer;
-

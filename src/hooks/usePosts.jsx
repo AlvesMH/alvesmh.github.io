@@ -29,3 +29,4 @@ export const usePosts = ({
 
   return { paginatedPosts, totalPages };
 };
+
