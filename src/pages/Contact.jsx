@@ -32,7 +32,7 @@ const ContactPage = () => {
     }
 
     const ACCESS_KEY = WEB3FORMS_KEY;
-    if (!access_key || access_key === 'YOUR_WEB3FORMS_ACCESS_KEY') {
+    if (!access_key) {
       setStatus('❌ Missing Web3Forms access key. Set VITE_WEB3FORMS_KEY or replace the placeholder in Contact.jsx.');
       return;
     }
