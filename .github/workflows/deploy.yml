@@ -17,11 +17,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Make the key available to ALL steps in this job (including build)
+    # Make the key available to ALL steps (including vite build)
     env:
-      # If you saved it as a Repository Variable:
       VITE_WEB3FORMS_KEY: ${{ vars.VITE_WEB3FORMS_KEY }}
-      # If you used a Repository Secret instead, use this line instead:
+      # If you used a Secret instead of a Variable, use this:
       # VITE_WEB3FORMS_KEY: ${{ secrets.VITE_WEB3FORMS_KEY }}
     steps:
       - name: Checkout
@@ -36,15 +35,24 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Verify VITE_WEB3FORMS_KEY is present
+        run: |
+          if [ -z "${VITE_WEB3FORMS_KEY}" ]; then
+            echo "❌ Missing VITE_WEB3FORMS_KEY. Add it in Settings → Actions → Variables (or Secrets)."
+            exit 1
+          else
+            echo "✅ VITE_WEB3FORMS_KEY present (length ${#VITE_WEB3FORMS_KEY})."
+          fi
+
       - name: Install
         run: npm ci
 
       - name: Build
         run: npm run build
 
-      # If you're using BrowserRouter, uncomment this to add a 404 fallback:
-      # - name: SPA 404 fallback for GitHub Pages
-      #   run: cp dist/index.html dist/404.html
+      # SPA fallback for BrowserRouter
+      - name: Ensure SPA 404 fallback
+        run: cp dist/index.html dist/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -61,5 +69,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-

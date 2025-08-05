@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { WEB3FORMS_KEY } from '../config';
 
 // Prefer env var at build-time; fallback to placeholder for convenience.
-const ENV_KEY = import.meta.env?.VITE_WEB3FORMS_KEY;
-const ACCESS_KEY_PLACEHOLDER = 'YOUR_WEB3FORMS_ACCESS_KEY';
 const HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
 
 const NewsletterCard = () => {
@@ -23,7 +22,7 @@ const NewsletterCard = () => {
       return;
     }
 
-    const access_key = (ENV_KEY || ACCESS_KEY_PLACEHOLDER || '').trim();
+    const access_key = WEB3FORMS_KEY;
     if (!access_key || access_key === 'YOUR_WEB3FORMS_ACCESS_KEY') {
       setStatus('❌ Missing Web3Forms access key. Set VITE_WEB3FORMS_KEY or replace the placeholder in NewsletterCard.jsx.');
       return;
