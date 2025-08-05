@@ -5,8 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { WEB3FORMS_KEY } from '../config';
 
-// Prefer env var at build-time; fallback to placeholder for convenience.
-// ✅ Put your key in .env as VITE_WEB3FORMS_KEY or replace the placeholder below.
 const HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
 
 const ContactPage = () => {
@@ -26,14 +24,16 @@ const ContactPage = () => {
     e.preventDefault();
     if (sending) return;
 
-    if (!captchaToken) {
-      setCaptchaError('Please complete the captcha.');
+    // Ensure the Web3Forms key is present at build-time
+    const ACCESS_KEY = WEB3FORMS_KEY;
+    if (!ACCESS_KEY) {
+      setStatus('❌ Missing Web3Forms access key. Set VITE_WEB3FORMS_KEY in your build environment.');
       return;
     }
 
-    const ACCESS_KEY = WEB3FORMS_KEY;
-    if (!access_key) {
-      setStatus('❌ Missing Web3Forms access key. Set VITE_WEB3FORMS_KEY or replace the placeholder in Contact.jsx.');
+    // Require captcha
+    if (!captchaToken) {
+      setCaptchaError('Please complete the captcha.');
       return;
     }
 
@@ -43,7 +43,7 @@ const ContactPage = () => {
 
     try {
       const payload = {
-        access_key,
+        access_key: ACCESS_KEY,                  // ✅ use the same constant
         from_name: 'New Contact Message',
         subject: `📩 New contact from ${name}`,
         name,
@@ -62,7 +62,9 @@ const ContactPage = () => {
 
       const json = await res.json().catch(() => ({}));
       if (res.ok && (json?.success || json?.ok)) {
-        setName(''); setEmail(''); setMessage('');
+        setName('');
+        setEmail('');
+        setMessage('');
         setCaptchaToken('');
         navigate('/thank-you', { replace: true });
       } else {
@@ -91,9 +93,30 @@ const ContactPage = () => {
           onChange={() => {}}
         />
 
-        <TextField label="Name" value={name} onChange={(e) => setName(e.target.value)} fullWidth required />
-        <TextField label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth required />
-        <TextField label="Message" value={message} onChange={(e) => setMessage(e.target.value)} multiline rows={4} fullWidth required />
+        <TextField
+          label="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          fullWidth
+          required
+        />
+        <TextField
+          label="Email"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          fullWidth
+          required
+        />
+        <TextField
+          label="Message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          multiline
+          rows={4}
+          fullWidth
+          required
+        />
 
         <div className="flex justify-center">
           <HCaptcha

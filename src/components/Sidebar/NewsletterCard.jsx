@@ -1,8 +1,8 @@
+// src/components/Sidebar/NewsletterCard.jsx
 import React, { useState } from 'react';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { WEB3FORMS_KEY } from '../../config';
 
-// Prefer env var at build-time; fallback to placeholder for convenience.
 const HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
 
 const NewsletterCard = () => {
@@ -17,14 +17,12 @@ const NewsletterCard = () => {
     e.preventDefault();
     if (sending) return;
 
-    if (!captchaToken) {
-      setCaptchaError('Please complete the captcha.');
+    if (!WEB3FORMS_KEY) {
+      setStatus('❌ Missing Web3Forms access key. Set VITE_WEB3FORMS_KEY in your build environment.');
       return;
     }
-
-    const access_key = WEB3FORMS_KEY;
-    if (!access_key {
-      setStatus('❌ Missing Web3Forms access key. Set VITE_WEB3FORMS_KEY or replace the placeholder in NewsletterCard.jsx.');
+    if (!captchaToken) {
+      setCaptchaError('Please complete the captcha.');
       return;
     }
 
@@ -34,7 +32,7 @@ const NewsletterCard = () => {
 
     try {
       const payload = {
-        access_key,
+        access_key: WEB3FORMS_KEY,
         from_name: 'New Newsletter Subscriber',
         subject: '🆕 New newsletter subscriber',
         email: (email || '').trim().toLowerCase(),
@@ -50,6 +48,7 @@ const NewsletterCard = () => {
       });
 
       const json = await res.json().catch(() => ({}));
+
       if (res.ok && (json?.success || json?.ok)) {
         setStatus('✅ You have subscribed successfully!');
         setEmail('');
@@ -73,7 +72,6 @@ const NewsletterCard = () => {
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-3" noValidate>
-        {/* Honeypot */}
         <input
           type="text"
           name="botcheck"
