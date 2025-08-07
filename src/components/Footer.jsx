@@ -21,6 +21,7 @@ const Footer = () => (
             <Link
               key={item}
               to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="text-gray-400 hover:text-blue-600 transition-colors"
             >
               {item}

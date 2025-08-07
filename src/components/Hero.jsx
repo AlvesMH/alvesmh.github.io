@@ -3,14 +3,14 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const Hero = () => (
-  <section className="py-16 px-4 sm:px-6 lg:px-8">
+  <section className="py-6 px-4 sm:px-6 lg:px-8">
     <div className="max-w-4xl mx-auto text-center">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           Welcome to {' '}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
             My Blog
