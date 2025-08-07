@@ -8,6 +8,7 @@ const AboutCard = () => {
       {/* Clickable header + blurb linking to About */}
       <Link
         to="/about"
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         className="block text-center mb-6 hover:opacity-90 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 rounded-lg"
         aria-label="Open About page"
         title="Open About page"
