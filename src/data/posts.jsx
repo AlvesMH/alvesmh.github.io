@@ -4,7 +4,7 @@ export const POSTS = [
   {
     id: 1,
     slug: "why_genai_literacy_new_entry_level_skill",
-    title: "“Mediocre expertise” will being automated away",
+    title: "“Mediocre Expertise” Will Be Automated Away",
     excerpt:
       "Generative AI is reshaping the job market, wiping out many entry-level roles while rewarding specialised expertise. What remains valuable is specialised, adaptive expertise — the kind that can be amplified by generative AI, not replaced by it.",
     category: "Society",
