@@ -3,6 +3,17 @@ import MarkdownRenderer from "../components/MarkdownRenderer";
 export const POSTS = [
   {
     id: 1,
+    slug: "why_genai_literacy_new_entry_level_skill",
+    title: "“Mediocre expertise” will being automated away",
+    excerpt:
+      "Generative AI is reshaping the job market, wiping out many entry-level roles while rewarding specialised expertise. What remains valuable is specialised, adaptive expertise — the kind that can be amplified by generative AI, not replaced by it.",
+    category: "Society",
+    date: "2025-08-09",
+    readTime: "7 min read",
+    tags: ["Education", "Management"],
+  },
+  {
+    id: 2,
     slug: "prompting_science",
     title: "The Pedagogy of Prompting: Teaching Students to Think with AI",
     excerpt:
@@ -13,7 +24,7 @@ export const POSTS = [
     tags: ["Education", "AI-Literacy"],
   },
   {
-    id: 2,
+    id: 3,
     slug: "offloading_to_augmentation",
     title: "From Offloading to Augmentation: Reclaiming Cognitive Work in the Age of AI",
     excerpt:
@@ -24,7 +35,7 @@ export const POSTS = [
     tags: ["Education", "Cognition"],
   },
   {
-    id: 3,
+    id: 4,
     slug: "flipped_classroom",
     title: "The Flipped Classroom Gets an Upgrade: Using GenAI for Deeper Learning",
     excerpt:
@@ -35,7 +46,7 @@ export const POSTS = [
     tags: ["Education", "Flipped-Learning"],
   },
   {
-    id: 4,
+    id: 5,
     slug: "beyond-the-syllabus",
     title: "Beyond the Syllabus: How AI is Changing What (and How) We Teach",
     excerpt:
@@ -46,7 +57,7 @@ export const POSTS = [
     tags: ["Education", "Curriculum"],
   },
   {
-    id: 5,
+    id: 6,
     slug: "co-thinking-model",
     title: "Co-Thinking with Machines: A New Model for Human–AI Collaboration",
     excerpt:
@@ -57,7 +68,7 @@ export const POSTS = [
     tags: ["AI-Philosophy", "Cognition"],
   },
   {
-    id: 6,
+    id: 7,
     slug: "slow-thinking-fast-ai",
     title: "Teaching Slow Thinking in a Fast AI World",
     excerpt:
@@ -68,7 +79,7 @@ export const POSTS = [
     tags: ["Critical-Thinking", "Psychology"],
   },
   {
-    id: 7,
+    id: 8,
     slug: "ai-literacy-guiding-principles",
     title: "Guiding Principles for AI Literacy in Universities",
     excerpt:
