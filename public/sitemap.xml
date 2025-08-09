@@ -10,13 +10,6 @@
 
   <!-- Add more URLs below -->
   <url>
-    <loc>https://hugomartins.eu/</loc>
-    <lastmod>2025-08-09</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
     <loc>https://hugomartins.eu/about</loc>
     <lastmod>2025-08-09</lastmod>
     <changefreq>yearly</changefreq>
