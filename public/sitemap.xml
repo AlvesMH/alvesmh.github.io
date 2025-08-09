@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://hugomartins.eu/</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Add more URLs below -->
+  <url>
+    <loc>https://hugomartins.eu/</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hugomartins.eu/about</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hugomartins.eu/archive</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hugomartins.eu/contact</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hugomartins.eu/post/1</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hugomartins.eu/post/2</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hugomartins.eu/post/3</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hugomartins.eu/post/4</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hugomartins.eu/post/5</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hugomartins.eu/post/6</loc>
+    <lastmod>2025-08-09</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
