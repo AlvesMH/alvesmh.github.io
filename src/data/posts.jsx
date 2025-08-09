@@ -7,7 +7,7 @@ export const POSTS = [
     title: "“Mediocre Expertise” Will Be Automated Away",
     excerpt:
       "Generative AI is reshaping the job market, wiping out many entry-level roles while rewarding specialised expertise. What remains valuable is specialised, adaptive expertise — the kind that can be amplified by generative AI, not replaced by it.",
-    category: "Society",
+    category: "Management",
     date: "2025-08-09",
     readTime: "7 min read",
     tags: ["Education", "Management"],
