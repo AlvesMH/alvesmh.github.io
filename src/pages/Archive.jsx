@@ -1,4 +1,5 @@
 import React from 'react';
+import Canonical from '../components/Canonical';
 import { Link } from 'react-router-dom';
 import { POSTS } from '../data/posts';
 
@@ -8,6 +9,7 @@ const ArchivePage = () => {
 
   return (
     <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <Canonical path="/archive" />
       <h1 className="text-3xl font-bold text-gray-900 mb-8">Archive</h1>
       <ul className="divide-y divide-gray-300">
         {sortedPosts.map((post) => (

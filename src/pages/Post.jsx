@@ -2,11 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { POSTS } from '../data/posts';
 import MarkdownRenderer from '../components/MarkdownRenderer';
+import Canonical from '../components/Canonical'; // 👈 Import it
 
-/**
- * Vite ≥ 5: use `query: '?raw', import: 'default'`
- * IMPORTANT: Path is relative to this file (src/pages), so use ../posts/*.md
- */
 const markdownModules = import.meta.glob(
   '../posts/*.md',
   { query: '?raw', import: 'default' }
@@ -16,7 +13,6 @@ export default function PostPage() {
   const { id } = useParams();
   const numericId = Number(id);
 
-  // Where is this post in the POSTS array?
   const index = useMemo(
     () => POSTS.findIndex((p) => p.id === numericId),
     [numericId]
@@ -26,16 +22,12 @@ export default function PostPage() {
   const [md, setMd] = useState(null);
   const [loadingMd, setLoadingMd] = useState(false);
 
-  // Always scroll to top when moving between posts
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [numericId]);
 
-  // (Re)load markdown whenever the slug changes
   useEffect(() => {
-    // Clear old content so you don't briefly see the previous post
     setMd(null);
-
     if (!post?.slug) return;
 
     const key = `../posts/${post.slug}.md`;
@@ -50,19 +42,11 @@ export default function PostPage() {
     setLoadingMd(true);
 
     loader()
-      .then((raw) => {
-        if (!cancelled) setMd(raw);
-      })
-      .catch((err) => {
-        console.error('Failed to load markdown:', err);
-      })
-      .finally(() => {
-        if (!cancelled) setLoadingMd(false);
-      });
+      .then((raw) => { if (!cancelled) setMd(raw); })
+      .catch((err) => console.error('Failed to load markdown:', err))
+      .finally(() => { if (!cancelled) setLoadingMd(false); });
 
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [post?.slug]);
 
   if (!post) {
@@ -78,6 +62,9 @@ export default function PostPage() {
 
   return (
     <main className="max-w-3xl mx-auto px-4 py-16">
+      {/* 👇 Canonical based on post slug */}
+      <Canonical path={`/post/${post.slug}`} />
+
       <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
       <PostMeta post={post} />
 
@@ -110,16 +97,12 @@ const PostNav = ({ prev, next }) => (
       <Link to={`/post/${prev.id}`} className="text-blue-600 hover:underline">
         ← {prev.title}
       </Link>
-    ) : (
-      <span />
-    )}
+    ) : <span />}
 
     {next ? (
       <Link to={`/post/${next.id}`} className="text-blue-600 hover:underline">
         {next.title} →
       </Link>
-    ) : (
-      <span />
-    )}
+    ) : <span />}
   </nav>
 );

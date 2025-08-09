@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Canonical from '../components/Canonical';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
@@ -80,6 +81,7 @@ const ContactPage = () => {
 
   return (
     <main className="max-w-lg mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <Canonical path="/contact" />
       <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Contact</h1>
 
       <form onSubmit={handleSubmit} className="space-y-6" noValidate>

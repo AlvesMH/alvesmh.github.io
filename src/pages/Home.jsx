@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import Canonical from '../components/Canonical'
 import Hero from '../components/Hero';
 import SearchBar from '../components/SearchBar';
 import CategoryFilter from '../components/CategoryFilter';
@@ -57,6 +58,8 @@ const HomePage = () => {
 
   return (
     <>
+      <Canonical path="/" />
+      
       <Hero />
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 flex flex-col lg:flex-row gap-8">
         <section id="latest" className="lg:w-2/3">

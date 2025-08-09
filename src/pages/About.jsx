@@ -1,9 +1,11 @@
 import React from 'react';
 import AboutCard from '../components/Sidebar/AboutCard';
+import Canonical from '../components/Canonical'
 
 const AboutPage = () => {
   return (
     <div className="p-6 max-w-4xl mx-auto">
+      <Canonical path="/about" />
       <h1 className="text-3xl font-bold mb-4">About Me</h1>
 
       <p className="mb-4">
