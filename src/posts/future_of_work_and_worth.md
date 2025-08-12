@@ -48,4 +48,12 @@ If we leave work design, HR practices, and fiscal systems unchanged, **young peo
 
 --- 
 
-### We do not lack talent, we lack alignment. Policy that still taxes yesterday’s value, HR that manages yesterday’s jobs, and education that teaches yesterday’s tasks will waste what AI makes possible. 
+**_We do not lack talent, we lack alignment. Policy that still taxes yesterday’s value, HR that manages yesterday’s jobs, and education that teaches yesterday’s tasks will waste what AI makes possible._**
+
+---
+
+Let’s build human-centered futures—together.
+
+Thanks for reading.
+**— HM**
+
