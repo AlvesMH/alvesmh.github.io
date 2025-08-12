@@ -12,7 +12,7 @@ const Header = () => {
         <div className="flex justify-between items-center py-6">
           {/* Logo */}
           <a
-            href="https://ask-mark.onrender.com"
+            href="/"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center space-x-3"

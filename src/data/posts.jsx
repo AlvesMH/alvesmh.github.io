@@ -1,8 +1,19 @@
 import MarkdownRenderer from "../components/MarkdownRenderer";
 
 export const POSTS = [
+  { 
+  id: 1,
+    slug: "future_of_work_and_worth",
+    title: "“Work, Wealth, and Worth in the Age of AI",
+    excerpt:
+      "If we want an AI economy that delivers both comfort and fulfillment, we must confront the structural flaws in how we prepare, employ, and reward people. Policy that still taxes yesterday’s value, HR that manages yesterday’s jobs, and education that teaches yesterday’s tasks will waste what AI makes possible.",
+    category: "Society",
+    date: "2025-08-12",
+    readTime: "12 min read",
+    tags: ["Education", "Management", "Society"],
+  },
   {
-    id: 1,
+    id: 2,
     slug: "why_genai_literacy_new_entry_level_skill",
     title: "“Mediocre Expertise” Will Be Automated Away",
     excerpt:
@@ -13,18 +24,18 @@ export const POSTS = [
     tags: ["Education", "Management"],
   },
   {
-    id: 2,
+    id: 3,
     slug: "prompting_science",
     title: "The Pedagogy of Prompting: Teaching Students to Think with AI",
     excerpt:
       "Prompting is fast becoming a new literacy. In this post, I explore how we can teach students not just to use GenAI tools, but to engage them critically—turning passive consumption into active, reflective learning.",
     category: "Education",
     date: "2025-08-01",
-    readTime: "7 min read",
+    readTime: "8 min read",
     tags: ["Education", "AI-Literacy"],
   },
   {
-    id: 3,
+    id: 4,
     slug: "offloading_to_augmentation",
     title: "From Offloading to Augmentation: Reclaiming Cognitive Work in the Age of AI",
     excerpt:
@@ -35,7 +46,7 @@ export const POSTS = [
     tags: ["Education", "Cognition"],
   },
   {
-    id: 4,
+    id: 5,
     slug: "flipped_classroom",
     title: "The Flipped Classroom Gets an Upgrade: Using GenAI for Deeper Learning",
     excerpt:
@@ -46,7 +57,7 @@ export const POSTS = [
     tags: ["Education", "Flipped-Learning"],
   },
   {
-    id: 5,
+    id: 6,
     slug: "beyond-the-syllabus",
     title: "Beyond the Syllabus: How AI is Changing What (and How) We Teach",
     excerpt:
@@ -57,7 +68,7 @@ export const POSTS = [
     tags: ["Education", "Curriculum"],
   },
   {
-    id: 6,
+    id: 7,
     slug: "co-thinking-model",
     title: "Co-Thinking with Machines: A New Model for Human–AI Collaboration",
     excerpt:
@@ -68,7 +79,7 @@ export const POSTS = [
     tags: ["AI-Philosophy", "Cognition"],
   },
   {
-    id: 7,
+    id: 8,
     slug: "slow-thinking-fast-ai",
     title: "Teaching Slow Thinking in a Fast AI World",
     excerpt:
@@ -79,7 +90,7 @@ export const POSTS = [
     tags: ["Critical-Thinking", "Psychology"],
   },
   {
-    id: 8,
+    id: 9,
     slug: "ai-literacy-guiding-principles",
     title: "Guiding Principles for AI Literacy in Universities",
     excerpt:
