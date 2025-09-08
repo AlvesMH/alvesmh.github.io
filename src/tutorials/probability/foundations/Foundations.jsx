@@ -1,24 +1,32 @@
-// src/tutorials/probability/foundations/Foundations.jsx
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import mdSource from "./foundations.md?raw";
-
+import { Link } from "react-router-dom";
 import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
-import OnThisPageAside from "../../shell/components/OnThisPageAside";
+
+/**
+ * Foundations.jsx — sequential lesson page new one
+ *
+ * - Loads markdown content from ./foundations.md (co-located with this file)
+ * - Builds a sticky "On This Page" TOC from rendered headings
+ * - Shows flashcards at the bottom
+ * - Provides Next/Previous nav + a dedicated Quiz route CTA
+ * - Responsive: two columns (content + TOC) on large screens, single column on mobile
+ * - No progress/memory features (static site-friendly)
+ */
 
 export default function Foundations() {
+  
   const contentWrapRef = useRef(null);
   const [toc, setToc] = useState([]); // [{id, text, level}]
   const md = mdSource;
 
-  // Build the TOC from rendered headings (ids are added inside RichMarkdown)
+  // Observe rendered content to extract H2/H3 headings for the TOC (ids are added by RichMarkdown)
   useEffect(() => {
+    if (!contentWrapRef.current) return;
     const el = contentWrapRef.current;
-    if (!el) return;
 
     const buildToc = () => {
       const nodes = Array.from(el.querySelectorAll("h2, h3"));
@@ -36,142 +44,130 @@ export default function Foundations() {
     return () => obs.disconnect();
   }, [md]);
 
-  // Smooth-scroll when clicking TOC links (optional; OnThisPageAside also handles this)
-  const onTocClick = (e, id) => {
+  // Smooth scroll for TOC links
+  function handleTocClick(e, id) {
     e.preventDefault();
-    const t = document.getElementById(id);
-    if (t) {
-      t.scrollIntoView({ behavior: "smooth", block: "start" });
+    const target = document.getElementById(id);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
       history.replaceState(null, "", `#${id}`);
     }
-  };
+  }
+
+  // Foundations flashcards (concise essentials)
+  const flashcards = useMemo(
+    () => [
+      { front: "Complement rule", back: "P(A^c) = 1 − P(A)" },
+      { front: "Inclusion–exclusion (2 sets)", back: "P(A∪B)=P(A)+P(B)−P(A∩B)" },
+      { front: "Conditional probability", back: "P(A|B)=P(A∩B)/P(B), if P(B)>0" },
+      { front: "Independence", back: "A ⟂ B iff P(A∩B)=P(A)P(B)" },
+      { front: "Law of total probability", back: "P(A)=∑ P(A|B_i)P(B_i) for a partition {B_i}" },
+      { front: "Bayes’ theorem", back: "P(B_i|A)= P(A|B_i)P(B_i) / ∑_j P(A|B_j)P(B_j)" },
+      { front: "Linearity of expectation", back: "E[aX+bY+c]=aE[X]+bE[Y]+c" },
+      { front: "Variance identity", back: "Var(X)=E[X^2]−(E[X])^2" },
+      { front: "Discrete vs continuous", back: "pmf p(x) vs pdf f(x); cdf F(x)=P(X≤x)" },
+    ],
+    []
+  );
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <>
+      {/* Top header with breadcrumbs + Back to Blog / All Tutorials */}
       <AppHeaderMini
         tutorialSlug="introduction-to-probability-distribution"
+        sectionId="foundations"
         sectionTitle="Foundations"
       />
 
-      <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-10 lg:pt-14">
-        {/* Top breadcrumbs / actions */}
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-          <nav className="text-sm text-slate-600">
-            <Link to="/tutorials" className="hover:underline">
-              All Tutorials
-            </Link>{" "}
-            /{" "}
-            <Link
-              to="/tutorials/introduction-to-probability-distribution"
-              className="hover:underline"
-            >
-              Probability
-            </Link>{" "}
-            / <span className="font-medium text-slate-900">Foundations</span>
-          </nav>
-          <div className="flex items-center gap-2">
-            <Link
-              to="/blog"
-              className="rounded-md border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-50"
-            >
-              Back to Blog
-            </Link>
-            <button
-              onClick={() => window.print()}
-              className="rounded-md border border-slate-300 px-3 py-1.5 text-sm hover:bg-slate-50"
-              title="Print or Save as PDF"
-            >
-              Print / Save as PDF
-            </button>
-          </div>
+      <main className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+        {/* Title strip (optional; H1 is also in the markdown) */}
+        <div className="py-6">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Foundations of Probability
+          </h1>
+          <p className="mt-2 text-slate-700 max-w-3xl">
+            Axioms and event algebra, conditional probability & independence, Bayes’ theorem, counting,
+            and random variables & moments.
+          </p>
         </div>
 
-        {/* Two-column layout (content + sidebar) */}
+        {/* Responsive content + sticky TOC */}
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_280px]">
           {/* Content */}
-          <article ref={contentWrapRef} className="min-w-0 space-y-8">
-            <h1 className="mb-2 text-2xl font-bold tracking-tight">Foundations</h1>
-            <p className="text-slate-600">
-              Start here: probability spaces, events, rules, expectation, variance, and notation.
-            </p>
-
-            {/* Markdown */}
-            <RichMarkdown
-              content={md}
-              // If your images are served from public/, set an imgBase (and keep ./images/... in the .md)
-              // imgBase="/tutorials/introduction-to-probability-distribution/foundations"
-            />
-
-            {/* Flashcards */}
-            <section aria-labelledby="flashcards-title" className="mt-8">
-              <h2 id="flashcards-title" className="text-xl font-semibold">
-                Quick Flashcards
-              </h2>
-              <p className="mt-1 text-sm text-slate-600">
-                Drill the essentials from this page.
-              </p>
-              <div className="mt-4">
-                <Flashcards
-                  initialCards={[
-                    {
-                      front: "Sample space (Ω)",
-                      back: "Set of all possible outcomes of a random experiment.",
-                    },
-                    {
-                      front: "Event",
-                      back: "Subset of Ω. A happens if the outcome lies in that subset.",
-                    },
-                    {
-                      front: "Mutual exclusivity",
-                      back: "A ∩ B = ∅ → P(A ∪ B) = P(A) + P(B).",
-                    },
-                    {
-                      front: "Total probability",
-                      back: "If {B_i} partitions Ω, then P(A)=∑ P(A|B_i)P(B_i).",
-                    },
-                    {
-                      front: "Bayes’ rule",
-                      back: "P(A|B) = P(B|A)P(A)/P(B).",
-                    },
-                  ]}
-                />
-              </div>
-            </section>
-
-            {/* Bottom navigation */}
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex gap-2">
-                <Link
-                  to="/tutorials/introduction-to-probability-distribution"
-                  className="rounded-md border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50"
-                >
-                  ← Overview
-                </Link>
-                <Link
-                  to="/tutorials/introduction-to-probability-distribution/discrete/bernoulli"
-                  className="rounded-md border border-slate-300 px-3 py-2 text-sm hover:bg-slate-50"
-                >
-                  Next: Bernoulli →
-                </Link>
-              </div>
-              <Link
-                to="/tutorials/introduction-to-probability-distribution/foundations/quiz"
-                className="inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
-              >
-                Take the Foundations Quiz
-              </Link>
-            </div>
+          <article
+            ref={contentWrapRef}
+            className="min-w-0"
+          >
+            {/* RichMarkdown renders headings with ids; it also supports KaTeX, admonitions, code copy, etc. */}
+            <RichMarkdown content={md} />
           </article>
 
-          {/* Single “On This Page” (with Print) */}
-          <OnThisPageAside
-            toc={toc}
-            onClick={onTocClick}
-          />
+          {/* On This Page (desktop) */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-24 rounded-xl border border-slate-200 bg-white p-4">
+              <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                On this page
+              </div>
+              <ul className="mt-3 space-y-2 text-sm">
+                {toc.map((item) => (
+                  <li key={item.id} className={item.level === 3 ? "ml-3" : ""}>
+                    <a
+                      href={`#${item.id}`}
+                      onClick={(e) => handleTocClick(e, item.id)}
+                      className="text-slate-700 hover:text-slate-900 hover:underline"
+                    >
+                      {item.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-4 pt-4 border-t border-slate-200">
+                <button
+                  onClick={() => window.print()}
+                  className="w-full rounded-md border border-slate-300 px-3 py-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                  title="Open print dialog (you can save as PDF)"
+                >
+                  Print / Save as PDF
+                </button>
+              </div>
+            </div>
+          </aside>
         </div>
+
+        {/* Flashcards */}
+        <section className="mt-12">
+          <h2 className="text-xl font-bold text-slate-900 mb-3">Quick flashcards</h2>
+          <Flashcards deck={flashcards} />
+        </section>
+
+        {/* Bottom nav + Quiz CTA */}
+        <nav className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex gap-3">
+            <Link
+              to="/tutorials/introduction-to-probability-distribution"
+              className="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            >
+              ← Overview
+            </Link>
+            <Link
+              to="/tutorials/introduction-to-probability-distribution/discrete"
+              className="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            >
+              Next: Discrete →
+            </Link>
+          </div>
+
+          <Link
+            to="/tutorials/introduction-to-probability-distribution/foundations/quiz"
+            className="inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+          >
+            Start Foundations Quiz
+          </Link>
+        </nav>
       </main>
 
       <AppFooterMini />
-    </div>
+    </>
   );
 }
