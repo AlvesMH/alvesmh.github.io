@@ -1,12 +1,30 @@
-// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import Sitemap from 'vite-plugin-sitemap';
 import path from 'node:path';
+import fs from 'node:fs';
+
+// Ensures dist/robots.txt exists before sitemap's closeBundle
+function ensureRobotsTxt() {
+  return {
+    name: 'ensure-robots',
+    apply: 'build',
+    generateBundle() {
+      // Prefer your public/robots.txt if present; otherwise emit a safe default
+      const publicRobots = path.resolve(__dirname, 'public/robots.txt');
+      let source = 'User-agent: *\nAllow: /\nSitemap: https://hugomartins.eu/sitemap.xml\n';
+      if (fs.existsSync(publicRobots)) {
+        source = fs.readFileSync(publicRobots, 'utf8');
+      }
+      this.emitFile({ type: 'asset', fileName: 'robots.txt', source });
+    },
+  };
+}
 
 export default defineConfig({
   plugins: [
     react(),
+    ensureRobotsTxt(), // <-- add this BEFORE Sitemap
     Sitemap({
       hostname: 'https://hugomartins.eu',
       exclude: ['/drafts/**'],
@@ -29,18 +47,19 @@ export default defineConfig({
         '/tutorials/introduction-to-probability-distribution/continuous/clt',
         '/tutorials/introduction-to-probability-distribution/practice'
       ],
-     // Have the plugin generate dist/robots.txt instead of opening one
-     generateRobotsTxt: true,
-     robots: [
-       { userAgent: '*', allow: '/' },
-     ],
-    })
+      // If your plugin supports it, you can also keep these;
+      // they won't conflict because the file already exists now.
+      // generateRobotsTxt: true,
+      // robots: [{ userAgent: '*', allow: '/' }],
+    }),
   ],
-  base: '/',
+  base: '/', // custom domain
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@tutorials': path.resolve(__dirname, 'src/tutorials'),
     },
   },
+  build: { sourcemap: true },
 });
+
