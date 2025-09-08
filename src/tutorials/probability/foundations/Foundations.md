@@ -137,5 +137,5 @@ A **random variable** \(X\) maps outcomes to numbers.
 
 An illustrative Venn diagram can help cement the identities above.
 
-![Venn diagram: A, B, A∩B, complements](/tutorials/introduction-to-probability-distribution/foundations/images/venn-placeholder.png)
+![Venn diagram: A, B, A∩B, complements](./tutorials/introduction-to-probability-distribution/foundations/images/venn-placeholder.png)
 
