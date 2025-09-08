@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef } from "react";
+import mdSource from "./foundations.md?raw";
 import { Link } from "react-router-dom";
 import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
@@ -6,7 +7,7 @@ import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
 
 /**
- * Foundations.jsx — sequential lesson page
+ * Foundations.jsx — sequential lesson page new one
  *
  * - Loads markdown content from ./foundations.md (co-located with this file)
  * - Builds a sticky "On This Page" TOC from rendered headings
@@ -17,24 +18,10 @@ import Flashcards from "../../shell/components/Flashcards";
  */
 
 export default function Foundations() {
-  const [md, setMd] = useState("");
+  
   const contentWrapRef = useRef(null);
   const [toc, setToc] = useState([]); // [{id, text, level}]
-
-  // Load markdown (Vite raw import)
-  useEffect(() => {
-    let mounted = true;
-    import("./foundations.md?raw")
-      .then((mod) => {
-        if (mounted) setMd(mod.default || "");
-      })
-      .catch((err) => {
-        console.error("Failed to load foundations.md", err);
-      });
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const md = mdSource;
 
   // Observe rendered content to extract H2/H3 headings for the TOC (ids are added by RichMarkdown)
   useEffect(() => {
