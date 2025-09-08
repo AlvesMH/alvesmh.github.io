@@ -1,3 +1,4 @@
+// vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import Sitemap from 'vite-plugin-sitemap';
@@ -27,15 +28,19 @@ export default defineConfig({
         '/tutorials/introduction-to-probability-distribution/continuous/normal',
         '/tutorials/introduction-to-probability-distribution/continuous/clt',
         '/tutorials/introduction-to-probability-distribution/practice'
-      ]
+      ],
+     // Have the plugin generate dist/robots.txt instead of opening one
+     generateRobotsTxt: true,
+     robots: [
+       { userAgent: '*', allow: '/' },
+     ],
     })
   ],
-  base: '/', // custom domain => root
+  base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@tutorials': path.resolve(__dirname, 'src/tutorials'),
     },
   },
-  build: { sourcemap: true }
 });
