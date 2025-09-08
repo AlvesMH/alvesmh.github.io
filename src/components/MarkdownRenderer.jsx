@@ -5,6 +5,7 @@ import remarkMath from "remark-math";
 import rehypeRaw from "rehype-raw";
 import rehypeKatex from "rehype-katex";
 import rehypeHighlight from "rehype-highlight";
+import 'katex/dist/katex.min.css';
 import "highlight.js/styles/github-dark.css";
 
 const MarkdownRenderer = ({ source }) => (

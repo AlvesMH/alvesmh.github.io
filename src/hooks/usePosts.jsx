@@ -1,40 +1,42 @@
 import { useMemo } from 'react';
-import { POSTS } from '../data/posts';
+import { POSTS as RAW_POSTS } from '../data/posts';
+import { ensureSlug } from '../utils/slugify';
 
-export const usePosts = ({
-  searchTerm,
-  selectedCategory,
-  currentPage,
-  postsPerPage
-}) => {
+export function usePosts({
+  searchTerm = '',
+  selectedCategory = 'all',
+  currentPage = 1,
+  postsPerPage = 6,
+}) {
+  // Normalize posts to always include a `slug`
+  const posts = useMemo(() => RAW_POSTS.map(ensureSlug), []);
+
+  // Filter + sort
   const filtered = useMemo(() => {
-    const term = (searchTerm || '').toLowerCase();
-    const selected = (selectedCategory || 'all').toLowerCase();
+    const q = (searchTerm || '').trim().toLowerCase();
+    const cat = (selectedCategory || 'all').toLowerCase();
 
-    return POSTS.filter((post) => {
-      const postCategory = (post.category || '').toLowerCase();
+    return posts
+      .filter((p) => {
+        // Category
+        if (cat !== 'all' && (p.category || '').toLowerCase() !== cat) return false;
 
-      const matchesCategory =
-        selected === 'all' || postCategory === selected;
+        // Search (title, excerpt, tags)
+        if (!q) return true;
+        const inTitle = (p.title || '').toLowerCase().includes(q);
+        const inExcerpt = (p.excerpt || '').toLowerCase().includes(q);
+        const inTags = (p.tags || []).some((t) => (t || '').toLowerCase().includes(q));
+        return inTitle || inExcerpt || inTags;
+      })
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+  }, [posts, searchTerm, selectedCategory]);
 
-      const matchesSearch =
-        (post.title || '').toLowerCase().includes(term) ||
-        (post.excerpt || '').toLowerCase().includes(term) ||
-        (Array.isArray(post.tags) ? post.tags : []).some((t) =>
-          (t || '').toLowerCase().includes(term)
-        );
-
-      return matchesCategory && matchesSearch;
-    });
-  }, [searchTerm, selectedCategory]);
-
+  // Pagination
   const totalPages = Math.max(1, Math.ceil(filtered.length / postsPerPage));
+  const pageIndex = Math.min(Math.max(1, currentPage), totalPages) - 1;
+  const start = pageIndex * postsPerPage;
+  const paginatedPosts = filtered.slice(start, start + postsPerPage);
 
-  const paginatedPosts = useMemo(() => {
-    const start = (currentPage - 1) * postsPerPage;
-    return filtered.slice(start, start + postsPerPage);
-  }, [filtered, currentPage, postsPerPage]);
-
-  return { paginatedPosts, totalPages };
-};
+  return { paginatedPosts, totalPages, total: filtered.length };
+}
 

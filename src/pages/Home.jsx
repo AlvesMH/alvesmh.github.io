@@ -9,6 +9,7 @@ import Pagination from '../components/Pagination';
 import Sidebar from '../components/Sidebar';
 import { usePosts } from '../hooks/usePosts';
 import { POSTS, CATEGORIES as BASE_CATEGORIES } from '../data/posts';
+import { ensureSlug } from '../utils/slugify'; // <- ensure every post has a slug
 
 const POSTS_PER_PAGE = 6;
 
@@ -43,6 +44,12 @@ const HomePage = () => {
     postsPerPage: POSTS_PER_PAGE
   });
 
+  // Ensure slug-only routing: normalize posts to include a slug
+  const postsForGrid = useMemo(
+    () => (paginatedPosts || []).map(ensureSlug),
+    [paginatedPosts]
+  );
+
   // Case-insensitive category counts
   const categories = useMemo(
     () =>
@@ -65,7 +72,7 @@ const HomePage = () => {
         map.set(tag, (map.get(tag) || 0) + 1);
       }
     }
-    return [...map.entries()]
+    return Array.from(map.entries())
       .sort((a, b) => b[1] - a[1])
       .slice(0, 8)
       .map(([tag]) => tag);
@@ -77,7 +84,7 @@ const HomePage = () => {
     "@type": "WebSite",
     "name": "Augmented Minds",
     "alternateName": "Augmented Minds Blog",
-    "url": "https://alvesmh.github.io/",
+    "url": "https://hugomartins.eu/",
     "inLanguage": "en",
     "sameAs": [
       "https://github.com/alvesmh",
@@ -85,7 +92,7 @@ const HomePage = () => {
     ],
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://alvesmh.github.io/?q={search_term_string}",
+      "target": "https://hugomartins.eu/?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };
@@ -116,7 +123,8 @@ const HomePage = () => {
               onSelect={setSelectedCategory}
             />
           </div>
-          <PostsGrid posts={paginatedPosts} />
+          {/* Pass slug-normalized posts to the grid so links use /post/:slug */}
+          <PostsGrid posts={postsForGrid} />
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
