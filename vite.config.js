@@ -4,19 +4,24 @@ import Sitemap from 'vite-plugin-sitemap';
 import path from 'node:path';
 import fs from 'node:fs';
 
-// Ensures dist/robots.txt exists before sitemap's closeBundle
-function ensureRobotsTxt() {
+const OUT_DIR = 'dist';
+
+// Ensure robots.txt exists on disk before sitemap's closeBundle
+function writeRobotsPre() {
   return {
-    name: 'ensure-robots',
+    name: 'write-robots-pre',
     apply: 'build',
-    generateBundle() {
-      // Prefer your public/robots.txt if present; otherwise emit a safe default
-      const publicRobots = path.resolve(__dirname, 'public/robots.txt');
+    enforce: 'pre',            // run this closeBundle BEFORE others
+    closeBundle() {
+      const outDir = path.resolve(__dirname, OUT_DIR);
+      const file = path.join(outDir, 'robots.txt');
+      const fromPublic = path.resolve(__dirname, 'public/robots.txt');
       let source = 'User-agent: *\nAllow: /\nSitemap: https://hugomartins.eu/sitemap.xml\n';
-      if (fs.existsSync(publicRobots)) {
-        source = fs.readFileSync(publicRobots, 'utf8');
+      if (fs.existsSync(fromPublic)) {
+        source = fs.readFileSync(fromPublic, 'utf8');
       }
-      this.emitFile({ type: 'asset', fileName: 'robots.txt', source });
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.writeFileSync(file, source, 'utf8');   // <-- ensure file exists
     },
   };
 }
@@ -24,7 +29,7 @@ function ensureRobotsTxt() {
 export default defineConfig({
   plugins: [
     react(),
-    ensureRobotsTxt(), // <-- add this BEFORE Sitemap
+    writeRobotsPre(),             // must come BEFORE Sitemap in the array
     Sitemap({
       hostname: 'https://hugomartins.eu',
       exclude: ['/drafts/**'],
@@ -47,19 +52,16 @@ export default defineConfig({
         '/tutorials/introduction-to-probability-distribution/continuous/clt',
         '/tutorials/introduction-to-probability-distribution/practice'
       ],
-      // If your plugin supports it, you can also keep these;
-      // they won't conflict because the file already exists now.
-      // generateRobotsTxt: true,
-      // robots: [{ userAgent: '*', allow: '/' }],
+      // Keep robots generation OFF, since we’re writing the file ourselves:
+      // generateRobotsTxt: false,
     }),
   ],
-  base: '/', // custom domain
+  base: '/', // custom domain root
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
       '@tutorials': path.resolve(__dirname, 'src/tutorials'),
     },
   },
-  build: { sourcemap: true },
+  build: { sourcemap: true, outDir: OUT_DIR },
 });
-
