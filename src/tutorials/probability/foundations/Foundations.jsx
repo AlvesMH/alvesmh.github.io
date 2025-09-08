@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import mdSource from "./foundations.md?raw";
 import { Link } from "react-router-dom";
 import AppHeaderMini from "../../shell/components/AppHeaderMini";
