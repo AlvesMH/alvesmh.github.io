@@ -80,6 +80,5 @@ Try these in the interactive panel on this page.
 
 An exponentially decaying pdf from \(x=0\); the cdf climbs quickly at small \(x\) and flattens:
 
-![exp-shapes](./images/exp-shapes-placeholder.png)
+![exp-shapes](/images/Exponential_distribution.png)
 
-<small>Place images for this page under `src/tutorials/probability/continuous/images/` and reference them relatively.</small>

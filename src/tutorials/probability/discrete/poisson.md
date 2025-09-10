@@ -77,6 +77,6 @@ Try additional values in the interactive panel on this page.
 
 Poisson pmfs for different \(\lambda\) values:
 
-![poisson-shapes](./images/poisson-shapes-placeholder.png)
+![poisson-shapes](/images/poisson-distribution.jpg)
 
-<small>Place images for this page under `src/tutorials/probability/discrete/images/` and reference them relatively.</small>
+

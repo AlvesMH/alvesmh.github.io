@@ -83,6 +83,5 @@ Try additional values in the interactive panel.
 
 Right-skew decreases as \(p\) rises or \(r\) increases:
 
-![negbin-shapes](./images/negbin-shapes-placeholder.png)
+![negbin-shapes](/images/negbin-shapes-placeholder.png)
 
-<small>Put images for this page under `src/tutorials/probability/discrete/images/` and reference them as above.</small>

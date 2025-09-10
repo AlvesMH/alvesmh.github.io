@@ -4,6 +4,8 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import Tex from "../../shell/components/Tex";
+
 
 /**
  * Bernoulli.jsx — lesson page
@@ -184,6 +186,15 @@ export default function Bernoulli() {
 }
 
 /* ------------------------- Small Interactive Panel ------------------------ */
+function Metric({ label, value }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">{label}</div>
+      <div className="tabular-nums font-semibold text-slate-900">{value}</div>
+    </div>
+  );
+}
+
 function BernoulliPanel() {
   const [p, setP] = useState(0.25);
 
@@ -194,9 +205,14 @@ function BernoulliPanel() {
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">
+      {/* scoped styling so only metric labels get tighter math */}
+      <style>{`
+        .metric-label .katex { line-height: 1.2; }
+      `}</style>
+
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <label className="block text-sm font-medium text-slate-700">
-          Success probability p
+        <label className="block text-sm font-medium text-slate-700 w-full sm:w-72">
+          Success probability <Tex size="sm">{String.raw`p`}</Tex>
           <input
             type="range"
             min="0"
@@ -205,32 +221,39 @@ function BernoulliPanel() {
             value={p}
             onChange={(e) => setP(Number(e.target.value))}
             className="mt-2 w-full"
+            aria-label="Success probability p"
           />
-          <div className="mt-1 text-slate-800 tabular-nums">p = {p.toFixed(2)}</div>
+          <div className="mt-1 text-slate-800 tabular-nums">
+            <Tex size="sm">{String.raw`p`}</Tex> = {p.toFixed(2)}
+          </div>
         </label>
 
-        <div className="grid grid-cols-2 gap-3 text-sm">
-          <div className="rounded-lg border border-slate-200 p-3">
-            <div className="text-slate-500">P(X=0)</div>
-            <div className="text-slate-900 font-semibold">{pmf0.toFixed(4)}</div>
-          </div>
-          <div className="rounded-lg border border-slate-200 p-3">
-            <div className="text-slate-500">P(X=1)</div>
-            <div className="text-slate-900 font-semibold">{pmf1.toFixed(4)}</div>
-          </div>
-          <div className="rounded-lg border border-slate-200 p-3">
-            <div className="text-slate-500">E[X]</div>
-            <div className="text-slate-900 font-semibold">{mean.toFixed(4)}</div>
-          </div>
-          <div className="rounded-lg border border-slate-200 p-3">
-            <div className="text-slate-500">Var(X)</div>
-            <div className="text-slate-900 font-semibold">{variance.toFixed(4)}</div>
-          </div>
+        <div className="grid grid-cols-2 gap-3 text-sm sm:flex-1 sm:grid-cols-4">
+          <Metric
+            label={<Tex size="sm">{String.raw`\mathbb{P}(X=0)`}</Tex>}
+            value={pmf0.toFixed(4)}
+          />
+          <Metric
+            label={<Tex size="sm">{String.raw`\mathbb{P}(X=1)`}</Tex>}
+            value={pmf1.toFixed(4)}
+          />
+          <Metric
+            label={<Tex size="sm">{String.raw`\mathbb{E}[X]`}</Tex>}
+            value={mean.toFixed(4)}
+          />
+          <Metric
+            label={<Tex size="sm">{String.raw`\mathrm{Var}(X)`}</Tex>}
+            value={variance.toFixed(4)}
+          />
         </div>
       </div>
 
       <p className="mt-4 text-sm text-slate-700">
-        Recall: for Bernoulli(p), the pmf is P(X=1)=p and P(X=0)=1−p, with mean p and variance p(1−p).
+        Recall: for <Tex size="sm">{String.raw`\mathrm{Bernoulli}(p)`}</Tex>, the pmf is{" "}
+        <Tex size="sm">{String.raw`\mathbb{P}(X=1)=p`}</Tex> and{" "}
+        <Tex size="sm">{String.raw`\mathbb{P}(X=0)=1-p`}</Tex>, with{" "}
+        <Tex size="sm">{String.raw`\mathbb{E}[X]=p`}</Tex> and{" "}
+        <Tex size="sm">{String.raw`\mathrm{Var}(X)=p(1-p)`}</Tex>.
       </p>
     </div>
   );

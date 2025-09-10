@@ -4,6 +4,7 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import Tex from "../../shell/components/Tex";
 
 /**
  * ContinuousIntro.jsx — section overview (Continuous & CLT)
@@ -187,12 +188,29 @@ export default function ContinuousIntro() {
 }
 
 /* ----------------------------- CLT Mini Demo -------------------------------- */
+function Metric({ label, value }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">{label}</div>
+      <div className="tabular-nums font-semibold text-slate-900">{value}</div>
+    </div>
+  );
+}
+
 function CLTDemo() {
   const [dist, setDist] = useState("uniform"); // 'uniform' | 'exponential' | 'bernoulli'
   const [p, setP] = useState(0.2);             // only for bernoulli
   const [n, setN] = useState(10);              // sample size
   const [m, setM] = useState(1000);            // number of replications
   const [stats, setStats] = useState(null);    // {empMean, empSD, theoMean, theoSD}
+
+  // tighten KaTeX only inside our metric labels
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.textContent = `.metric-label .katex{line-height:1.2}`;
+    document.head.appendChild(style);
+    return () => style.remove();
+  }, []);
 
   // Distribution generators and moments
   const draw = useMemo(() => {
@@ -244,10 +262,9 @@ function CLTDemo() {
   }
 
   useEffect(() => {
-    // quick initial run
-    simulate();
+    simulate(); // initial run
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // run once
+  }, []);
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">
@@ -267,7 +284,7 @@ function CLTDemo() {
 
         {dist === "bernoulli" && (
           <label className="block text-sm font-medium text-slate-700">
-            Bernoulli p
+            Bernoulli <Tex size="sm">{String.raw`p`}</Tex>
             <input
               type="range"
               min="0"
@@ -277,12 +294,14 @@ function CLTDemo() {
               onChange={(e) => setP(Number(e.target.value))}
               className="mt-2 w-full"
             />
-            <div className="mt-1 text-slate-800 tabular-nums">p = {p.toFixed(2)}</div>
+            <div className="mt-1 text-slate-800 tabular-nums">
+              <Tex size="sm">{String.raw`p`}</Tex> = {p.toFixed(2)}
+            </div>
           </label>
         )}
 
         <label className="block text-sm font-medium text-slate-700">
-          Sample size n
+          Sample size <Tex size="sm">{String.raw`n`}</Tex>
           <input
             type="number"
             min={1}
@@ -290,11 +309,12 @@ function CLTDemo() {
             value={n}
             onChange={(e) => setN(Math.max(1, Math.min(2000, Number(e.target.value) || 1)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="sample size n"
           />
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          Replications m
+          Replications <Tex size="sm">{String.raw`m`}</Tex>
           <input
             type="number"
             min={50}
@@ -302,6 +322,7 @@ function CLTDemo() {
             value={m}
             onChange={(e) => setM(Math.max(50, Math.min(20000, Number(e.target.value) || 50)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="replications m"
           />
         </label>
       </div>
@@ -316,26 +337,31 @@ function CLTDemo() {
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-        <Metric label="Theoretical mean μ" value={moments.mean.toFixed(4)} />
-        <Metric label="Theoretical SD(Ȳ)" value={Math.sqrt(moments.var / n).toFixed(4)} />
-        <Metric label="Empirical mean of Ȳ" value={stats ? stats.empMean.toFixed(4) : "—"} />
-        <Metric label="Empirical SD(Ȳ)" value={stats ? stats.empSD.toFixed(4) : "—"} />
+        <Metric
+          label={<><Tex size="sm">{String.raw`\text{Theoretical } \mu`}</Tex></>}
+          value={moments.mean.toFixed(4)}
+        />
+        <Metric
+          label={<><Tex size="sm">{String.raw`\text{Theoretical } \mathrm{SD}(\overline{Y})`}</Tex></>}
+          value={Math.sqrt(moments.var / n).toFixed(4)}
+        />
+        <Metric
+          label={<><Tex size="sm">{String.raw`\text{Empirical } \overline{Y}\ \text{ mean}`}</Tex></>}
+          value={stats ? stats.empMean.toFixed(4) : "—"}
+        />
+        <Metric
+          label={<><Tex size="sm">{String.raw`\text{Empirical } \mathrm{SD}(\overline{Y})`}</Tex></>}
+          value={stats ? stats.empSD.toFixed(4) : "—"}
+        />
       </div>
 
       <p className="mt-3 text-sm text-slate-700">
-        As <em>n</em> increases, the distribution of the standardized sample mean approaches Normal(0,1), regardless of
-        the parent distribution (provided basic regularity holds). Here we compare empirical and theoretical moments of
-        Ȳ. Try larger <em>n</em> and different parents to see stabilization.
+        <Tex size="sm">
+          {String.raw`\text{Standardized mean: }\ \frac{\overline{Y}-\mu}{\sigma/\sqrt{n}}\ \approx\ N(0,1)`}
+        </Tex>
+        {" "}as <Tex size="sm">{String.raw`n`}</Tex> grows (under mild conditions). Try larger{" "}
+        <Tex size="sm">{String.raw`n`}</Tex> and different parents to see stabilization.
       </p>
-    </div>
-  );
-}
-
-function Metric({ label, value }) {
-  return (
-    <div className="rounded-lg border border-slate-200 p-3">
-      <div className="text-slate-500">{label}</div>
-      <div className="text-slate-900 font-semibold tabular-nums">{value}</div>
     </div>
   );
 }

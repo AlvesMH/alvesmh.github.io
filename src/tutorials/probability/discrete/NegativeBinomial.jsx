@@ -4,6 +4,8 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import Tex from "../../shell/components/Tex";
+
 
 /**
  * NegativeBinomial.jsx — lesson page
@@ -182,73 +184,128 @@ export default function NegativeBinomial() {
   );
 }
 
-/* ------------------------- Interactive Negative Binomial Panel ------------------------ */
+/* ------------------------- Small Interactive Panel ------------------------ */
+function Metric({ label, value, hint }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">
+        {label}
+        {hint ? <span className="text-slate-400"> {hint}</span> : null}
+      </div>
+      <div className="tabular-nums font-semibold text-slate-900">{value}</div>
+    </div>
+  );
+}
+
 function NegativeBinomialPanel() {
-  const [r, setR] = useState(3);
-  const [p, setP] = useState(0.4);
-  const [k, setK] = useState(6); // trials (k >= r)
+  const [n, setN] = useState(10);
+  const [p, setP] = useState(0.3);
+  const [k, setK] = useState(3);
 
-  // Keep inputs sensible
+  // Guard inputs
   useEffect(() => {
-    if (r < 1) setR(1);
-    if (k < r) setK(r);
-  }, [r, k]);
+    if (k > n) setK(n);
+    if (k < 0) setK(0);
+  }, [n]);
+  useEffect(() => {
+    if (p < 0) setP(0);
+    if (p > 1) setP(1);
+  }, [p]);
 
-  const mean = useMemo(() => (p > 0 ? r / p : Infinity), [r, p]);
-  const variance = useMemo(() => (p > 0 ? (r * (1 - p)) / (p * p) : Infinity), [r, p]);
+  const mean = useMemo(() => n * p, [n, p]);
+  const variance = useMemo(() => n * p * (1 - p), [n, p]);
 
-  // Light-weight log-factorial via split rule: small exact, large Stirling (OK for teaching use)
-  const logFact = (m) => {
-    if (m < 2) return 0;
-    if (m <= 200) {
+  // Numerically stable log(n choose k)
+  const logChoose = useMemo(() => {
+    const MAX = Math.max(10000, n + 10);
+    const LOGFACT = new Float64Array(Math.max(MAX + 1, 2));
+    LOGFACT[0] = 0;
+    for (let i = 1; i <= MAX; i++) LOGFACT[i] = LOGFACT[i - 1] + Math.log(i);
+    const stirling = (m) =>
+      m <= MAX ? LOGFACT[m] : m * Math.log(m) - m + 0.5 * Math.log(2 * Math.PI * m);
+    return (nn, kk) => {
+      if (kk < 0 || kk > nn) return -Infinity;
+      return stirling(nn) - stirling(kk) - stirling(nn - kk);
+    };
+  }, [n]);
+
+  const binomPMF = useMemo(() => {
+    return (nn, pp, kk) => {
+      if (kk < 0 || kk > nn) return 0;
+      if (pp === 0) return kk === 0 ? 1 : 0;
+      if (pp === 1) return kk === nn ? 1 : 0;
+      const logp = logChoose(nn, kk) + kk * Math.log(pp) + (nn - kk) * Math.log(1 - pp);
+      return Math.exp(logp);
+    };
+  }, [logChoose]);
+
+  const binomCDF_LE = useMemo(() => {
+    return (nn, pp, kk) => {
       let s = 0;
-      for (let i = 2; i <= m; i++) s += Math.log(i);
+      for (let i = 0; i <= Math.min(kk, nn); i++) s += binomPMF(nn, pp, i);
       return s;
-    }
-    // Stirling w/ first correction terms
-    return m * Math.log(m) - m + 0.5 * Math.log(2 * Math.PI * m) + 1 / (12 * m) - 1 / (360 * m ** 3);
-  };
-  const logChoose = (n, k) => {
-    if (k < 0 || k > n) return -Infinity;
-    return logFact(n) - logFact(k) - logFact(n - k);
-  };
+    };
+  }, [binomPMF]);
 
-  const pmf = useMemo(() => {
-    if (!(k >= r)) return 0;
-    if (p === 0) return k === Infinity ? 1 : 0;
-    if (p === 1) return k === r ? 1 : 0;
-    const logp = logChoose(k - 1, r - 1) + r * Math.log(p) + (k - r) * Math.log(1 - p);
-    return Math.exp(logp);
-  }, [k, r, p]);
+  // Normal approximation with continuity correction
+  function stdNormCDF(x) {
+    const a1 = 0.254829592,
+      a2 = -0.284496736,
+      a3 = 1.421413741,
+      a4 = -1.453152027,
+      a5 = 1.061405429,
+      p = 0.3275911;
+    const sign = x < 0 ? -1 : 1;
+    const t = 1 / (1 + p * Math.abs(x));
+    const y = 1 - (((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t) * Math.exp(-x * x);
+    return 0.5 * (1 + sign * y);
+  }
+  function normalApproxPMF(nn, pp, kk) {
+    const mu = nn * pp,
+      sig = Math.sqrt(nn * pp * (1 - pp));
+    if (!(sig > 0)) return kk === Math.round(mu) ? 1 : 0;
+    // continuity: P(k-0.5 ≤ X ≤ k+0.5)
+    const z1 = ((kk + 0.5) - mu) / sig;
+    const z0 = ((kk - 0.5) - mu) / sig;
+    return Math.max(0, stdNormCDF(z1) - stdNormCDF(z0));
+  }
 
-  const cdf = useMemo(() => {
-    // Sum pmf from r to k (reasonable for k <= ~400; input UI should keep within bounds)
-    let s = 0;
-    const maxIter = Math.min(k, r + 400); // guard
-    for (let t = r; t <= maxIter; t++) {
-      const logp = logChoose(t - 1, r - 1) + r * Math.log(p) + (t - r) * Math.log(1 - p);
-      s += Math.exp(logp);
-    }
-    return s;
-  }, [k, r, p]);
+  // Poisson approximation (rare-events) with λ=np
+  function poissonPMF(lambda, kk) {
+    if (kk < 0) return 0;
+    let p0 = Math.exp(-lambda);
+    if (kk === 0) return p0;
+    let v = p0;
+    for (let i = 1; i <= kk; i++) v *= lambda / i;
+    return v;
+  }
+
+  const pmf = useMemo(() => binomPMF(n, p, k), [n, p, k, binomPMF]);
+  const cdf = useMemo(() => binomCDF_LE(n, p, k), [n, p, k, binomCDF_LE]);
+  const pmfNormal = useMemo(() => normalApproxPMF(n, p, k), [n, p, k]);
+  const pmfPoisson = useMemo(() => poissonPMF(n * p, k), [n, p, k]);
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">
-      <div className="grid gap-4 md:grid-cols-4">
+      {/* scoped so only metric labels get tighter math */}
+      <style>{`.metric-label .katex{line-height:1.2}`}</style>
+
+      <div className="grid gap-4 md:grid-cols-3">
         <label className="block text-sm font-medium text-slate-700">
-          r (successes target)
+          Number of trials <Tex size="sm">{String.raw`n`}</Tex>
           <input
             type="number"
             min={1}
-            max={20}
-            value={r}
-            onChange={(e) => setR(Math.max(1, Math.min(20, Number(e.target.value) || 1)))}
+            max={1000}
+            value={n}
+            onChange={(e) => setN(Math.max(1, Math.min(1000, Number(e.target.value) || 0)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="Number of trials n"
           />
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          Success probability p
+          Success probability <Tex size="sm">{String.raw`p`}</Tex>
           <input
             type="range"
             min="0"
@@ -257,46 +314,68 @@ function NegativeBinomialPanel() {
             value={p}
             onChange={(e) => setP(Number(e.target.value))}
             className="mt-2 w-full"
+            aria-label="Success probability p"
           />
-          <div className="mt-1 text-slate-800 tabular-nums">p = {p.toFixed(2)}</div>
+          <div className="mt-1 text-slate-800 tabular-nums">
+            <Tex size="sm">{String.raw`p`}</Tex> = {p.toFixed(2)}
+          </div>
         </label>
 
-        <label className="block text-sm font-medium text-slate-700 md:col-span-2">
-          Target trials k (≥ r)
+        <label className="block text-sm font-medium text-slate-700">
+          Target count <Tex size="sm">{String.raw`k`}</Tex>
           <input
             type="number"
-            min={r}
-            max={400}
+            min={0}
+            max={n}
             value={k}
-            onChange={(e) =>
-              setK(Math.max(r, Math.min(400, Number(e.target.value) || r)))
-            }
+            onChange={(e) => setK(Math.max(0, Math.min(n, Number(e.target.value) || 0)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="Target count k"
           />
         </label>
       </div>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5 text-sm">
-        <Metric label="E[X]" value={Number.isFinite(mean) ? mean.toFixed(4) : "∞"} />
-        <Metric label="Var(X)" value={Number.isFinite(variance) ? variance.toFixed(4) : "∞"} />
-        <Metric label="P(X=k)" value={pmf.toPrecision(4)} />
-        <Metric label="P(X≤k)" value={cdf.toPrecision(4)} />
-        <Metric label="Mode (approx.)" value={r > 1 ? String(Math.floor((r - 1) * (1 - p) / p) + r) : "r"} />
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+        <Metric
+          label={<Tex size="sm">{String.raw`\mathbb{E}[X]`}</Tex>}
+          value={mean.toFixed(4)}
+        />
+        <Metric
+          label={<Tex size="sm">{String.raw`\mathrm{Var}(X)`}</Tex>}
+          value={variance.toFixed(4)}
+        />
+        <Metric
+          label={<Tex size="sm">{String.raw`\mathbb{P}(X=k)`}</Tex>}
+          value={pmf.toPrecision(4)}
+        />
+        <Metric
+          label={<Tex size="sm">{String.raw`\mathbb{P}(X\le k)`}</Tex>}
+          value={cdf.toPrecision(4)}
+        />
+        <Metric
+          label={
+            <>
+              Normal approx <Tex size="sm">{String.raw`\mathbb{P}(X=k)`}</Tex>
+            </>
+          }
+          value={pmfNormal.toPrecision(4)}
+          hint="(continuity-corrected)"
+        />
+        <Metric
+          label={
+            <>
+              Poisson approx <Tex size="sm">{String.raw`\mathbb{P}(X=k)`}</Tex>
+            </>
+          }
+          value={pmfPoisson.toPrecision(4)}
+          hint={<Tex size="sm">{String.raw`(\lambda=np)`}</Tex>}
+        />
       </div>
 
       <p className="mt-3 text-sm text-slate-700">
-        When r=1 this reduces to the Geometric(p) distribution on trials. The pmf shape is right-skewed for small p and
-        tightens as p increases or r grows.
+        Approximations are sensible when their conditions hold (see the section below). Use the exact{" "}
+        <Tex size="sm">{String.raw`\mathbb{P}(X=k)`}</Tex> for precise answers.
       </p>
-    </div>
-  );
-}
-
-function Metric({ label, value }) {
-  return (
-    <div className="rounded-lg border border-slate-200 p-3">
-      <div className="text-slate-500">{label}</div>
-      <div className="text-slate-900 font-semibold tabular-nums">{value}</div>
     </div>
   );
 }

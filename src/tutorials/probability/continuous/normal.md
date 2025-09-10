@@ -74,9 +74,9 @@ Try similar calculations with the interactive controls on this page.
 
 Smooth bell-shaped pdf centered at \(μ\); the cdf is sigmoid-like and approaches 0/1 in the tails:
 
-![normal-shape](./images/normal-shape-placeholder.png)
+![normal-shape](/images/Normal_distribution.png)
 
-<small>Place images for this page under `src/tutorials/probability/continuous/images/`.</small>
+
 
 ---
 

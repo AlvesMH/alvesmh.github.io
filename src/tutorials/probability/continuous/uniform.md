@@ -103,6 +103,5 @@ Try these in the interactive panel on the page.
 
 A flat pdf on \([a,b]\), linearly increasing cdf:
 
-![uniform-shapes](./images/uniform-shapes-placeholder.png)
+![uniform-shapes](/images/uniform-distribution.jpg)
 
-<small>Place images for this page under `src/tutorials/probability/continuous/images/` and reference them relatively.</small>

@@ -94,9 +94,9 @@ Even when the data are **not Normal**, sums/averages behave **approximately Norm
 
 PDFs and CDFs connect by integration:
 
-![pdf-cdf-schematic](./images/pdf-cdf-schematic-placeholder.png)
+![pdf-cdf-schematic](/images/pdf-cdf.png)
 
-<small>Place images for this section under `src/tutorials/probability/continuous/images/` and reference them relatively as above.</small>
+
 
 ---
 

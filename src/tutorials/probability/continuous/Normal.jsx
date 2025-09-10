@@ -4,6 +4,8 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import katex from "katex";
+import "katex/dist/katex.min.css";
 
 /**
  * Normal.jsx — lesson page
@@ -15,6 +17,25 @@ import Flashcards from "../../shell/components/Flashcards";
  * - z-score: z=(x-μ)/σ; 68–95–99.7 rule
  * - linear & sum closures: aX+b and sums of independent Normals remain Normal
  */
+
+function Tex({ children, block = false, size = "sm", className = "" }) {
+  const html = React.useMemo(() => {
+    const s = typeof children === "string" ? children : String(children ?? "");
+    return katex.renderToString(s, { displayMode: block, throwOnError: false });
+  }, [children, block]);
+
+  // size: "sm" (0.92em), "xs" (0.85em), default (1.0em)
+  const sizeClass =
+    size === "xs" ? "text-[0.85em]" : size === "sm" ? "text-[0.92em]" : "";
+
+  const Tag = block ? "div" : "span";
+  return (
+    <Tag
+      className={`${block ? "katex-display" : "katex"} ${sizeClass} align-middle ${className}`}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
+}
 
 export default function Normal() {
   const [md, setMd] = useState("");
@@ -161,10 +182,10 @@ export default function Normal() {
               ← Gamma
             </Link>
             <Link
-              to="/tutorials/introduction-to-probability-distribution/continuous"
+              to="/tutorials/introduction-to-probability-distribution/continuous/clt"
               className="inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
             >
-              Back to Continuous Intro →
+              Next to CLT →
             </Link>
           </div>
 
@@ -316,13 +337,13 @@ function NormalPanel() {
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-7 text-sm">
-        <Metric label="z=(x−μ)/σ" value={z.toFixed(6)} />
-        <Metric label="f(x)" value={pdfAtX.toPrecision(4)} />
-        <Metric label="F(x)" value={cdfAtX.toPrecision(4)} />
-        <Metric label="P(a≤X≤b)" value={intervalProb.toPrecision(4)} />
-        <Metric label="P(|X−μ|≤1σ)" value={p1.toPrecision(4)} />
-        <Metric label="P(|X−μ|≤2σ)" value={p2.toPrecision(4)} />
-        <Metric label="P(|X−μ|≤3σ)" value={p3.toPrecision(4)} />
+        <Metric label={<Tex>{String.raw`z=\frac{x-\mu}{\sigma}`}</Tex>} value={z.toFixed(6)} />
+        <Metric label={<Tex>{String.raw`f(x)`}</Tex>} value={pdfAtX.toPrecision(4)} />
+        <Metric label={<Tex>{String.raw`F(x)`}</Tex>} value={cdfAtX.toPrecision(4)} />
+        <Metric label={<Tex>{String.raw`\mathbb{P}(a\le X\le b)`}</Tex>} value={intervalProb.toPrecision(4)} />
+        <Metric label={<Tex>{String.raw`\mathbb{P}(|X-\mu|\le 1\sigma)`}</Tex>} value={p1.toPrecision(4)} />
+        <Metric label={<Tex>{String.raw`\mathbb{P}(|X-\mu|\le 2\sigma)`}</Tex>} value={p2.toPrecision(4)} />
+        <Metric label={<Tex>{String.raw`\mathbb{P}(|X-\mu|\le 3\sigma)`}</Tex>} value={p3.toPrecision(4)} />
       </div>
 
       <div className="mt-5 grid gap-4 md:grid-cols-3">
@@ -342,7 +363,7 @@ function NormalPanel() {
             onClick={simulate}
             className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
           >
-            Resimulate N(μ,σ²)
+            Resimulate&nbsp;<Tex>N(\mu,\sigma^{2})</Tex>
           </button>
         </div>
 
@@ -350,27 +371,31 @@ function NormalPanel() {
           <div className="rounded-lg border border-slate-200 p-3">
             <div className="text-slate-500">Empirical vs theoretical</div>
             <div className="mt-1 tabular-nums">
-              μ̂ = {stats ? stats.empMean.toFixed(6) : "—"} (theory {mu.toFixed(6)})
+              <Tex>{String.raw`\hat{\mu}`}</Tex> = {stats ? stats.empMean.toFixed(6) : "—"} (theory <Tex>{String.raw`\mu`}</Tex>={mu.toFixed(6)})
             </div>
             <div className="tabular-nums">
-              σ̂² = {stats ? stats.empVar.toFixed(6) : "—"} (theory {(sigma * sigma).toFixed(6)})
+              <Tex>{String.raw`\hat{\sigma}^{2}`}</Tex> = {stats ? stats.empVar.toFixed(6) : "—"} (theory <Tex>{String.raw`\sigma^{2}`}</Tex>={(sigma*sigma).toFixed(6)})
             </div>
           </div>
         </div>
       </div>
 
       <p className="mt-3 text-sm text-slate-700">
-        We use Φ(z)=½(1+erf(z/√2)) with an accurate erf approximation. Box–Muller sampling checks mean/variance.
+        We use{" "}
+        <Tex>{String.raw`\Phi(z)=\tfrac{1}{2}\!\left(1+\operatorname{erf}\!\left(\frac{z}{\sqrt{2}}\right)\right)`}</Tex>
+        {" "}with an accurate <Tex>{String.raw`\operatorname{erf}`}</Tex> approximation. Box–Muller sampling checks mean/variance.  
       </p>
     </div>
   );
 }
 
+// inside Normal.jsx
 function Metric({ label, value }) {
   return (
-    <div className="rounded-lg border border-slate-200 p-3">
-      <div className="text-slate-500">{label}</div>
-      <div className="text-slate-900 font-semibold tabular-nums">{value}</div>
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">{label}</div>
+      <div className="tabular-nums font-semibold text-slate-900">{value}</div>
     </div>
   );
 }
+

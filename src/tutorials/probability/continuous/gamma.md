@@ -88,6 +88,6 @@ As a prior for a **rate** (Poisson or Exponential models), \( \mathrm{Gamma}(α,
 
 Gamma pdfs for varying \(k\) and common \(λ\):
 
-![gamma-shapes](./images/gamma-shapes-placeholder.png)
+![gamma-shapes](/images/gamma-distribution.png)
 
-<small>Place images for this page under `src/tutorials/probability/continuous/images/` and reference them relatively.</small>
+

@@ -4,6 +4,7 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import Tex from "../../shell/components/Tex";
 
 /**
  * Exponential.jsx — lesson page
@@ -185,6 +186,15 @@ export default function Exponential() {
 }
 
 /* ------------------------ Interactive Exponential Panel ------------------------ */
+function Metric({ label, value }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">{label}</div>
+      <div className="tabular-nums font-semibold text-slate-900">{value}</div>
+    </div>
+  );
+}
+
 function ExponentialPanel() {
   const [lambda, setLambda] = useState(1.2);
   const [x, setX] = useState(1.0);
@@ -231,117 +241,106 @@ function ExponentialPanel() {
 
   function simulate() {
     const N = Math.max(100, Math.min(20000, Math.floor(m)));
-    let s1 = 0;
-    let s2 = 0;
+    let s1 = 0, s2 = 0;
     for (let i = 0; i < N; i++) {
       // inverse-CDF: X = −ln(1−U)/λ
       const u = Math.random();
       const val = -Math.log(1 - u) / lambda;
-      s1 += val;
-      s2 += val * val;
+      s1 += val; s2 += val * val;
     }
     const empMean = s1 / N;
     const empVar = s2 / N - empMean * empMean;
     setStats({ empMean, empVar });
   }
 
-  useEffect(() => {
-    simulate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // initial run
+  useEffect(() => { simulate(); }, []); // initial run
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">
+      {/* tighten KaTeX only inside metric labels */}
+      <style>{`.metric-label .katex{line-height:1.2}`}</style>
+
       <div className="grid gap-4 md:grid-cols-4">
         <label className="block text-sm font-medium text-slate-700">
-          Rate λ {"(>0)"}
+          Rate <Tex size="sm">{String.raw`\lambda`}</Tex> {"(> 0)"}
           <input
-            type="number"
-            step="0.1"
-            min="0.1"
-            value={lambda}
+            type="number" step="0.1" min="0.1" value={lambda}
             onChange={(e) => setLambda(Math.max(0.1, Number(e.target.value) || 0.1))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="rate lambda"
           />
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          x (for f,F,S)
+          <Tex size="sm">{String.raw`x`}</Tex> (for <Tex size="sm">{String.raw`f,\,F,\,S`}</Tex>)
           <input
-            type="number"
-            min="0"
-            value={x}
+            type="number" min="0" value={x}
             onChange={(e) => setX(Math.max(0, Number(e.target.value) || 0))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="x for f F S"
           />
         </label>
 
         <div className="grid grid-cols-2 gap-3">
           <label className="block text-xs font-medium text-slate-700">
-            c (interval)
+            <Tex size="sm">{String.raw`c`}</Tex> (interval)
             <input
-              type="number"
-              min="0"
-              value={c}
+              type="number" min="0" value={c}
               onChange={(e) => setC(Math.max(0, Number(e.target.value) || 0))}
               className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1"
+              aria-label="interval c"
             />
           </label>
           <label className="block text-xs font-medium text-slate-700">
-            d (interval)
+            <Tex size="sm">{String.raw`d`}</Tex> (interval)
             <input
-              type="number"
-              min="0"
-              value={d}
+              type="number" min="0" value={d}
               onChange={(e) => setD(Math.max(0, Number(e.target.value) || 0))}
               className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1"
+              aria-label="interval d"
             />
           </label>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           <label className="block text-xs font-medium text-slate-700">
-            s (memoryless)
+            <Tex size="sm">{String.raw`s`}</Tex> (memoryless)
             <input
-              type="number"
-              min="0"
-              value={s}
+              type="number" min="0" value={s}
               onChange={(e) => setS(Math.max(0, Number(e.target.value) || 0))}
               className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1"
+              aria-label="memoryless s"
             />
           </label>
           <label className="block text-xs font-medium text-slate-700">
-            t (memoryless)
+            <Tex size="sm">{String.raw`t`}</Tex> (memoryless)
             <input
-              type="number"
-              min="0"
-              value={t}
+              type="number" min="0" value={t}
               onChange={(e) => setT(Math.max(0, Number(e.target.value) || 0))}
               className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1"
+              aria-label="memoryless t"
             />
           </label>
         </div>
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-6 text-sm">
-        <Metric label="E[X]" value={mean.toFixed(6)} />
-        <Metric label="Var(X)" value={variance.toFixed(6)} />
-        <Metric label="f(x)" value={pdfAtX.toPrecision(4)} />
-        <Metric label="F(x)" value={cdfAtX.toPrecision(4)} />
-        <Metric label="S(x)" value={survAtX.toPrecision(4)} />
-        <Metric label="P(c≤X≤d)" value={intervalProb.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{E}[X]`}</Tex>} value={mean.toFixed(6)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathrm{Var}(X)`}</Tex>} value={variance.toFixed(6)} />
+        <Metric label={<Tex size="sm">{String.raw`f(x)`}</Tex>} value={pdfAtX.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`F(x)`}</Tex>} value={cdfAtX.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`S(x)`}</Tex>} value={survAtX.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{P}(c\le X\le d)`}</Tex>} value={intervalProb.toPrecision(4)} />
       </div>
 
       <div className="mt-5 grid gap-4 md:grid-cols-3">
         <label className="block text-sm font-medium text-slate-700">
-          Simulation size m
+          Simulation size <Tex size="sm">{String.raw`m`}</Tex>
           <input
-            type="number"
-            min={100}
-            max={20000}
-            value={m}
+            type="number" min={100} max={20000} value={m}
             onChange={(e) => setM(Math.max(100, Math.min(20000, Number(e.target.value) || 100)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="simulation size m"
           />
         </label>
 
@@ -350,7 +349,7 @@ function ExponentialPanel() {
             onClick={simulate}
             className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
           >
-            Resimulate Exp(λ)
+            Resimulate&nbsp;<Tex size="sm">{String.raw`\mathrm{Exp}(\lambda)`}</Tex>
           </button>
         </div>
 
@@ -358,34 +357,28 @@ function ExponentialPanel() {
           <div className="rounded-lg border border-slate-200 p-3">
             <div className="text-slate-500">Empirical vs theoretical</div>
             <div className="mt-1 tabular-nums">
-              μ̂ = {stats ? stats.empMean.toFixed(6) : "—"} (theory {(1 / lambda).toFixed(6)})
+              <Tex size="sm">{String.raw`\hat{\mu}`}</Tex> = {stats ? stats.empMean.toFixed(6) : "—"} (theory <Tex size="sm">{String.raw`\mu`}</Tex>={(1 / lambda).toFixed(6)})
             </div>
             <div className="tabular-nums">
-              σ̂² = {stats ? stats.empVar.toFixed(6) : "—"} (theory {(1 / (lambda * lambda)).toFixed(6)})
+              <Tex size="sm">{String.raw`\hat{\sigma}^{2}`}</Tex> = {stats ? stats.empVar.toFixed(6) : "—"} (theory <Tex size="sm">{String.raw`\sigma^{2}`}</Tex>={(1 / (lambda * lambda)).toFixed(6)})
             </div>
           </div>
         </div>
       </div>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
-        <Metric label="Hazard h(x)" value={`${lambda.toFixed(3)} (constant)`} />
-        <Metric label="Median" value={(Math.log(2) / lambda).toFixed(6)} />
-        <Metric label="Memoryless Δ" value={memDelta.toExponential(2)} />
+        <Metric label={<Tex size="sm">{String.raw`h(x)`}</Tex>} value={<>{lambda.toFixed(3)} <span className="text-slate-500">(constant)</span></>} />
+        <Metric label={<Tex size="sm">{String.raw`\text{Median}`}</Tex>} value={(Math.log(2) / lambda).toFixed(6)} />
+        <Metric label={<Tex size="sm">{String.raw`\text{Memoryless }\Delta`}</Tex>} value={memDelta.toExponential(2)} />
       </div>
 
       <p className="mt-3 text-sm text-slate-700">
-        Simulation uses inverse-CDF: X = −ln(1−U)/λ with U~Uniform(0,1). Interval probability uses the survival
-        function: P(c≤X≤d)=S(c)−S(d). Memoryless Δ should be ~0 up to floating error.
+        Simulation uses inverse-CDF:&nbsp;
+        <Tex size="sm">{String.raw`X=-\ln(1-U)/\lambda`}</Tex> with{" "}
+        <Tex size="sm">{String.raw`U\sim \mathrm{Uniform}(0,1)`}</Tex>. Interval probability uses the survival function:&nbsp;
+        <Tex size="sm">{String.raw`\mathbb{P}(c\le X\le d)=S(c)-S(d)`}</Tex>. Memoryless{" "}
+        <Tex size="sm">{String.raw`\Delta`}</Tex> should be ~0 up to floating error.
       </p>
-    </div>
-  );
-}
-
-function Metric({ label, value }) {
-  return (
-    <div className="rounded-lg border border-slate-200 p-3">
-      <div className="text-slate-500">{label}</div>
-      <div className="text-slate-900 font-semibold tabular-nums">{value}</div>
     </div>
   );
 }

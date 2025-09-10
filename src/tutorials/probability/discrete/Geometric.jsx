@@ -4,6 +4,7 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import Tex from "../../shell/components/Tex";
 
 /**
  * Geometric.jsx — lesson page
@@ -183,33 +184,59 @@ export default function Geometric() {
   );
 }
 
-/* ------------------------- Interactive Geometric Panel ------------------------ */
+/* ------------------------- Small Interactive Panel ------------------------ */
+function Metric({ label, value, hint }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">
+        {label}
+        {hint ? <span className="ml-1 text-slate-400">{hint}</span> : null}
+      </div>
+      <div className="tabular-nums font-semibold text-slate-900">{value}</div>
+    </div>
+  );
+}
+
 function GeometricPanel() {
-  const [p, setP] = useState(0.3);
-  const [k, setK] = useState(4);
-  const [m, setM] = useState(2);
-  const [n, setN] = useState(3);
+  // Geometric(p): trials until first success, support k = 1,2,...
+  const [p, setP] = React.useState(0.3);
+  const [k, setK] = React.useState(3);
 
-  useEffect(() => { if (k < 1) setK(1); }, [k]);
+  // guards
+  React.useEffect(() => {
+    if (p < 0) setP(0);
+    if (p > 1) setP(1);
+  }, [p]);
+  React.useEffect(() => {
+    if (k < 1) setK(1);
+  }, [k]);
 
-  const pmf = useMemo(() => (k >= 1 ? Math.pow(1 - p, k - 1) * p : 0), [p, k]);
-  const cdf = useMemo(() => (k >= 1 ? 1 - Math.pow(1 - p, k) : 0), [p, k]);
-  const tail = useMemo(() => (k >= 0 ? Math.pow(1 - p, k) : 1), [p, k]); // P(X>k)
-  const mean = useMemo(() => (p > 0 ? 1 / p : Infinity), [p]);
-  const variance = useMemo(() => (p > 0 ? (1 - p) / (p * p) : Infinity), [p]);
+  const mean = React.useMemo(() => (p > 0 ? 1 / p : Infinity), [p]);
+  const variance = React.useMemo(() => (p > 0 ? (1 - p) / (p * p) : Infinity), [p]);
 
-  // Memoryless check: P(X>m+n | X>m) vs P(X>n)
-  const tail_m = useMemo(() => Math.pow(1 - p, Math.max(0, m)), [p, m]);
-  const tail_mn = useMemo(() => Math.pow(1 - p, Math.max(0, m + n)), [p, m, n]);
-  const cond = useMemo(() => (tail_m > 0 ? tail_mn / tail_m : 0), [tail_m, tail_mn]);
-  const tail_n = useMemo(() => Math.pow(1 - p, Math.max(0, n)), [p, n]);
-  const delta = useMemo(() => Math.abs(cond - tail_n), [cond, tail_n]);
+  const pmf = React.useMemo(() => {
+    if (k < 1 || p <= 0 || p > 1) return 0;
+    return Math.pow(1 - p, k - 1) * p;
+  }, [k, p]);
+
+  const cdf = React.useMemo(() => {
+    if (k < 1 || p <= 0 || p > 1) return 0;
+    return 1 - Math.pow(1 - p, k);
+  }, [k, p]);
+
+  const tail = React.useMemo(() => {
+    if (k < 0 || p < 0 || p > 1) return 0;
+    return Math.pow(1 - p, k);
+  }, [k, p]);
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">
-      <div className="grid gap-4 md:grid-cols-4">
-        <label className="block text-sm font-medium text-slate-700 md:col-span-2">
-          Success probability p
+      {/* scope: only metric labels get tighter math */}
+      <style>{`.metric-label .katex { line-height: 1.2; }`}</style>
+
+      <div className="grid gap-4 md:grid-cols-3">
+        <label className="block text-sm font-medium text-slate-700">
+          Success probability <Tex size="sm">{String.raw`p`}</Tex>
           <input
             type="range"
             min="0"
@@ -218,70 +245,39 @@ function GeometricPanel() {
             value={p}
             onChange={(e) => setP(Number(e.target.value))}
             className="mt-2 w-full"
+            aria-label="success probability p"
           />
-          <div className="mt-1 text-slate-800 tabular-nums">p = {p.toFixed(2)}</div>
+          <div className="mt-1 text-slate-800 tabular-nums">
+            <Tex size="sm">{String.raw`p`}</Tex> = {p.toFixed(2)}
+          </div>
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          Target k (P(X=k), P(X≤k))
+          Target trial <Tex size="sm">{String.raw`k`}</Tex>
           <input
             type="number"
             min={1}
             value={k}
             onChange={(e) => setK(Math.max(1, Number(e.target.value) || 1))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="target trial k"
           />
         </label>
-
-        <div className="grid grid-cols-2 gap-3">
-          <label className="block text-xs font-medium text-slate-700">
-            m (memoryless)
-            <input
-              type="number"
-              min={0}
-              value={m}
-              onChange={(e) => setM(Math.max(0, Number(e.target.value) || 0))}
-              className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1"
-            />
-          </label>
-          <label className="block text-xs font-medium text-slate-700">
-            n (memoryless)
-            <input
-              type="number"
-              min={0}
-              value={n}
-              onChange={(e) => setN(Math.max(0, Number(e.target.value) || 0))}
-              className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1"
-            />
-          </label>
-        </div>
       </div>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-6 text-sm">
-        <Metric label="E[X]" value={Number.isFinite(mean) ? mean.toFixed(4) : "∞"} />
-        <Metric label="Var(X)" value={Number.isFinite(variance) ? variance.toFixed(4) : "∞"} />
-        <Metric label="P(X=k)" value={pmf.toPrecision(4)} />
-        <Metric label="P(X≤k)" value={cdf.toPrecision(4)} />
-        <Metric label="P(X>k)" value={tail.toPrecision(4)} />
-        <Metric label="Memoryless Δ" value={delta.toExponential(2)} hint="|P(X>m+n|X>m)−P(X>n)|" />
+      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{E}[X]`}</Tex>} value={Number.isFinite(mean) ? mean.toFixed(4) : "—"} />
+        <Metric label={<Tex size="sm">{String.raw`\mathrm{Var}(X)`}</Tex>} value={Number.isFinite(variance) ? variance.toFixed(4) : "—"} />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{P}(X=k)`}</Tex>} value={pmf.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`F(k)=\mathbb{P}(X\le k)`}</Tex>} value={cdf.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{P}(X>k)`}</Tex>} value={tail.toPrecision(4)} hint={<Tex size="xs">{String.raw`=(1-p)^k`}</Tex>} />
       </div>
 
       <p className="mt-3 text-sm text-slate-700">
-        With support starting at 1, the mean is 1/p and the variance is (1−p)/p². The **memoryless** identity makes
-        Geometric unique among discrete distributions.
+        Trials-until-first-success:{" "}
+        <Tex size="sm">{String.raw`\mathbb{P}(X=k)=(1-p)^{k-1}p,\quad k=1,2,\dots`}</Tex>. Memoryless:{" "}
+        <Tex size="sm">{String.raw`\mathbb{P}(X>m+n\mid X>m)=\mathbb{P}(X>n)`}</Tex>.
       </p>
-    </div>
-  );
-}
-
-function Metric({ label, value, hint }) {
-  return (
-    <div className="rounded-lg border border-slate-200 p-3">
-      <div className="text-slate-500">
-        {label}
-        {hint ? <span className="text-slate-400"> ({hint})</span> : null}
-      </div>
-      <div className="text-slate-900 font-semibold tabular-nums">{value}</div>
     </div>
   );
 }

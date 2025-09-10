@@ -32,6 +32,7 @@ const tutorials = [
         title: "Continuous",
         href: "/tutorials/introduction-to-probability-distribution/continuous",
         children: [
+          { id: "continuous-intro", title: "Continuous Intro", href: "/tutorials/introduction-to-probability-distribution/continuous/continuous-intro" },
           { id: "uniform", title: "Uniform", href: "/tutorials/introduction-to-probability-distribution/continuous/uniform" },
           { id: "exponential", title: "Exponential", href: "/tutorials/introduction-to-probability-distribution/continuous/exponential" },
           { id: "gamma", title: "Gamma", href: "/tutorials/introduction-to-probability-distribution/continuous/gamma" },

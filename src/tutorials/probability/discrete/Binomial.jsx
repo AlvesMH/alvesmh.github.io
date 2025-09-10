@@ -4,6 +4,8 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import Tex from "../../shell/components/Tex";
+
 
 /**
  * Binomial.jsx — lesson page
@@ -182,14 +184,32 @@ export default function Binomial() {
 
 /* ------------------------- Small Interactive Panel ------------------------ */
 /* Self-contained helpers (stable binomial + approximations) */
+function Metric({ label, value, hint }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">
+        {label}
+        {hint ? <span className="ml-1 text-slate-400">({hint})</span> : null}
+      </div>
+      <div className="tabular-nums font-semibold text-slate-900">{value}</div>
+    </div>
+  );
+}
+
 function BinomialPanel() {
   const [n, setN] = useState(10);
   const [p, setP] = useState(0.3);
   const [k, setK] = useState(3);
 
   // Guard inputs
-  useEffect(() => { if (k > n) setK(n); if (k < 0) setK(0); }, [n]);
-  useEffect(() => { if (p < 0) setP(0); if (p > 1) setP(1); }, [p]);
+  useEffect(() => {
+    if (k > n) setK(n);
+    if (k < 0) setK(0);
+  }, [n]);
+  useEffect(() => {
+    if (p < 0) setP(0);
+    if (p > 1) setP(1);
+  }, [p]);
 
   const mean = useMemo(() => n * p, [n, p]);
   const variance = useMemo(() => n * p * (1 - p), [n, p]);
@@ -200,7 +220,8 @@ function BinomialPanel() {
     const LOGFACT = new Float64Array(Math.max(MAX + 1, 2));
     LOGFACT[0] = 0;
     for (let i = 1; i <= MAX; i++) LOGFACT[i] = LOGFACT[i - 1] + Math.log(i);
-    const stirling = (m) => (m <= MAX ? LOGFACT[m] : m * Math.log(m) - m + 0.5 * Math.log(2 * Math.PI * m));
+    const stirling = (m) =>
+      m <= MAX ? LOGFACT[m] : m * Math.log(m) - m + 0.5 * Math.log(2 * Math.PI * m);
     return (nn, kk) => {
       if (kk < 0 || kk > nn) return -Infinity;
       return stirling(nn) - stirling(kk) - stirling(nn - kk);
@@ -212,7 +233,8 @@ function BinomialPanel() {
       if (kk < 0 || kk > nn) return 0;
       if (pp === 0) return kk === 0 ? 1 : 0;
       if (pp === 1) return kk === nn ? 1 : 0;
-      const logp = logChoose(nn, kk) + kk * Math.log(pp) + (nn - kk) * Math.log(1 - pp);
+      const logp =
+        logChoose(nn, kk) + kk * Math.log(pp) + (nn - kk) * Math.log(1 - pp);
       return Math.exp(logp);
     };
   }, [logChoose]);
@@ -227,22 +249,28 @@ function BinomialPanel() {
 
   // Normal approximation with continuity correction
   function stdNormCDF(x) {
-    const a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741, a4 = -1.453152027, a5 = 1.061405429, p = 0.3275911;
+    const a1 = 0.254829592,
+      a2 = -0.284496736,
+      a3 = 1.421413741,
+      a4 = -1.453152027,
+      a5 = 1.061405429,
+      pC = 0.3275911;
     const sign = x < 0 ? -1 : 1;
-    const t = 1 / (1 + p * Math.abs(x));
+    const t = 1 / (1 + pC * Math.abs(x));
     const y = 1 - (((((a5 * t + a4) * t + a3) * t + a2) * t + a1) * t) * Math.exp(-x * x);
     return 0.5 * (1 + sign * y);
   }
   function normalApproxPMF(nn, pp, kk) {
-    const mu = nn * pp, sig = Math.sqrt(nn * pp * (1 - pp));
+    const mu = nn * pp,
+      sig = Math.sqrt(nn * pp * (1 - pp));
     if (!(sig > 0)) return kk === Math.round(mu) ? 1 : 0;
     // continuity: P(k-0.5 ≤ X ≤ k+0.5)
-    const z1 = ((kk + 0.5) - mu) / sig;
-    const z0 = ((kk - 0.5) - mu) / sig;
+    const z1 = (kk + 0.5 - mu) / sig;
+    const z0 = (kk - 0.5 - mu) / sig;
     return Math.max(0, stdNormCDF(z1) - stdNormCDF(z0));
   }
 
-  // Poisson approximation (rare-events) with λ=np
+  // Poisson approximation (λ = np)
   function poissonPMF(lambda, kk) {
     if (kk < 0) return 0;
     let p0 = Math.exp(-lambda);
@@ -259,21 +287,27 @@ function BinomialPanel() {
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">
+      {/* Scoped styling so only metric labels get tighter math */}
+      <style>{`.metric-label .katex { line-height: 1.2; }`}</style>
+
       <div className="grid gap-4 md:grid-cols-3">
         <label className="block text-sm font-medium text-slate-700">
-          Number of trials n
+          Number of trials <Tex size="sm">{String.raw`n`}</Tex>
           <input
             type="number"
             min={1}
             max={1000}
             value={n}
-            onChange={(e) => setN(Math.max(1, Math.min(1000, Number(e.target.value) || 0)))}
+            onChange={(e) =>
+              setN(Math.max(1, Math.min(1000, Number(e.target.value) || 0)))
+            }
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="Number of trials n"
           />
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          Success probability p
+          Success probability <Tex size="sm">{String.raw`p`}</Tex>
           <input
             type="range"
             min="0"
@@ -282,12 +316,15 @@ function BinomialPanel() {
             value={p}
             onChange={(e) => setP(Number(e.target.value))}
             className="mt-2 w-full"
+            aria-label="Success probability p"
           />
-          <div className="mt-1 text-slate-800 tabular-nums">p = {p.toFixed(2)}</div>
+          <div className="mt-1 text-slate-800 tabular-nums">
+            <Tex size="sm">{String.raw`p`}</Tex> = {p.toFixed(2)}
+          </div>
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          Target count k
+          Target count <Tex size="sm">{String.raw`k`}</Tex>
           <input
             type="number"
             min={0}
@@ -295,31 +332,55 @@ function BinomialPanel() {
             value={k}
             onChange={(e) => setK(Math.max(0, Math.min(n, Number(e.target.value) || 0)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="Target count k"
           />
         </label>
       </div>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-        <Metric label="E[X]" value={mean.toFixed(4)} />
-        <Metric label="Var(X)" value={variance.toFixed(4)} />
-        <Metric label="P(X=k)" value={pmf.toPrecision(4)} />
-        <Metric label="P(X≤k)" value={cdf.toPrecision(4)} />
-        <Metric label="Normal approx P(X=k)" value={pmfNormal.toPrecision(4)} hint="with continuity" />
-        <Metric label="Poisson approx P(X=k)" value={pmfPoisson.toPrecision(4)} hint="λ=np" />
+      <div className="mt-4 grid gap-3 text-sm sm:grid-cols-2 lg:grid-cols-4">
+        <Metric
+          label={<Tex size="sm">{String.raw`\mathbb{E}[X]`}</Tex>}
+          value={mean.toFixed(4)}
+        />
+        <Metric
+          label={<Tex size="sm">{String.raw`\mathrm{Var}(X)`}</Tex>}
+          value={variance.toFixed(4)}
+        />
+        <Metric
+          label={<Tex size="sm">{String.raw`\mathbb{P}(X=k)`}</Tex>}
+          value={pmf.toPrecision(4)}
+        />
+        <Metric
+          label={<Tex size="sm">{String.raw`\mathbb{P}(X\le k)`}</Tex>}
+          value={cdf.toPrecision(4)}
+        />
+        <Metric
+          label={
+            <>
+              Normal approx&nbsp;
+              <Tex size="sm">{String.raw`\mathbb{P}(X=k)`}</Tex>
+            </>
+          }
+          value={pmfNormal.toPrecision(4)}
+          hint="with continuity"
+        />
+        <Metric
+          label={
+            <>
+              Poisson approx&nbsp;
+              <Tex size="sm">{String.raw`\mathbb{P}(X=k)`}</Tex>
+            </>
+          }
+          value={pmfPoisson.toPrecision(4)}
+          hint={<Tex size="sm">{String.raw`\lambda = np`}</Tex>}
+        />
       </div>
 
       <p className="mt-3 text-sm text-slate-700">
-        Approximations are sensible when their conditions hold (see the section below). Use the exact pmf for precise answers.
+        Approximations are sensible when their conditions hold (see below). For precise
+        results use the exact pmf{" "}
+        <Tex size="sm">{String.raw`\mathbb{P}(X=k)=\binom{n}{k}p^{k}(1-p)^{\,n-k}`}</Tex>.
       </p>
-    </div>
-  );
-}
-
-function Metric({ label, value, hint }) {
-  return (
-    <div className="rounded-lg border border-slate-200 p-3">
-      <div className="text-slate-500">{label}{hint ? <span className="text-slate-400"> ({hint})</span> : null}</div>
-      <div className="text-slate-900 font-semibold tabular-nums">{value}</div>
     </div>
   );
 }

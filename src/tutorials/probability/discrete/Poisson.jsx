@@ -4,6 +4,8 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import Tex from "../../shell/components/Tex";
+
 
 /**
  * Poisson.jsx — lesson page
@@ -184,6 +186,18 @@ export default function Poisson() {
 }
 
 /* ------------------------- Interactive Poisson Panel ------------------------ */
+function Metric({ label, value, hint }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">
+        {label}
+        {hint ? <span className="ml-1 text-slate-400">{hint}</span> : null}
+      </div>
+      <div className="tabular-nums font-semibold text-slate-900">{value}</div>
+    </div>
+  );
+}
+
 function PoissonPanel() {
   const [lambda, setLambda] = useState(3.0);
   const [k, setK] = useState(2);
@@ -232,30 +246,30 @@ function PoissonPanel() {
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">
+      {/* Tighten KaTeX inside metric labels only */}
+      <style>{`.metric-label .katex{line-height:1.2}`}</style>
+
       <div className="grid gap-4 md:grid-cols-3">
         <label className="block text-sm font-medium text-slate-700">
-          Rate λ
+          Rate <Tex size="sm">{String.raw`\lambda`}</Tex>
           <input
-            type="range"
-            min="0"
-            max="30"
-            step="0.1"
-            value={lambda}
+            type="range" min="0" max="30" step="0.1" value={lambda}
             onChange={(e) => setLambda(Number(e.target.value))}
             className="mt-2 w-full"
+            aria-label="rate lambda"
           />
-          <div className="mt-1 text-slate-800 tabular-nums">λ = {lambda.toFixed(1)}</div>
+          <div className="mt-1 text-slate-800 tabular-nums">
+            <Tex size="sm">{String.raw`\lambda`}</Tex> = {lambda.toFixed(1)}
+          </div>
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          Target count k
+          Target count <Tex size="sm">{String.raw`k`}</Tex>
           <input
-            type="number"
-            min={0}
-            max={150}
-            value={k}
+            type="number" min={0} max={150} value={k}
             onChange={(e) => setK(Math.max(0, Math.min(150, Number(e.target.value) || 0)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="target count k"
           />
         </label>
 
@@ -263,29 +277,23 @@ function PoissonPanel() {
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5 text-sm">
-        <Metric label="E[X]" value={mean.toFixed(4)} />
-        <Metric label="Var(X)" value={variance.toFixed(4)} />
-        <Metric label="P(X=k)" value={pmf.toPrecision(4)} />
-        <Metric label="P(X≤k)" value={cdf.toPrecision(4)} />
-        <Metric label="Normal approx P(X=k)" value={pmfNormal.toPrecision(4)} hint="with continuity" />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{E}[X]`}</Tex>} value={mean.toFixed(4)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathrm{Var}(X)`}</Tex>} value={variance.toFixed(4)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{P}(X=k)`}</Tex>} value={pmf.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{P}(X\le k)`}</Tex>} value={cdf.toPrecision(4)} />
+        <Metric
+          label={<><Tex size="sm">{String.raw`\text{Normal approx } \mathbb{P}(X=k)`}</Tex></>}
+          value={pmfNormal.toPrecision(4)}
+          hint={<Tex size="sm">{String.raw`( \text{continuity-corrected} )`}</Tex>}
+        />
       </div>
 
       <p className="mt-3 text-sm text-slate-700">
-        Exact probabilities use the stable recurrence p<sub>k</sub>=p<sub>k−1</sub>·λ/k with p<sub>0</sub>=e<sup>−λ</sup>.
-        The Normal approximation improves as λ grows; use continuity correction for better accuracy.
+        Exact probabilities use the stable recurrence{" "}
+        <Tex size="sm">{String.raw`p_k = p_{k-1}\,\lambda/k \quad \text{with}\quad p_0=e^{-\lambda}`}</Tex>.
+        The Normal approximation improves as <Tex size="sm">{String.raw`\lambda`}</Tex> grows; use continuity correction for better accuracy.
       </p>
     </div>
   );
 }
 
-function Metric({ label, value, hint }) {
-  return (
-    <div className="rounded-lg border border-slate-200 p-3">
-      <div className="text-slate-500">
-        {label}
-        {hint ? <span className="text-slate-400"> ({hint})</span> : null}
-      </div>
-      <div className="text-slate-900 font-semibold tabular-nums">{value}</div>
-    </div>
-  );
-}

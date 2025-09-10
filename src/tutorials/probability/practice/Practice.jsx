@@ -5,6 +5,8 @@ import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
 import QuizMCQ from "../../shell/components/QuizMCQ";
+import seedrandom from "seedrandom";
+
 
 /**
  * Practice.jsx — Probability Practice Hub
@@ -20,155 +22,196 @@ import QuizMCQ from "../../shell/components/QuizMCQ";
  * - No progress/memory features (static site)
  */
 
+// Put near the top of Practice.jsx (outside the component or inside, either is fine)
+function stripIndent(s) {
+  // drop a possible leading blank line
+  const lines = s.replace(/^\s*\n/, "").split("\n");
+  // compute smallest leading whitespace among non-empty lines
+  const indents = lines
+    .filter((l) => l.trim().length)
+    .map((l) => l.match(/^\s*/)[0].length);
+  const min = indents.length ? Math.min(...indents) : 0;
+  return lines.map((l) => l.slice(min)).join("\n").trimEnd();
+}
+
+
 export default function Practice() {
   const [toc, setToc] = useState([]);
   const contentRef = useRef(null);
+  const mdRef = useRef(null);
 
   // ---------- Inline markdown for the Exercises section ----------
   const practiceMd = useMemo(
     () => `
-# Practice & Exam Preparation
+      # Practice & Exam Preparation
 
-> 💡 **How to use this page**  
-> 1) Warm up with short exercises (open *Solutions* after you commit).  
-> 2) Take the full **40-question MCQ exam** below, or use **Exam Mode** for a quick 30Q subset.  
-> 3) Print or Save as PDF (button in the sidebar) to work offline.  
-> 4) Review with flashcards at the bottom.
+      > 💡 **How to use this page**  
+      > 1) Warm up with short exercises (open *Solutions* after you commit).  
+      > 2) Take the full **40-question MCQ exam** below, or use **Exam Mode** for a quick 30Q subset.  
+      > 3) Print or Save as PDF (button in the sidebar) to work offline.  
+      > 4) Review with flashcards at the bottom.
 
----
+      ---
 
-## A. Warm-ups & Short Exercises
+      ## A. Warm-ups & Short Exercises
 
-Each problem targets the core skills from the tutorial (Bernoulli/Binomial/Geometric/NegBin/Poisson, Uniform/Exponential/Gamma/Normal, CLT, transformations).  
-  
-Open the *Solution* only after you’ve tried it.
+      Each problem targets the core skills from the tutorial (Bernoulli/Binomial/Geometric/NegBin/Poisson, Uniform/Exponential/Gamma/Normal, CLT, transformations).  
+        
+      Open the *Solution* only after you’ve tried it.
 
-### 1) Bernoulli mean/var
-Let \\(X\\sim \\mathrm{Bernoulli}(p)\\). Compute \\(\\mathbb E[X]\\) and \\(\\mathrm{Var}(X)\\).
+      ### 1) Bernoulli mean/var
+      Let \\(X\\sim \\mathrm{Bernoulli}(p)\\). Compute \\(\\mathbb E[X]\\) and \\(\\mathrm{Var}(X)\\).
 
-<details><summary>Solution</summary>
-\\(\\mathbb E[X]=p\\), \\(\\mathrm{Var}(X)=p(1-p)\\).
-</details>
+      <details><summary>Solution</summary>
+      \\(\\mathbb E[X]=p\\), \\(\\mathrm{Var}(X)=p(1-p)\\).
+      </details>
 
-### 2) Binomial pmf & mean/var
-If \\(Y\\sim\\mathrm{Binomial}(n,p)\\), write \\(P(Y=k)\\) and give mean/variance.
+      ### 2) Binomial pmf & mean/var
+      If \\(Y\\sim\\mathrm{Binomial}(n,p)\\), write \\(P(Y=k)\\) and give mean/variance.
 
-<details><summary>Solution</summary>
-\\(P(Y=k)=\\binom{n}{k}p^k(1-p)^{n-k}\\), \\(\\mathbb E[Y]=np\\), \\(\\mathrm{Var}(Y)=np(1-p)\\).
-</details>
+      <details><summary>Solution</summary>
+      \\(P(Y=k)=\\binom{n}{k}p^k(1-p)^{n-k}\\), \\(\\mathbb E[Y]=np\\), \\(\\mathrm{Var}(Y)=np(1-p)\\).
+      </details>
 
-### 3) Geometric tail & mean
-For \\(G\\sim\\mathrm{Geom}(p)\\) (# of trials until first success, support \\(1,2,\\dots\\)), show \\(P(G>k)=(1-p)^k\\) and \\(\\mathbb E[G]=1/p\\).
+      ### 3) Geometric tail & mean
+      For \\(G\\sim\\mathrm{Geom}(p)\\) (# of trials until first success, support \\(1,2,\\dots\\)), show \\(P(G>k)=(1-p)^k\\) and \\(\\mathbb E[G]=1/p\\).
 
-<details><summary>Solution</summary>
-No success in first \\(k\\) trials: \\((1-p)^k\\). Mean is \\(1/p\\).
-</details>
+      <details><summary>Solution</summary>
+      No success in first \\(k\\) trials: \\((1-p)^k\\). Mean is \\(1/p\\).
+      </details>
 
-### 4) NegBin interpretation
-\\(X\\sim\\mathrm{NegBin}(r,p)\\) = # of trials until \\(r\\)th success. What is \\(\\mathbb E[X]\\)?
+      ### 4) NegBin interpretation
+      \\(X\\sim\\mathrm{NegBin}(r,p)\\) = # of trials until \\(r\\)th success. What is \\(\\mathbb E[X]\\)?
 
-<details><summary>Solution</summary>
-\\(\\mathbb E[X]=r/p\\).
-</details>
+      <details><summary>Solution</summary>
+      \\(\\mathbb E[X]=r/p\\).
+      </details>
 
-### 5) Poisson mean/var & interval prob
-\\(N\\sim\\mathrm{Pois}(\\lambda)\\). Give mean/variance and \\(P(N=0)\\).
+      ### 5) Poisson mean/var & interval prob
+      \\(N\\sim\\mathrm{Pois}(\\lambda)\\). Give mean/variance and \\(P(N=0)\\).
 
-<details><summary>Solution</summary>
-Mean=Var=\\(\\lambda\\). \\(P(N=0)=e^{-\\lambda}\\).
-</details>
+      <details><summary>Solution</summary>
+      Mean=Var=\\(\\lambda\\). \\(P(N=0)=e^{-\\lambda}\\).
+      </details>
 
-### 6) Poisson thinning
-If arrivals ~ Poisson(\\(\\lambda\\)), each kept with prob \\(q\\) independently. Distribution of kept arrivals?
+      ### 6) Poisson thinning
+      If arrivals ~ Poisson(\\(\\lambda\\)), each kept with prob \\(q\\) independently. Distribution of kept arrivals?
 
-<details><summary>Solution</summary>
-Thinned process is \\(\\mathrm{Pois}(q\\lambda)\\).
-</details>
+      <details><summary>Solution</summary>
+      Thinned process is \\(\\mathrm{Pois}(q\\lambda)\\).
+      </details>
 
-### 7) Uniform interval probability
-\\(X\\sim\\mathrm{U}(a,b)\\). Compute \\(P(c\\le X\\le d)\\).
+      ### 7) Uniform interval probability
+      \\(X\\sim\\mathrm{U}(a,b)\\). Compute \\(P(c\\le X\\le d)\\).
 
-<details><summary>Solution</summary>
-\\(\\dfrac{\\max(0,\\min(d,b)-\\max(c,a))}{b-a}\\).
-</details>
+      <details><summary>Solution</summary>
+      \\(\\dfrac{\\max(0,\\min(d,b)-\\max(c,a))}{b-a}\\).
+      </details>
 
-### 8) Exponential memoryless
-\\(T\\sim\\mathrm{Exp}(\\lambda)\\). Show \\(P(T>s+t\\mid T>s)=P(T>t)\\).
+      ### 8) Exponential memoryless
+      \\(T\\sim\\mathrm{Exp}(\\lambda)\\). Show \\(P(T>s+t\\mid T>s)=P(T>t)\\).
 
-<details><summary>Solution</summary>
-\\(\\dfrac{e^{-\\lambda(s+t)}}{e^{-\\lambda s}}=e^{-\\lambda t}\\).
-</details>
+      <details><summary>Solution</summary>
+      \\(\\dfrac{e^{-\\lambda(s+t)}}{e^{-\\lambda s}}=e^{-\\lambda t}\\).
+      </details>
 
-### 9) Sum of exponentials
-If \\(X_i\\stackrel{iid}{\\sim}\\mathrm{Exp}(\\lambda)\\) for \\(i=1..k\\), distribution of \\(\\sum X_i\\)?
+      ### 9) Sum of exponentials
+      If \\(X_i\\stackrel{iid}{\\sim}\\mathrm{Exp}(\\lambda)\\) for \\(i=1..k\\), distribution of \\(\\sum X_i\\)?
 
-<details><summary>Solution</summary>
-\\(\\mathrm{Gamma}(k,\\lambda)\\) (rate form).
-</details>
+      <details><summary>Solution</summary>
+      \\(\\mathrm{Gamma}(k,\\lambda)\\) (rate form).
+      </details>
 
-### 10) Gamma moments
-For \\(G\\sim\\mathrm{Gamma}(k,\\lambda)\\) (rate), give mean/variance.
+      ### 10) Gamma moments
+      For \\(G\\sim\\mathrm{Gamma}(k,\\lambda)\\) (rate), give mean/variance.
 
-<details><summary>Solution</summary>
-\\(\\mathbb E[G]=k/\\lambda\\), \\(\\mathrm{Var}(G)=k/\\lambda^2\\).
-</details>
+      <details><summary>Solution</summary>
+      \\(\\mathbb E[G]=k/\\lambda\\), \\(\\mathrm{Var}(G)=k/\\lambda^2\\).
+      </details>
 
-### 11) Normal standardization
-\\(X\\sim\\mathcal N(\\mu,\\sigma^2)\\). Express \\(P(X\\le x)\\) using \\(\\Phi\\).
+      ### 11) Normal standardization
+      \\(X\\sim\\mathcal N(\\mu,\\sigma^2)\\). Express \\(P(X\\le x)\\) using \\(\\Phi\\).
 
-<details><summary>Solution</summary>
-\\(P(X\\le x)=\\Phi\\big((x-\\mu)/\\sigma\\big)\\).
-</details>
+      <details><summary>Solution</summary>
+      \\(P(X\\le x)=\\Phi\\big((x-\\mu)/\\sigma\\big)\\).
+      </details>
 
-### 12) CLT statement
-Write the classical i.i.d. CLT for standardized \\(\\overline{X}\\).
+      ### 12) CLT statement
+      Write the classical i.i.d. CLT for standardized \\(\\overline{X}\\).
 
-<details><summary>Solution</summary>
-\\((\\overline{X}-\\mu)/(\\sigma/\\sqrt{n}) \\Rightarrow \\mathcal N(0,1)\\).
-</details>
+      <details><summary>Solution</summary>
+      \\((\\overline{X}-\\mu)/(\\sigma/\\sqrt{n}) \\Rightarrow \\mathcal N(0,1)\\).
+      </details>
 
-### 13) Change of variables (monotone)
-If \\(X\\) has density \\(f_X\\), and \\(Y=g(X)\\) strictly increasing, derive \\(f_Y\\).
+      ### 13) Change of variables (monotone)
+      If \\(X\\) has density \\(f_X\\), and \\(Y=g(X)\\) strictly increasing, derive \\(f_Y\\).
 
-<details><summary>Solution</summary>
-\\(f_Y(y)=f_X(g^{-1}(y))\\left|\\dfrac{d}{dy}g^{-1}(y)\\right|\\).
-</details>
+      <details><summary>Solution</summary>
+      \\(f_Y(y)=f_X(g^{-1}(y))\\left|\\dfrac{d}{dy}g^{-1}(y)\\right|\\).
+      </details>
 
-### 14) Order stats for U(0,1)
-For \\(U_1,..,U_n\\sim \\mathrm U(0,1)\\), pdf of \\(\\max U_i\\)?
+      ### 14) Order stats for U(0,1)
+      For \\(U_1,..,U_n\\sim \\mathrm U(0,1)\\), pdf of \\(\\max U_i\\)?
 
-<details><summary>Solution</summary>
-\\(f(x)=n x^{n-1},\\ 0\\le x\\le 1\\).
-</details>
+      <details><summary>Solution</summary>
+      \\(f(x)=n x^{n-1},\\ 0\\le x\\le 1\\).
+      </details>
 
-### 15) Bayes (quick numbers)
-Test has sensitivity 0.95, specificity 0.98, prevalence 0.01. Compute \\(P(\\text{disease}|\\text{positive})\\).
+      ### 15) Bayes (quick numbers)
+      Test has sensitivity 0.95, specificity 0.98, prevalence 0.01. Compute \\(P(\\text{disease}|\\text{positive})\\).
 
-<details><summary>Solution</summary>
-\\(\\frac{0.95\\cdot 0.01}{0.95\\cdot 0.01 + 0.02\\cdot 0.99}\\approx 0.324\\).
-</details>
-`,
+      <details><summary>Solution</summary>
+      \\(\\frac{0.95\\cdot 0.01}{0.95\\cdot 0.01 + 0.02\\cdot 0.99}\\approx 0.324\\).
+      </details>
+      `,
     []
   );
 
+  // Convert \( ... \) -> $...$ and \[ ... \] -> $$...$$ for better renderer compatibility
+  const mdForRenderer = useMemo(() => {
+    // 1) remove leading indentation so markdown isn't a code block
+    let s = stripIndent(practiceMd);
+
+    // 2) convert \( \) / \[ \] to $ $ / $$ $$ for KaTeX pipeline
+    s = s.replace(/\\\[(.+?)\\\]/gs, (_, inner) => `$$${inner}$$`);
+    s = s.replace(/\\\((.+?)\\\)/g,  (_, inner) => `$${inner}$`);
+
+    return s;
+  }, [practiceMd]);
+
   // ---------- Build TOC by scanning headings ----------
   useEffect(() => {
-    if (!contentRef.current) return;
-    const el = contentRef.current;
+    const container = mdRef.current || contentRef.current;
+    if (!container) return;
+
+    let rafId = 0;
     const rebuild = () => {
-      const nodes = Array.from(el.querySelectorAll("h2, h3"));
-      const items = nodes.map((n) => ({
-        id: n.id || "",
-        text: n.textContent || "",
-        level: n.tagName === "H2" ? 2 : 3,
-      }));
-      setToc(items);
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const nodes = Array.from(container.querySelectorAll("h2, h3"));
+        setToc(
+          nodes.map((n) => ({
+            id: n.id || "",
+            text: n.textContent || "",
+            level: n.tagName === "H2" ? 2 : 3,
+          }))
+        );
+      });
     };
+
+    // initial build
     rebuild();
+
+    // Only observe the markdown area, not the whole article with the quiz
     const obs = new MutationObserver(rebuild);
-    obs.observe(el, { childList: true, subtree: true, attributes: true });
-    return () => obs.disconnect();
-  }, [practiceMd]);
+    obs.observe(container, { childList: true, subtree: true, attributes: true });
+
+    return () => {
+      obs.disconnect();
+      cancelAnimationFrame(rafId);
+    };
+  }, []); // <-- IMPORTANT: run once (or use [practiceMd] if it changes at runtime)
+
 
   // ---------- MCQ: 40 comprehensive questions ----------
   const fullQuestions = useMemo(
@@ -569,19 +612,15 @@ Test has sensitivity 0.95, specificity 0.98, prevalence 0.01. Compute \\(P(\\tex
 
   // 30-question randomized subset for “Exam Mode”
   const [examSeed, setExamSeed] = useState(42);
-  const examQuestions = useMemo(() => {
-    const arr = [...fullQuestions];
-    // Fisher–Yates shuffle based on a simple seeded PRNG (LCG) for reproducibility
-    let seed = examSeed >>> 0;
-    const rand = () => {
-      seed = (1664525 * seed + 1013904223) >>> 0;
-      return seed / 2 ** 32;
-    };
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(rand() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
+    const examQuestions = useMemo(() => {
+    const rng = seedrandom(String(examSeed));
+    const a = fullQuestions.slice();
+    // Fisher–Yates with seeded RNG
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(rng() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
     }
-    return arr.slice(0, 30);
+    return a.slice(0, 30);
   }, [fullQuestions, examSeed]);
 
   // Flashcards recap deck (broad coverage)
@@ -637,7 +676,9 @@ Test has sensitivity 0.95, specificity 0.98, prevalence 0.01. Compute \\(P(\\tex
               <h2 id="exercises" className="text-xl font-bold text-slate-900">
                 A. Exercises (with solutions)
               </h2>
-              <RichMarkdown content={practiceMd} />
+              <div ref={mdRef}>
+                <RichMarkdown content={mdForRenderer} />
+              </div>
             </section>
 
             {/* B. Exam MCQ */}

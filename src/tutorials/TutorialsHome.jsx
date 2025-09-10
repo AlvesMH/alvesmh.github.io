@@ -10,6 +10,43 @@ import tutorials from "./tutorialsIndex";
  * - Lists every tutorial and its sections (and subtopics where provided).
  * - Responsive: 2 columns on large screens (card grid), stacked on mobile.
  */
+
+// Map all possible cover assets under src/tutorials
+const coverMap = import.meta.glob(
+  "./tutorials/**/*.{png,jpg,jpeg,webp,avif,svg}",
+  { query: '?url', import: 'default' });
+
+// Resolve tut.image / tut.cover / inferred defaults to a real URL
+function getCoverUrl(tut) {
+  const cand = [tut.image, tut.cover].filter(Boolean);
+
+  // 1) any absolute or http(s) path: return as-is
+  for (const c of cand) {
+    if (c && (c.startsWith("/") || /^https?:\/\//i.test(c))) return c;
+  }
+
+  // 2) try direct match by end of path (e.g., "cover.jpg" or "foo/cover.png")
+  for (const c of cand) {
+    if (!c) continue;
+    const key = Object.keys(coverMap).find(k => k.endsWith("/" + c) || k.endsWith(c));
+    if (key) return coverMap[key];
+  }
+
+  // 3) common conventions by slug (cover/hero/thumb in same folder)
+  const guesses = [
+    `./tutorials/${tut.slug}/cover.jpg`,
+    `./tutorials/${tut.slug}/cover.png`,
+    `./tutorials/${tut.slug}/cover.webp`,
+    `./tutorials/${tut.slug}/hero.jpg`,
+    `./tutorials/${tut.slug}/thumb.jpg`,
+  ];
+  for (const g of guesses) if (coverMap[g]) return coverMap[g];
+
+  // 4) give up → undefined (we’ll render a placeholder)
+  return undefined;
+}
+
+
 export default function TutorialsHome() {
   const [q, setQ] = useState("");
   const filtered = useMemo(() => {
@@ -18,7 +55,14 @@ export default function TutorialsHome() {
     return tutorials.filter((t) => {
       const title = (t.title || "").toLowerCase();
       const summary = (t.summary || t.description || "").toLowerCase();
-      return title.includes(needle) || summary.includes(needle);
+      const inSections =
+        Array.isArray(t.sections) &&
+        t.sections.some(s =>
+          (s.title || "").toLowerCase().includes(needle) ||
+          (Array.isArray(s.children) &&
+          s.children.some(c => (c.title || "").toLowerCase().includes(needle)))
+        );
+      return title.includes(needle) || summary.includes(needle) || inSections;
     });
   }, [q]);
 
@@ -56,14 +100,36 @@ export default function TutorialsHome() {
               className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm"
             >
               {/* Cover */}
-              {(tut.image || tut.cover) && (
-                <img
-                  src={tut.image || tut.cover}
-                  alt=""
-                  loading="lazy"
-                  className="h-40 w-full object-cover"
+              <div className="relative aspect-[16/9] w-full bg-slate-100">
+                {(() => {
+                  const url = getCoverUrl(tut);
+                  if (!url) {
+                    // Nice placeholder with the tutorial initial
+                    const initial = (tut.title || "?").trim().charAt(0).toUpperCase();
+                    return (
+                      <div className="flex h-full w-full items-center justify-center text-4xl font-bold text-slate-300 select-none">
+                        {initial}
+                      </div>
+                    );
+                  }
+                  return (
+                    <img
+                      src={url}
+                      alt={tut.imageAlt || tut.title || ""}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover"
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    />
+                  );
+                })()}
+                {/* Make whole cover clickable (keeps your CTA below too) */}
+                <Link
+                  to={tut.href || `/tutorials/${tut.slug}`}
+                  className="absolute inset-0 ring-inset focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+                  aria-label={`Open ${tut.title}`}
                 />
-              )}
+              </div>
 
               <div className="flex flex-1 flex-col p-4">
                 <h2 className="text-base font-semibold text-gray-900">

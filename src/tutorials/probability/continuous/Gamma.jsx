@@ -4,6 +4,8 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import Tex from "../../shell/components/Tex";
+
 
 /**
  * Gamma.jsx — lesson page
@@ -187,13 +189,22 @@ export default function Gamma() {
 }
 
 /* ------------------------ Interactive Gamma Panel ------------------------ */
+function Metric({ label, value }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">{label}</div>
+      <div className="tabular-nums font-semibold text-slate-900">{value}</div>
+    </div>
+  );
+}
+
 function GammaPanel() {
-  const [k, setK] = useState(2.5);     // shape > 0
+  const [k, setK] = useState(2.5);          // shape > 0
   const [lambda, setLambda] = useState(1.0); // rate > 0
   const [x, setX] = useState(1.2);
   const [c, setC] = useState(0.5);
   const [d, setD] = useState(3.0);
-  const [m, setM] = useState(5000); // simulation size
+  const [m, setM] = useState(5000);         // simulation size
   const [stats, setStats] = useState(null); // {empMean, empVar}
 
   useEffect(() => {
@@ -206,7 +217,6 @@ function GammaPanel() {
   }, [k, lambda, x, c, d]);
 
   // --- Special functions: Γ, regularized P(a,x) and Q(a,x) ---
-  // Lanczos log-gamma (good accuracy for our teaching ranges)
   function logGamma(z) {
     const p = [
       676.5203681218851,   -1259.1392167224028,
@@ -216,7 +226,6 @@ function GammaPanel() {
     ];
     const g = 7;
     if (z < 0.5) {
-      // Reflection formula Γ(z)Γ(1−z)=π/sin(πz)
       return Math.log(Math.PI) - Math.log(Math.sin(Math.PI * z)) - logGamma(1 - z);
     }
     z -= 1;
@@ -226,21 +235,16 @@ function GammaPanel() {
     return 0.5 * Math.log(2 * Math.PI) + (z + 0.5) * Math.log(t) - t + Math.log(xg);
   }
 
-  // Regularized lower γ(a,x)/Γ(a) via series; upper via Lentz CF
   function gammP(a, x) {
     if (x <= 0) return 0;
     if (x < a + 1) {
-      // series
       let ap = a, sum = 1 / a, del = sum;
       for (let n = 1; n <= 200; n++) {
-        ap += 1;
-        del *= x / ap;
-        sum += del;
+        ap += 1; del *= x / ap; sum += del;
         if (Math.abs(del) < Math.abs(sum) * 1e-12) break;
       }
       return sum * Math.exp(-x + a * Math.log(x) - logGamma(a));
     } else {
-      // continued fraction for Q, then P=1-Q
       let b = x + 1 - a;
       let ccf = 1 / 1e-30;
       let dcf = 1 / b;
@@ -248,10 +252,8 @@ function GammaPanel() {
       for (let i = 1; i <= 200; i++) {
         const an = -i * (i - a);
         b += 2;
-        dcf = an * dcf + b;
-        if (Math.abs(dcf) < 1e-30) dcf = 1e-30;
-        ccf = b + an / ccf;
-        if (Math.abs(ccf) < 1e-30) ccf = 1e-30;
+        dcf = an * dcf + b; if (Math.abs(dcf) < 1e-30) dcf = 1e-30;
+        ccf = b + an / ccf; if (Math.abs(ccf) < 1e-30) ccf = 1e-30;
         dcf = 1 / dcf;
         const del = dcf * ccf;
         h *= del;
@@ -291,13 +293,12 @@ function GammaPanel() {
     return Math.max(0, gammP(k, lambda * right) - gammP(k, lambda * left));
   }, [k, lambda, c, d]);
 
-  // For integer k, Poisson equivalence: F(x)=1−∑_{n=0}^{k−1} e^{−λx}(λx)^n/n!
+  // For integer k, Poisson equivalence delta
   const poissonEquivDelta = useMemo(() => {
     const ks = Math.round(k);
     if (Math.abs(k - ks) > 1e-9 || x < 0) return null; // only for integer shape
     const lx = lambda * x;
-    let sum = 0;
-    let term = 1; // (λx)^0/0!
+    let sum = 0, term = 1; // (λx)^0/0!
     for (let n = 0; n <= ks - 1; n++) {
       if (n > 0) term *= lx / n;
       sum += term;
@@ -306,22 +307,18 @@ function GammaPanel() {
     return Math.abs(altCdf - cdfAtX);
   }, [k, lambda, x, cdfAtX]);
 
-  // Simulation (Marsaglia–Tsang for general k)
   function rngGamma(shape, rate) {
     const scale = 1 / rate;
     if (shape < 1) {
-      // boost: draw u, g ~ Gamma(shape+1,1), then u^{1/shape} * g
       const u = Math.random();
       return rngGamma(shape + 1, 1) * Math.pow(u, 1 / shape) * scale;
     }
     const d = shape - 1 / 3;
     const c = 1 / Math.sqrt(9 * d);
     while (true) {
-      let xNorm, v;
-      // Box-Muller for Normal(0,1)
       let u1 = Math.random(), u2 = Math.random();
-      xNorm = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-      v = Math.pow(1 + c * xNorm, 3);
+      const xNorm = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
+      const v = Math.pow(1 + c * xNorm, 3);
       if (v <= 0) continue;
       const u = Math.random();
       const x2 = xNorm * xNorm;
@@ -335,104 +332,94 @@ function GammaPanel() {
     let s1 = 0, s2 = 0;
     for (let i = 0; i < N; i++) {
       const g = rngGamma(k, lambda);
-      s1 += g;
-      s2 += g * g;
+      s1 += g; s2 += g * g;
     }
     const empMean = s1 / N;
     const empVar = s2 / N - empMean * empMean;
     setStats({ empMean, empVar });
   }
 
-  useEffect(() => {
-    simulate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // initial run
+  useEffect(() => { simulate(); }, []); // initial run
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">
+      {/* tighten KaTeX inside metric labels only */}
+      <style>{`.metric-label .katex{line-height:1.2}`}</style>
+
       <div className="grid gap-4 md:grid-cols-4">
         <label className="block text-sm font-medium text-slate-700">
-          Shape k {"(>0)"}
+          Shape <Tex size="sm">{String.raw`k`}</Tex> {"(> 0)"}
           <input
-            type="number"
-            step="0.1"
-            min="0.1"
-            value={k}
+            type="number" step="0.1" min="0.1" value={k}
             onChange={(e) => setK(Math.max(0.1, Number(e.target.value) || 0.1))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="gamma shape k"
           />
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          Rate λ {"(>0)"}
+          Rate <Tex size="sm">{String.raw`\lambda`}</Tex> {"(> 0)"}
           <input
-            type="number"
-            step="0.1"
-            min="0.1"
-            value={lambda}
+            type="number" step="0.1" min="0.1" value={lambda}
             onChange={(e) => setLambda(Math.max(0.1, Number(e.target.value) || 0.1))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="gamma rate lambda"
           />
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          x (for f,F,S,h)
+          <Tex size="sm">{String.raw`x`}</Tex> (for <Tex size="sm">{String.raw`f,\,F,\,S,\,h`}</Tex>)
           <input
-            type="number"
-            min="0"
-            value={x}
+            type="number" min="0" value={x}
             onChange={(e) => setX(Math.max(0, Number(e.target.value) || 0))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="x for f F S h"
           />
         </label>
 
         <div className="grid grid-cols-2 gap-3">
           <label className="block text-xs font-medium text-slate-700">
-            c (interval)
+            <Tex size="sm">{String.raw`c`}</Tex> (interval)
             <input
-              type="number"
-              min="0"
-              value={c}
+              type="number" min="0" value={c}
               onChange={(e) => setC(Math.max(0, Number(e.target.value) || 0))}
               className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1"
+              aria-label="interval c"
             />
           </label>
           <label className="block text-xs font-medium text-slate-700">
-            d (interval)
+            <Tex size="sm">{String.raw`d`}</Tex> (interval)
             <input
-              type="number"
-              min="0"
-              value={d}
+              type="number" min="0" value={d}
               onChange={(e) => setD(Math.max(0, Number(e.target.value) || 0))}
               className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1"
+              aria-label="interval d"
             />
           </label>
         </div>
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-7 text-sm">
-        <Metric label="E[X]" value={mean.toFixed(6)} />
-        <Metric label="Var(X)" value={variance.toFixed(6)} />
-        <Metric label="f(x)" value={pdfAtX.toPrecision(4)} />
-        <Metric label="F(x)" value={cdfAtX.toPrecision(4)} />
-        <Metric label="S(x)" value={survAtX.toPrecision(4)} />
-        <Metric label="P(c≤X≤d)" value={intervalProb.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{E}[X]`}</Tex>} value={mean.toFixed(6)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathrm{Var}(X)`}</Tex>} value={variance.toFixed(6)} />
+        <Metric label={<Tex size="sm">{String.raw`f(x)`}</Tex>} value={pdfAtX.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`F(x)`}</Tex>} value={cdfAtX.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`S(x)`}</Tex>} value={survAtX.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{P}(c\le X\le d)`}</Tex>} value={intervalProb.toPrecision(4)} />
         <Metric
-          label="h(x)=f/S"
-          value={(survAtX > 0 ? (pdfAtX / survAtX).toFixed(6) : "∞")}
+          label={<Tex size="sm">{String.raw`h(x)=\frac{f(x)}{S(x)}`}</Tex>}
+          value={survAtX > 0 ? (pdfAtX / survAtX).toFixed(6) : "∞"}
         />
       </div>
 
       <div className="mt-5 grid gap-4 md:grid-cols-3">
         <label className="block text-sm font-medium text-slate-700">
-          Simulation size m
+          Simulation size <Tex size="sm">{String.raw`m`}</Tex>
           <input
-            type="number"
-            min={200}
-            max={20000}
-            value={m}
+            type="number" min={200} max={20000} value={m}
             onChange={(e) => setM(Math.max(200, Math.min(20000, Number(e.target.value) || 200)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="simulation size m"
           />
         </label>
 
@@ -441,7 +428,7 @@ function GammaPanel() {
             onClick={simulate}
             className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
           >
-            Resimulate Gamma(k,λ)
+            Resimulate&nbsp;<Tex size="sm">{String.raw`\mathrm{Gamma}(k,\lambda)`}</Tex>
           </button>
         </div>
 
@@ -449,10 +436,10 @@ function GammaPanel() {
           <div className="rounded-lg border border-slate-200 p-3">
             <div className="text-slate-500">Empirical vs theoretical</div>
             <div className="mt-1 tabular-nums">
-              μ̂ = {stats ? stats.empMean.toFixed(6) : "—"} (theory {(k / lambda).toFixed(6)})
+              <Tex size="sm">{String.raw`\hat{\mu}`}</Tex> = {stats ? stats.empMean.toFixed(6) : "—"} (theory <Tex size="sm">{String.raw`\mu`}</Tex>={(k / lambda).toFixed(6)})
             </div>
             <div className="tabular-nums">
-              σ̂² = {stats ? stats.empVar.toFixed(6) : "—"} (theory {(k / (lambda * lambda)).toFixed(6)})
+              <Tex size="sm">{String.raw`\hat{\sigma}^{2}`}</Tex> = {stats ? stats.empVar.toFixed(6) : "—"} (theory <Tex size="sm">{String.raw`\sigma^{2}`}</Tex>={(k / (lambda * lambda)).toFixed(6)})
             </div>
           </div>
         </div>
@@ -460,24 +447,19 @@ function GammaPanel() {
 
       {poissonEquivDelta !== null && (
         <p className="mt-3 text-sm text-slate-700">
-          Integer-shape check: |Gamma CDF - (1 - e^{-λx}∑_{n=0}^{k-1}(λx)^n/n!)| ={" "}
-          <span className="font-semibold tabular-nums">{poissonEquivDelta.toExponential(2)}</span>
+          <Tex size="sm">
+            {String.raw`\Bigl|\text{Gamma CDF} - \Bigl(1-e^{-\lambda x}\sum_{n=0}^{k-1}\frac{(\lambda x)^n}{n!}\Bigr)\Bigr| =`}
+          </Tex>{" "}
+          <span className="font-semibold tabular-nums">
+            {poissonEquivDelta.toExponential(2)}
+          </span>
         </p>
       )}
 
       <p className="mt-3 text-sm text-slate-700">
-        CDF uses the **regularized incomplete gamma** (numerical series/continued fractions). For integer k, the CDF
-        equals 1 minus a truncated Poisson tail; we show the small numerical delta above when k is an integer.
+        CDF uses the regularized incomplete gamma (series / continued fractions). For integer&nbsp;
+        <Tex size="sm">{String.raw`k`}</Tex>, the CDF equals a truncated Poisson tail; we show the small numerical delta above when this holds.
       </p>
-    </div>
-  );
-}
-
-function Metric({ label, value }) {
-  return (
-    <div className="rounded-lg border border-slate-200 p-3">
-      <div className="text-slate-500">{label}</div>
-      <div className="text-slate-900 font-semibold tabular-nums">{value}</div>
     </div>
   );
 }

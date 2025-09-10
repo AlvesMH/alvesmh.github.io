@@ -4,6 +4,8 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import Tex from "../../shell/components/Tex";
+
 
 /**
  * Uniform.jsx — lesson page
@@ -185,6 +187,15 @@ export default function Uniform() {
 }
 
 /* --------------------------- Interactive Uniform Panel --------------------------- */
+function Metric({ label, value }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">{label}</div>
+      <div className="tabular-nums font-semibold text-slate-900">{value}</div>
+    </div>
+  );
+}
+
 function UniformPanel() {
   const [a, setA] = useState(0);
   const [b, setB] = useState(1);
@@ -194,11 +205,10 @@ function UniformPanel() {
   const [m, setM] = useState(5000); // simulation size
   const [stats, setStats] = useState(null); // {empMean, empVar}
 
-  // keep constraints: a < b, c ≤ d
+  // keep constraints: a < b, c ≤ d, clamp x ∈ [a,b]
   useEffect(() => {
     if (a >= b) setB(a + 1e-6);
     if (c > d) setD(c);
-    // clamp x inside [a,b]
     if (x < a) setX(a);
     if (x > b) setX(b);
   }, [a, b, c, d, x]);
@@ -207,7 +217,10 @@ function UniformPanel() {
   const mean = useMemo(() => (a + b) / 2, [a, b]);
   const variance = useMemo(() => (width * width) / 12, [width]);
 
-  const pdfAtX = useMemo(() => (x >= a && x <= b && width > 0 ? 1 / width : 0), [x, a, b, width]);
+  const pdfAtX = useMemo(
+    () => (x >= a && x <= b && width > 0 ? 1 / width : 0),
+    [x, a, b, width]
+  );
   const cdfAtX = useMemo(() => {
     if (x <= a) return 0;
     if (x >= b) return 1;
@@ -226,11 +239,10 @@ function UniformPanel() {
       setStats(null);
       return;
     }
-    let s = 0;
-    let s2 = 0;
+    let s = 0, s2 = 0;
     for (let i = 0; i < m; i++) {
-      const u = Math.random(); // U(0,1)
-      const val = a + width * u; // transform to U(a,b)
+      const u = Math.random();         // U(0,1)
+      const val = a + width * u;       // transform to U(a,b)
       s += val;
       s2 += val * val;
     }
@@ -239,78 +251,83 @@ function UniformPanel() {
     setStats({ empMean, empVar });
   }
 
-  useEffect(() => {
-    simulate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // initial run
+  useEffect(() => { simulate(); /* on mount */ }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="rounded-xl border border-slate-200 bg-white p-4">
+      {/* Tighten KaTeX just inside metric labels */}
+      <style>{`.metric-label .katex{line-height:1.2}`}</style>
+
       <div className="grid gap-4 md:grid-cols-4">
         <label className="block text-sm font-medium text-slate-700">
-          a (left endpoint)
+          <Tex size="sm">{String.raw`a`}</Tex> (left endpoint)
           <input
             type="number"
             value={a}
             onChange={(e) => setA(Number(e.target.value))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="Uniform left endpoint a"
           />
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          b (right endpoint)
+          <Tex size="sm">{String.raw`b`}</Tex> (right endpoint)
           <input
             type="number"
             value={b}
             onChange={(e) => setB(Number(e.target.value))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="Uniform right endpoint b"
           />
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          x (for f(x), F(x))
+          <Tex size="sm">{String.raw`x`}</Tex> (for <Tex size="sm">{String.raw`f(x),\,F(x)`}</Tex>)
           <input
             type="number"
             value={x}
             onChange={(e) => setX(Number(e.target.value))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="x value"
           />
         </label>
 
         <div className="grid grid-cols-2 gap-3">
           <label className="block text-xs font-medium text-slate-700">
-            c (interval)
+            <Tex size="sm">{String.raw`c`}</Tex> (interval)
             <input
               type="number"
               value={c}
               onChange={(e) => setC(Number(e.target.value))}
               className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1"
+              aria-label="interval c"
             />
           </label>
           <label className="block text-xs font-medium text-slate-700">
-            d (interval)
+            <Tex size="sm">{String.raw`d`}</Tex> (interval)
             <input
               type="number"
               value={d}
               onChange={(e) => setD(Number(e.target.value))}
               className="mt-1 w-full rounded-md border border-slate-300 px-2 py-1"
+              aria-label="interval d"
             />
           </label>
         </div>
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-6 text-sm">
-        <Metric label="Width (b−a)" value={width.toFixed(6)} />
-        <Metric label="E[X]" value={mean.toFixed(6)} />
-        <Metric label="Var(X)" value={variance.toFixed(6)} />
-        <Metric label="f(x)" value={pdfAtX.toPrecision(4)} />
-        <Metric label="F(x)" value={cdfAtX.toPrecision(4)} />
-        <Metric label="P(c≤X≤d)" value={intervalProb.toPrecision(4)} />
+        <Metric label={<><span className="mr-1">Width</span><Tex size="sm">{String.raw`(b-a)`}</Tex></>} value={width.toFixed(6)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{E}[X]`}</Tex>} value={mean.toFixed(6)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathrm{Var}(X)`}</Tex>} value={variance.toFixed(6)} />
+        <Metric label={<Tex size="sm">{String.raw`f(x)`}</Tex>} value={pdfAtX.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`F(x)`}</Tex>} value={cdfAtX.toPrecision(4)} />
+        <Metric label={<Tex size="sm">{String.raw`\mathbb{P}(c\le X\le d)`}</Tex>} value={intervalProb.toPrecision(4)} />
       </div>
 
       <div className="mt-5 grid gap-4 md:grid-cols-3">
         <label className="block text-sm font-medium text-slate-700">
-          Simulation size m
+          Simulation size <Tex size="sm">{String.raw`m`}</Tex>
           <input
             type="number"
             min={100}
@@ -318,14 +335,16 @@ function UniformPanel() {
             value={m}
             onChange={(e) => setM(Math.max(100, Math.min(20000, Number(e.target.value) || 100)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
+            aria-label="simulation size m"
           />
         </label>
+
         <div className="flex items-end">
           <button
             onClick={simulate}
             className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white hover:bg-blue-700"
           >
-            Resimulate U(a,b)
+            Resimulate&nbsp;<Tex size="sm">{String.raw`U(a,b)`}</Tex>
           </button>
         </div>
 
@@ -333,28 +352,21 @@ function UniformPanel() {
           <div className="rounded-lg border border-slate-200 p-3">
             <div className="text-slate-500">Empirical vs theoretical</div>
             <div className="mt-1 tabular-nums">
-              μ̂ = {stats ? stats.empMean.toFixed(6) : "—"} (theory {(mean).toFixed(6)})
+              <Tex size="sm">{String.raw`\hat{\mu}`}</Tex> = {stats ? stats.empMean.toFixed(6) : "—"} (theory <Tex size="sm">{String.raw`\mu`}</Tex>={mean.toFixed(6)})
             </div>
             <div className="tabular-nums">
-              σ̂² = {stats ? stats.empVar.toFixed(6) : "—"} (theory {(variance).toFixed(6)})
+              <Tex size="sm">{String.raw`\hat{\sigma}^{2}`}</Tex> = {stats ? stats.empVar.toFixed(6) : "—"} (theory <Tex size="sm">{String.raw`\sigma^{2}`}</Tex>={variance.toFixed(6)})
             </div>
           </div>
         </div>
       </div>
 
       <p className="mt-3 text-sm text-slate-700">
-        Simulation uses the transformation <code>a+(b−a)U</code> with <code>U~Uniform(0,1)</code>. Interval probability
-        uses overlap length divided by width.
+        Simulation uses the transformation{" "}
+        <Tex size="sm">{String.raw`a+(b-a)U`}</Tex> with{" "}
+        <Tex size="sm">{String.raw`U\sim \mathrm{Uniform}(0,1)`}</Tex>. Interval probability uses overlap length divided by{" "}
+        <Tex size="sm">{String.raw`(b-a)`}</Tex>.
       </p>
-    </div>
-  );
-}
-
-function Metric({ label, value }) {
-  return (
-    <div className="rounded-lg border border-slate-200 p-3">
-      <div className="text-slate-500">{label}</div>
-      <div className="text-slate-900 font-semibold tabular-nums">{value}</div>
     </div>
   );
 }

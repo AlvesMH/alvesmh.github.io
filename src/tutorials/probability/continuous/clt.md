@@ -89,6 +89,6 @@ often approximated by multiplying the standard error by \( \sqrt{\frac{N-n}{N-1}
 
 CLT stacks independent “jittery” contributions; after standardisation, the sum smooths toward a bell curve:
 
-![clt-schematic](./images/clt-schematic-placeholder.png)
+![clt-schematic](/images/Central-Limit-Theorem.jpg)
 
-<small>Place images for this page under `src/tutorials/probability/continuous/images/`.</small>
+

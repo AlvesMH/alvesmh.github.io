@@ -45,6 +45,7 @@ export default defineConfig({
         '/tutorials/introduction-to-probability-distribution/discrete/negative-binomial',
         '/tutorials/introduction-to-probability-distribution/discrete/poisson',
         '/tutorials/introduction-to-probability-distribution/continuous',
+        '/tutorials/introduction-to-probability-distribution/continuous/continuous-intro',
         '/tutorials/introduction-to-probability-distribution/continuous/uniform',
         '/tutorials/introduction-to-probability-distribution/continuous/exponential',
         '/tutorials/introduction-to-probability-distribution/continuous/gamma',

@@ -72,6 +72,5 @@ Try these in the interactive panel on this page.
 
 The pmf **decays geometrically**: most mass is near 1 when \(p\) is large; heavier tails when \(p\) is small.
 
-![geometric-shape](./images/geometric-shape-placeholder.png)
+![geometric-shape](/images/geometric-shape.png)
 
-<small>Place images for this page under `src/tutorials/probability/discrete/images/`.</small>

@@ -66,6 +66,5 @@ is **Binomial(n,p)** with \(\mathbb{E}[S_n]=np\) and \(\mathrm{Var}(S_n)=np(1-p)
 
 Think of Bernoulli as a biased **coin flip**: \(p\) is the chance of “heads” (1), \(1-p\) the chance of “tails” (0).
 
-![single-coin](./images/coin-placeholder.png)
+![single-coin](/images/Biased-coin-Bernoulli-Distribution.jpg)
 
-<small>Place any images for this page under `src/tutorials/probability/discrete/images/` and reference them as above.</small>

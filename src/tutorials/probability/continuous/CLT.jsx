@@ -4,6 +4,7 @@ import AppHeaderMini from "../../shell/components/AppHeaderMini";
 import AppFooterMini from "../../shell/components/AppFooterMini";
 import RichMarkdown from "../../shell/components/RichMarkdown";
 import Flashcards from "../../shell/components/Flashcards";
+import Tex from "../../shell/components/Tex";
 
 /**
  * CLT.jsx — Central Limit Theorem page
@@ -177,6 +178,15 @@ export default function CLT() {
 }
 
 /* ---------------------------- Interactive CLT Panel ---------------------------- */
+function Metric({ label, value }) {
+  return (
+    <div className="rounded-lg border border-slate-200 bg-white p-3 shadow-sm">
+      <div className="metric-label mb-1 text-[13px] leading-5 text-slate-700">{label}</div>
+      <div className="tabular-nums font-semibold text-slate-900 break-words">{value}</div>
+    </div>
+  );
+}
+
 function CLTPanel() {
   const [dist, setDist] = useState("uniform"); // 'uniform' | 'exponential' | 'bernoulli' | 'pareto' | 'cauchy'
   const [p, setP] = useState(0.2);             // Bernoulli p
@@ -185,13 +195,21 @@ function CLTPanel() {
   const [m, setM] = useState(5000);            // replications
   const [stats, setStats] = useState(null);    // results object
 
+  // tighten KaTeX just inside metric labels
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.textContent = `.metric-label .katex{line-height:1.2}`;
+    document.head.appendChild(style);
+    return () => style.remove();
+  }, []);
+
   // Distribution draws + theoretical moments (when defined)
   const draw = useMemo(() => {
-    if (dist === "uniform") return () => Math.random(); // U(0,1)
-    if (dist === "exponential") return () => -Math.log(1 - Math.random()); // Exp(1)
-    if (dist === "bernoulli") return () => (Math.random() < p ? 1 : 0);
-    if (dist === "pareto") return () => Math.pow(1 - Math.random(), -1 / alpha); // Pareto(α) with xm=1
-    // cauchy(0,1)
+    if (dist === "uniform") return () => Math.random();                     // U(0,1)
+    if (dist === "exponential") return () => -Math.log(1 - Math.random());  // Exp(1)
+    if (dist === "bernoulli") return () => (Math.random() < p ? 1 : 0);     // Bernoulli(p)
+    if (dist === "pareto") return () => Math.pow(1 - Math.random(), -1 / alpha); // Pareto(α), xm=1
+    // Cauchy(0,1)
     return () => Math.tan(Math.PI * (Math.random() - 0.5));
   }, [dist, p, alpha]);
 
@@ -216,23 +234,18 @@ function CLTPanel() {
 
     let coverage1 = 0, coverage2 = 0, coverage3 = 0;
     let sumMeans = 0, sumMeansSq = 0;
-    let drawsForRho3 = 0;
-    let sumAbs3 = 0;
+    let drawsForRho3 = 0, sumAbs3 = 0;
 
     for (let j = 0; j < N; j++) {
       let s = 0;
-
       for (let i = 0; i < n; i++) {
-        const x = draw();
-        s += x;
-
-        // accumulate absolute central 3rd moment if μ finite
+        const xi = draw();
+        s += xi;
         if (Number.isFinite(mu)) {
-          sumAbs3 += Math.abs(x - mu) ** 3;
+          sumAbs3 += Math.abs(xi - mu) ** 3;
           drawsForRho3++;
         }
       }
-
       const ybar = s / n;
       sumMeans += ybar;
       sumMeansSq += ybar * ybar;
@@ -248,27 +261,23 @@ function CLTPanel() {
     const empMean = sumMeans / N;
     const empVar = sumMeansSq / N - empMean * empMean;
 
-    // Coverage proportions
     const prop1 = coverage1 / N;
     const prop2 = coverage2 / N;
     const prop3 = coverage3 / N;
 
-    // Normal targets
     const targ1 = 0.682689492; // P(|Z|≤1)
     const targ2 = 0.954499736; // P(|Z|≤2)
     const targ3 = 0.997300204; // P(|Z|≤3)
 
-    // Simple "normality gap" score (L1 sum of abs deviations)
     const gap =
       (Number.isFinite(prop1) ? Math.abs(prop1 - targ1) : 1) +
       (Number.isFinite(prop2) ? Math.abs(prop2 - targ2) : 1) +
       (Number.isFinite(prop3) ? Math.abs(prop3 - targ3) : 1);
 
-    // Berry–Esseen estimate when moments exist: C * ρ3 / (σ^3 √n)
     let beBound = null;
     if (theo.finiteVar && sig > 0 && drawsForRho3 > 0) {
       const rho3 = sumAbs3 / drawsForRho3; // empirical E|X−μ|^3
-      const C = 0.56; // classical non-tight universal constant (illustrative)
+      const C = 0.56; // illustrative constant
       beBound = (C * rho3) / (Math.pow(sig, 3) * Math.sqrt(n));
     }
 
@@ -276,13 +285,11 @@ function CLTPanel() {
       parent: theo.label,
       n, N,
       empMean, empVar,
-      theoMean: mu, theoSDBar: theo.finiteVar ? (sig / Math.sqrt(n)) : NaN,
+      theoMean: mu,
+      theoSDBar: theo.finiteVar ? (sig / Math.sqrt(n)) : NaN,
       coverage: { prop1, prop2, prop3, targ1, targ2, targ3, gap },
       beBound,
-      notes:
-        !theo.finiteVar
-          ? "Variance is infinite or undefined — classical CLT fails."
-          : null,
+      notes: !theo.finiteVar ? "Variance is infinite or undefined — classical CLT fails." : null,
     });
   }
 
@@ -311,56 +318,45 @@ function CLTPanel() {
 
         {dist === "bernoulli" && (
           <label className="block text-sm font-medium text-slate-700">
-            Bernoulli p
+            Bernoulli <Tex size="sm">{String.raw`p`}</Tex>
             <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-              value={p}
+              type="range" min="0" max="1" step="0.01" value={p}
               onChange={(e) => setP(Number(e.target.value))}
               className="mt-2 w-full"
             />
-            <div className="mt-1 text-slate-800 tabular-nums">p = {p.toFixed(2)}</div>
+            <div className="mt-1 text-slate-800 tabular-nums">
+              <Tex size="sm">{String.raw`p`}</Tex> = {p.toFixed(2)}
+            </div>
           </label>
         )}
 
         {dist === "pareto" && (
           <label className="block text-sm font-medium text-slate-700">
-            Pareto shape α
+            Pareto shape <Tex size="sm">{String.raw`\alpha`}</Tex>
             <input
-              type="number"
-              step="0.1"
-              min="0.5"
-              value={alpha}
+              type="number" step="0.1" min="0.5" value={alpha}
               onChange={(e) => setAlpha(Math.max(0.5, Number(e.target.value) || 0.5))}
               className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
             />
             <div className="mt-1 text-xs text-slate-600">
-              Mean exists if α&gt;1, variance if α&gt;2.
+              <Tex size="sm">{String.raw`\mathbb{E}[X]\ \text{exists if }\alpha>1,\quad \mathrm{Var}(X)\ \text{if }\alpha>2`}</Tex>
             </div>
           </label>
         )}
 
         <label className="block text-sm font-medium text-slate-700">
-          Sample size n
+          Sample size <Tex size="sm">{String.raw`n`}</Tex>
           <input
-            type="number"
-            min="1"
-            max="5000"
-            value={n}
+            type="number" min="1" max="5000" value={n}
             onChange={(e) => setN(Math.max(1, Math.min(5000, Number(e.target.value) || 1)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
           />
         </label>
 
         <label className="block text-sm font-medium text-slate-700">
-          Replications m
+          Replications <Tex size="sm">{String.raw`m`}</Tex>
           <input
-            type="number"
-            min="200"
-            max="20000"
-            value={m}
+            type="number" min="200" max="20000" value={m}
             onChange={(e) => setM(Math.max(200, Math.min(20000, Number(e.target.value) || 200)))}
             className="mt-2 w-full rounded-md border border-slate-300 px-2 py-1"
           />
@@ -380,19 +376,19 @@ function CLTPanel() {
         <>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-6 text-sm">
             <Metric label="Parent" value={stats.parent} />
-            <Metric label="n (per mean)" value={String(stats.n)} />
-            <Metric label="Replications m" value={String(stats.N)} />
-            <Metric label="Ȳ empirical mean" value={stats.empMean.toFixed(6)} />
-            <Metric label="Ȳ empirical var" value={stats.empVar.toFixed(6)} />
+            <Metric label={<Tex size="sm">{String.raw`n\ \text{ (per mean)}`}</Tex>} value={String(stats.n)} />
+            <Metric label={<Tex size="sm">{String.raw`\text{Replications } m`}</Tex>} value={String(stats.N)} />
+            <Metric label={<Tex size="sm">{String.raw`\overline{Y}\ \text{ empirical mean}`}</Tex>} value={stats.empMean.toFixed(6)} />
+            <Metric label={<Tex size="sm">{String.raw`\mathrm{Var}(\overline{Y})\ \text{ empirical}`}</Tex>} value={stats.empVar.toFixed(6)} />
             <Metric
-              label="Theory SD(Ȳ)"
+              label={<Tex size="sm">{String.raw`\text{Theory } \mathrm{SD}(\overline{Y})`}</Tex>}
               value={Number.isFinite(stats.theoSDBar) ? stats.theoSDBar.toFixed(6) : "—"}
             />
           </div>
 
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-6 text-sm">
             <Metric
-              label="P(|Z|≤1)"
+              label={<Tex size="sm">{String.raw`\mathbb{P}(|Z|\le 1)`}</Tex>}
               value={
                 Number.isFinite(stats.coverage.prop1)
                   ? `${stats.coverage.prop1.toFixed(4)} (target ${stats.coverage.targ1.toFixed(4)})`
@@ -400,7 +396,7 @@ function CLTPanel() {
               }
             />
             <Metric
-              label="P(|Z|≤2)"
+              label={<Tex size="sm">{String.raw`\mathbb{P}(|Z|\le 2)`}</Tex>}
               value={
                 Number.isFinite(stats.coverage.prop2)
                   ? `${stats.coverage.prop2.toFixed(4)} (target ${stats.coverage.targ2.toFixed(4)})`
@@ -408,7 +404,7 @@ function CLTPanel() {
               }
             />
             <Metric
-              label="P(|Z|≤3)"
+              label={<Tex size="sm">{String.raw`\mathbb{P}(|Z|\le 3)`}</Tex>}
               value={
                 Number.isFinite(stats.coverage.prop3)
                   ? `${stats.coverage.prop3.toFixed(4)} (target ${stats.coverage.targ3.toFixed(4)})`
@@ -417,7 +413,7 @@ function CLTPanel() {
             />
             <Metric label="Normality gap (↓ better)" value={stats.coverage.gap.toFixed(4)} />
             <Metric
-              label="Berry–Esseen bound"
+              label={<Tex size="sm">{String.raw`Berry\text{–}Esseen:\ \frac{C\,\rho_3}{\sigma^3\sqrt{n}}`}</Tex>}
               value={stats.beBound !== null ? stats.beBound.toFixed(4) : "—"}
             />
             <Metric label="Note" value={stats.notes || "—"} />
@@ -426,18 +422,15 @@ function CLTPanel() {
       )}
 
       <p className="mt-3 text-sm text-slate-700">
-        Coverage compares the standardized mean to the Normal 68–95–99.7% rule. The Berry–Esseen number is a rough
-        bound on the maximum CDF error; it shrinks ≈ 1/√n when the third absolute central moment exists.
+        Coverage compares{" "}
+        <Tex size="sm">{String.raw`\frac{\overline{Y}-\mu}{\sigma/\sqrt{n}}`}</Tex>{" "}
+        to the Normal 68–95–99.7% rule.{" "}
+        Berry–Esseen gives a rough worst-case CDF error{" "}
+        <Tex size="sm">{String.raw`\lesssim \frac{C\,\rho_3}{\sigma^3\sqrt{n}}`}</Tex>{" "}
+        when moments exist.
       </p>
-    </div>
-  );
-}
 
-function Metric({ label, value }) {
-  return (
-    <div className="rounded-lg border border-slate-200 p-3">
-      <div className="text-slate-500">{label}</div>
-      <div className="text-slate-900 font-semibold tabular-nums break-words">{value}</div>
+
     </div>
   );
 }

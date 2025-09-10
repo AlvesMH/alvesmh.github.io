@@ -98,6 +98,5 @@ Try these in the interactive panel below.
 
 Binomial pmfs for different \(p\) values:
 
-![binomial-shapes](./images/binomial-shapes-placeholder.png)
+![binomial-shapes](/images/Binomial_distribution.png)
 
-<small>Put your images in `src/tutorials/probability/discrete/images/` and reference them relatively.</small>

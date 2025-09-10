@@ -1,4 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import katex from "katex";
+import "katex/dist/katex.min.css";
 
 /**
  * Flashcards — session-based practice with simple re-queueing.
@@ -35,6 +38,44 @@ function Toggle({ active, onClick, children }) {
       {children}
     </button>
   );
+}
+
+function RenderCardContent({ content }) {
+  if (!content) return null;
+
+  let expr = content.trim();
+  let displayMode = false;
+
+  // Detect and strip delimiters
+  if (expr.startsWith("$$") && expr.endsWith("$$")) {
+    expr = expr.slice(2, -2);
+    displayMode = true;
+  } else if (expr.startsWith("\\[") && expr.endsWith("\\]")) {
+    expr = expr.slice(2, -2);
+    displayMode = true;
+  } else if (expr.startsWith("\\(") && expr.endsWith("\\)")) {
+    expr = expr.slice(2, -2);
+    displayMode = false;
+  } else if (expr.startsWith("$") && expr.endsWith("$")) {
+    expr = expr.slice(1, -1);
+    displayMode = false;
+  }
+
+  try {
+    const html = katex.renderToString(expr, {
+      displayMode,
+      throwOnError: false,
+      macros: { "\\P": "\\mathbb{P}" },
+    });
+    return (
+      <div
+        className="katex-content text-2xl sm:text-3xl md:text-4xl text-center"
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    );
+  } catch {
+    return <div className="whitespace-pre-wrap">{content}</div>;
+  }
 }
 
 function shuffle(arr) {
@@ -90,6 +131,9 @@ export default function Flashcards({ deck: deckProp, cards, title, className = "
 
   // Interaction state
   const [flipped, setFlipped] = useState(false);
+  const toggle = useCallback(() => {
+    setFlipped(v => !v);
+  }, []);
   const [streak, setStreak] = useState(0);
   const [seen, setSeen] = useState(() => new Set()); // unique cards seen this session
   const [history, setHistory] = useState([]); // back stack of ids
@@ -192,66 +236,159 @@ export default function Flashcards({ deck: deckProp, cards, title, className = "
   }, [currentId]);
 
   // UI
-  return (
-    <div className={`mx-auto w-full max-w-3xl ${className}`}>
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <div className="min-w-0">
-          {title && <h3 className="truncate text-base font-semibold text-gray-900">{title}</h3>}
-          <div className="text-xs text-gray-500">Space=flip • ←/→=prev/next • 1/2/3=Again/Hard/Easy</div>
-        </div>
-        <div className="flex items-center gap-2">
-          <Toggle active={shuffleOn} onClick={() => setShuffleOn((v) => !v)}>Shuffle</Toggle>
-          <Toggle active={reverse} onClick={() => setReverse((v) => !v)}>Reverse</Toggle>
-        </div>
+return (
+  <div className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 shadow-sm">
+    {/* Header / Progress */}
+    <div className="mb-4 flex items-center justify-between">
+      <div className="text-xs sm:text-sm text-slate-600">
+        Card{" "}
+        <span className="font-semibold text-slate-900">
+          {(progressIndex ?? 0) + 1}
+        </span>{" "}
+        of{" "}
+        <span className="font-semibold text-slate-900">
+          {Math.max(1, total)}
+        </span>
       </div>
-
-      {showHelper && (
-        <div className="mb-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
-          Tip: rate with 1/2/3. <button onClick={() => { localStorage.setItem(LS_HELP, "1"); setShowHelper(false); }} className="ml-2 underline">Got it</button>
-        </div>
-      )}
-
-      {baseCards.length === 0 && (
-        <div className="rounded-md border border-gray-200 bg-white p-4 text-sm text-gray-600">No cards yet.</div>
-      )}
-
-      {current && (
-        <div
-          role="button"
-          tabIndex={0}
-          aria-label="Flashcard"
-          onClick={() => setFlipped((f) => !f)}
-          onKeyDown={(e) => { if (e.key === "Enter") setFlipped((f) => !f); }}
-          className="relative mb-3 min-h-[200px] cursor-pointer select-none rounded-2xl border border-gray-200 bg-white p-6 text-center shadow-sm transition-transform hover:shadow-md"
-        >
-          <div className="mx-auto max-w-prose text-gray-900">{content}</div>
-          <div className="pointer-events-none absolute bottom-2 right-3 text-[10px] uppercase tracking-wide text-gray-400">{flipped ? "Back" : "Front"}</div>
-        </div>
-      )}
-
-      {/* Rating buttons */}
-      <div className="mb-3 grid grid-cols-3 gap-2">
-        <button onClick={() => rate("again")} className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50">
-          Again <span className="ml-1 text-[10px] text-gray-500">[1]</span>
-        </button>
-        <button onClick={() => rate("hard")} className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50">
-          Hard <span className="ml-1 text-[10px] text-gray-500">[2]</span>
-        </button>
-        <button onClick={() => rate("easy")} className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-50">
-          Easy <span className="ml-1 text-[10px] text-gray-500">[3]</span>
-        </button>
-      </div>
-
-      {/* Nav + Progress */}
-      <div className="flex items-center justify-between text-xs text-gray-600">
-        <div className="flex items-center gap-2">
-          <button onClick={prev} className="rounded-md border border-gray-200 bg-white px-2 py-1 hover:bg-gray-50">← Prev</button>
-          <button onClick={next} className="rounded-md border border-gray-200 bg-white px-2 py-1 hover:bg-gray-50">Next →</button>
-        </div>
-        <div>
-          Card {progressIndex} of {Math.max(1, total)} • {streak} in a row
-        </div>
+      <div
+        className="text-[11px] sm:text-xs font-medium tabular-nums text-slate-500"
+        aria-label="Current streak"
+        title="Correct in a row"
+      >
+        🔥 Streak: <span className="text-slate-900">{streak}</span>
       </div>
     </div>
-  );
+
+    {/* Progress bar */}
+    <div className="mb-5 h-2 w-full rounded-full bg-slate-100 ring-1 ring-inset ring-slate-200/50">
+      <div
+        className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-[width] duration-300 ease-out"
+        style={{ width: `${(progressIndex / Math.max(1, total)) * 100}%` }}
+        role="progressbar"
+        aria-valuemin={0}
+        aria-valuemax={Math.max(1, total)}
+        aria-valuenow={progressIndex}
+      />
+    </div>
+
+    {/* Flashcard */}
+    <AnimatePresence mode="wait">
+      <motion.button
+        key={flipped ? `${progressIndex}-b` : `${progressIndex}-f`}
+        type="button"
+        initial={{ rotateY: 90, opacity: 0.2 }}
+        animate={{ rotateY: 0, opacity: 1 }}
+        exit={{ rotateY: -90, opacity: 0 }}
+        transition={{ duration: 0.25 }}
+        onClick={toggle}
+        className={[
+          "relative mx-auto mb-6 aspect-[5/3] w-full max-w-3xl select-none rounded-2xl",
+          "bg-gradient-to-br from-white to-slate-50 p-4 sm:p-6 text-center shadow-sm ring-1 ring-slate-200",
+          "hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+        ].join(" ")}
+        aria-label={flipped ? "Show front" : "Show back"}
+        title="Click or press Space to flip"
+      >
+        {/* Centered content */}
+        <div className="flex h-full w-full items-center justify-center">
+          <div className="mx-auto max-w-3xl leading-snug text-slate-900 text-xl sm:text-2xl md:text-3xl">
+            {/* Math-aware renderer */}
+            <RenderCardContent content={content} />
+          </div>
+        </div>
+
+        <div className="pointer-events-none absolute bottom-2 right-3 text-[10px] uppercase tracking-wide text-slate-400">
+          {flipped ? "Back" : "Front"}
+        </div>
+
+        {/* subtle top accent */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-blue-500/70 to-indigo-500/70" />
+      </motion.button>
+    </AnimatePresence>
+
+    {/* Rating buttons */}
+    <div className="mb-4 grid grid-cols-3 gap-2">
+      <button
+        type="button"
+        onClick={() => rate("again")}
+        className={[
+          "rounded-lg border px-3 py-2 text-sm font-medium",
+          "bg-white border-slate-200 text-slate-800 hover:bg-slate-50",
+          "focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/70 active:scale-[0.98]"
+        ].join(" ")}
+        title="Mark as Again (1)"
+      >
+        <span className="inline-flex items-center justify-center gap-1">
+          <span className="hidden sm:inline">Again</span>
+          <span className="sm:ml-1 text-[10px] text-slate-500">[1]</span>
+        </span>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => rate("hard")}
+        className={[
+          "rounded-lg border px-3 py-2 text-sm font-medium",
+          "bg-white border-slate-200 text-slate-800 hover:bg-slate-50",
+          "focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/70 active:scale-[0.98]"
+        ].join(" ")}
+        title="Mark as Hard (2)"
+      >
+        <span className="inline-flex items-center justify-center gap-1">
+          <span className="hidden sm:inline">Hard</span>
+          <span className="sm:ml-1 text-[10px] text-slate-500">[2]</span>
+        </span>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => rate("easy")}
+        className={[
+          "rounded-lg border px-3 py-2 text-sm font-medium",
+          "bg-white border-slate-200 text-slate-800 hover:bg-slate-50",
+          "focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/70 active:scale-[0.98]"
+        ].join(" ")}
+        title="Mark as Easy (3)"
+      >
+        <span className="inline-flex items-center justify-center gap-1">
+          <span className="hidden sm:inline">Easy</span>
+          <span className="sm:ml-1 text-[10px] text-slate-500">[3]</span>
+        </span>
+      </button>
+    </div>
+
+    {/* Navigation */}
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={prev}
+          className="rounded-md border border-slate-200 bg-white px-3 py-1.5 text-xs sm:text-sm text-slate-800 hover:bg-slate-50 shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+          title="Previous (←)"
+        >
+          ← Prev
+        </button>
+        <button
+          type="button"
+          onClick={next}
+          className="rounded-md border border-slate-200 bg-white px-3 py-1.5 text-xs sm:text-sm text-slate-800 hover:bg-slate-50 shadow-xs focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600"
+          title="Next (→)"
+        >
+          Next →
+        </button>
+      </div>
+
+      <div className="text-[11px] sm:text-xs text-slate-500" aria-live="polite">
+        {(progressIndex ?? 0) + 1} / {Math.max(1, total)} • {streak} in a row
+      </div>
+    </div>
+
+    {/* Helper hint */}
+    <p className="mt-3 text-[11px] sm:text-xs text-slate-400">
+      Tip: press <kbd className="rounded border border-slate-300 px-1">Space</kbd> to flip,{" "}
+      <kbd className="rounded border border-slate-300 px-1">1</kbd>/<kbd className="rounded border border-slate-300 px-1">2</kbd>/<kbd className="rounded border border-slate-300 px-1">3</kbd> to rate,{" "}
+      <kbd className="rounded border border-slate-300 px-1">←</kbd>/<kbd className="rounded border border-slate-300 px-1">→</kbd> to navigate.
+    </p>
+  </div>
+);
 }

@@ -1,20 +1,59 @@
+// Callout.jsx
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Info, AlertTriangle, Lightbulb, Sigma, AlertOctagon, ChevronDown, ChevronUp, Check } from "lucide-react";
+import {
+  Info,
+  AlertTriangle,
+  Lightbulb,
+  Sigma,
+  AlertOctagon,
+  ChevronDown,
+  ChevronUp,
+  Check,
+} from "lucide-react";
+
+// 👉 Adjust this import path if your component lives elsewhere
+import RichMarkdown from "./RichMarkdown";
 
 const PROGRESS_KEY = "tutorial_progress";
 
-function safeParse(json, fallback) {
-  try {
-    return json ? JSON.parse(json) : fallback;
-  } catch {
-    return fallback;
+// Clean odd characters anywhere and trim nicely (handles U+FFFD, BOMs, etc.)
+function cleanWeirdChars(str = "") {
+   return String(str)
+     // kill zero-widths + BOM + replacement chars
+     .replace(/[\u200B-\u200D\u2060\uFEFF\uFFFD]/g, "")
+     // common bullet-ish glyphs that sometimes sneak in
+     .replace(/^[\s\u00A0\u2022\u25AA\u25CF\u25E6\u279C\u27A4\u27A1\u2756\u2713]+/, "")
+     .replace(/\r\n/g, "\n")
+     .replace(/\t/g, "  ")
+     .trimStart();
+ }
+
+ function dedupeTitlePrefix(body, title) {
+   if (!title) return body;
+   const t = title.trim().replace(/\s+/g, " ").toLowerCase();
+   const b = body.trimStart();
+   // remove if body starts with title (e.g., "Key idea " or "key idea:")
+   if (b.toLowerCase().startsWith(t)) {
+     return b.slice(t.length).replace(/^[:\-\s]+/, "");
+   }
+   return body;
+ }
+
+// If children are strings or arrays of strings, join & clean as one markdown block.
+function normalizeChildrenToMarkdown(children) {
+  if (typeof children === "string") return cleanWeirdChars(children);
+  if (Array.isArray(children)) {
+    const joined = children.map((c) => (typeof c === "string" ? c : "")).join("");
+    if (joined.trim()) return cleanWeirdChars(joined);
   }
+  return null; // not representable as plain markdown
 }
 
 function updateProgress({ slug, sectionId, sectionTitle, totalSections }) {
   if (!slug) return;
   const store = safeParse(localStorage.getItem(PROGRESS_KEY), {});
-  const cur = store[slug] || { sectionsCompleted: [], totalSections: totalSections || undefined };
+  const cur =
+    store[slug] || { sectionsCompleted: [], totalSections: totalSections || undefined };
   const set = new Set(Array.isArray(cur.sectionsCompleted) ? cur.sectionsCompleted : []);
   if (sectionId) set.add(sectionId);
   const updated = {
@@ -25,7 +64,6 @@ function updateProgress({ slug, sectionId, sectionTitle, totalSections }) {
     updatedAt: Date.now(),
   };
   store[slug] = updated;
-  // also set last visited pointer
   store.__lastVisited__ = {
     slug,
     sectionId: updated.lastSectionId,
@@ -89,17 +127,16 @@ const THEMES = {
 };
 
 /**
- * Callout component
+ * Callout
  *
  * Props:
- * - variant: 'info' | 'warn' | 'idea' | 'proof' | 'pitfall' (default: 'info')
- * - title?: string (optional heading; falls back to variant label)
- * - children: ReactNode (callout content)
- * - actionLabel?: string (shows a single bottom action row when provided)
- * - onAction?: () => void (optional custom handler)
- * - actionKey?: string (if provided and onAction not set, sets localStorage flag `callout:<key>:done`)
- * - progress?: { slug: string; sectionId?: string; sectionTitle?: string; totalSections?: number }
- *       When provided, clicking the action updates consolidated progress under `tutorial_progress`.
+ * - variant: 'info' | 'warn' | 'idea' | 'proof' | 'pitfall' (default 'info')
+ * - title?: string
+ * - children: ReactNode | string (plain strings will be rendered with RichMarkdown for math)
+ * - actionLabel?: string
+ * - onAction?: () => void
+ * - actionKey?: string
+ * - progress?: { slug, sectionId?, sectionTitle?, totalSections? }
  * - defaultCollapsedLines?: number (default 4)
  * - allowCollapse?: boolean (default true)
  * - startCollapsed?: boolean (default true)
@@ -131,18 +168,13 @@ export default function Callout({
     if (!contentRef.current) return;
     const el = contentRef.current;
     const styles = window.getComputedStyle(el);
-    const lineHeightStr = styles.lineHeight;
-    let lineHeight = parseFloat(lineHeightStr);
-    if (!Number.isFinite(lineHeight)) {
-      // Fallback if `normal` or couldn't parse
-      lineHeight = 24;
-    }
+    let lineHeight = parseFloat(styles.lineHeight);
+    if (!Number.isFinite(lineHeight)) lineHeight = 24;
     const maxH = lineHeight * defaultCollapsedLines;
     setMaxHeight(maxH);
 
-    // Measure if content exceeds the collapse threshold
     const ro = new ResizeObserver(() => {
-      const tooTall = el.scrollHeight > maxH + 1; // +1 to account for rounding
+      const tooTall = el.scrollHeight > maxH + 1;
       setExceeds(tooTall);
     });
     ro.observe(el);
@@ -155,12 +187,22 @@ export default function Callout({
     try {
       if (onAction) onAction();
       else if (actionKey) localStorage.setItem(`callout:${actionKey}:done`, "1");
-      if (progress && progress.slug) updateProgress(progress);
+      if (progress?.slug) updateProgress(progress);
       setDidAction(true);
     } catch {
-      // swallow errors silently; this is a best-effort UX feature
+      /* no-op */
     }
   };
+
+  // Decide how to render children:
+  // - If it's a plain string, clean odd chars and render with RichMarkdown (includes math support)
+  // - Otherwise, render as-is
+  let asMd = normalizeChildrenToMarkdown(children);
+  if (asMd !== null) {
+  asMd = dedupeTitlePrefix(cleanWeirdChars(asMd), title || theme.label);
+  }
+  const renderedChildren = asMd !== null ? <RichMarkdown>{asMd}</RichMarkdown> : children;
+
 
   const containerCls = `${theme.bg} ${theme.border} ${theme.text} ${className} relative w-full rounded-xl border`;
   const headerIconCls = `${theme.iconColor}`;
@@ -174,16 +216,15 @@ export default function Callout({
           <Icon className={`h-5 w-5 ${headerIconCls}`} aria-hidden="true" />
         </div>
         <div className="min-w-0 flex-1">
-          <h4 className="text-sm font-semibold leading-6">
-            {title || theme.label}
-          </h4>
+          <h4 className="text-sm font-semibold leading-6">{title || theme.label}</h4>
+
           {/* Body */}
           <div
             ref={contentRef}
-            className={`mt-1 text-sm/6 text-gray-800`}
+            className="mt-1 text-sm/6 text-gray-800"
             style={collapsed && exceeds ? { maxHeight, overflow: "hidden" } : undefined}
           >
-            {children}
+            {renderedChildren}
           </div>
 
           {/* Collapse / Expand control */}
@@ -232,6 +273,11 @@ export default function Callout({
   );
 }
 
+// Small convenience wrapper
 export function PopNote({ label, children }) {
-  return <Callout type="idea" title={label}>{children}</Callout>;
+  return (
+    <Callout variant="idea" title={label}>
+      {children}
+    </Callout>
+  );
 }
