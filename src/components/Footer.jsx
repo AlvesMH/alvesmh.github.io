@@ -2,8 +2,6 @@ import React from 'react';
 import { BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const prefetchTutorials = () => import('../tutorials');
-
 export default function Footer() {
   const handleClick = (item) => {
     if (item === 'Home') {
@@ -25,14 +23,21 @@ export default function Footer() {
             <span className="text-xl font-bold text-gray-900">Augmented Minds</span>
           </Link>
 
-          <p className="text-gray-600 mb-6">Sharing ideas, one post at a time.</p>
+          <p className="text-gray-600 mb-6"> Teaching tools, methodologies,and personal perspectives.</p>
 
           <div className="flex justify-center space-x-6 mb-6">
-            {['Home', 'Tutorials', 'About', 'Archive', 'Contact'].map((item) => (
+            {['Home', 'Tools', 'Critical Thinking', 'CV', 'About', 'Archive', 'Contact'].map((item) => (
               <Link
                 key={item}
-                to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                onMouseEnter={item === 'Tutorials' ? prefetchTutorials : undefined}
+                to={
+                  item === 'Home'
+                    ? '/'
+                    : item === 'Tools'
+                    ? '/tools'
+                    : item === 'Critical Thinking'
+                    ? '/critical-thinking'
+                    : `/${item.toLowerCase()}`
+                }
                 onClick={() => handleClick(item)}
                 className="text-gray-400 hover:text-blue-600 transition-colors"
               >
@@ -42,7 +47,7 @@ export default function Footer() {
           </div>
 
           <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} Augmented Minds Blog. Built with React.
+            © {new Date().getFullYear()} Augmented Minds. Built with React.
           </div>
         </div>
       </div>

@@ -36,8 +36,8 @@ const AboutCard = () => {
 
       {/* Socials */}
       <div className="mt-6 flex justify-center gap-4 text-gray-600">
-        <a href="https://github.com/alvesmh" aria-label="GitHub" className="hover:text-gray-900"><Github /></a>
-        <a href="https://www.linkedin.com/in/hugo-alves-martins" aria-label="LinkedIn" className="hover:text-gray-900"><Linkedin /></a>
+        <a href="https://github.com/alvesmh" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-gray-900"><Github /></a>
+        <a href="https://www.linkedin.com/in/hugoalvesmartins/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-gray-900"><Linkedin /></a>
         <Link
           to="/contact"
           aria-label="Contact form"

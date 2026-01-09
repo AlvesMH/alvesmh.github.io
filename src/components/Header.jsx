@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import { BookOpen, Menu } from 'lucide-react';
 import { NavLink, Link } from 'react-router-dom';
 
-const navLinks = ['Home', 'Tutorials', 'About', 'Archive', 'Contact'];
-const toPath = (item) => (item === 'Home' ? '/' : `/${item.toLowerCase()}`);
-const prefetchTutorials = () => import('../tutorials');
+const navItems = [
+  { label: 'Home', to: '/' },
+  { label: 'CV', to: '/cv' },
+  { label: 'Tools', to: '/tools' },
+  { label: 'Critical Thinking', to: '/critical-thinking' },
+  { label: 'About', to: '/about' },
+  { label: 'Archive', to: '/archive' },
+  { label: 'Contact', to: '/contact' }
+];
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,15 +41,15 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex space-x-8" aria-label="Primary">
-            {navLinks.map((item) => (
+            {navItems.map((nav) => (
+
               <NavLink
-                key={item}
-                to={toPath(item)}
+                key={nav.label}
+                to={nav.to}
                 className={linkClass}
-                onMouseEnter={item === 'Tutorials' ? prefetchTutorials : undefined}
-                onClick={() => clearSearchOnHome(item)}
+                onClick={() => clearSearchOnHome(nav.label)}
               >
-                {item}
+                {nav.label}
               </NavLink>
             ))}
           </nav>
@@ -63,15 +69,15 @@ export default function Header() {
         {/* Mobile Nav */}
         {menuOpen && (
           <div id="mobile-menu" className="md:hidden flex flex-col space-y-4 pb-4" aria-label="Mobile">
-            {navLinks.map((item) => (
+            {navItems.map((nav) => (
+
               <NavLink
-                key={item}
-                to={toPath(item)}
+                key={nav.label}
+                to={nav.to}
                 className={linkClass}
-                onMouseEnter={item === 'Tutorials' ? prefetchTutorials : undefined}
-                onClick={() => { clearSearchOnHome(item); setMenuOpen(false); }}
+                onClick={() => { clearSearchOnHome(nav.label); setMenuOpen(false); }}
               >
-                {item}
+                {nav.label}
               </NavLink>
             ))}
           </div>

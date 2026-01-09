@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const PopularTags = ({ tags, onClick }) => (
   <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-    <h3 className="text-lg font-bold text-gray-900 mb-4">Popular Topics</h3>
+    <h3 className="text-lg font-bold text-gray-900 mb-4">Posting Topics</h3>
     <div className="flex flex-wrap gap-2">
       {tags.map((tag) => (
         <button

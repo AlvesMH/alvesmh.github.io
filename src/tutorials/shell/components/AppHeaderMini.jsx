@@ -53,7 +53,7 @@ export default function AppHeaderMini({ tutorialSlug, sectionTitle, className = 
           </nav>
         </div>
         <div className="flex shrink-0 items-center gap-4 text-xs">
-          <Link to="/" className="font-medium text-gray-500 hover:text-gray-900">Back to Blog</Link>
+          <Link to="/" className="font-medium text-gray-500 hover:text-gray-900">Back to Home</Link>
           <Link to="/tutorials" className="font-medium text-gray-500 hover:text-gray-900">All Tutorials</Link>
         </div>
       </div>

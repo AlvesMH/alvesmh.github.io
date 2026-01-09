@@ -8,9 +8,9 @@ import NewsletterCard from './NewsletterCard';
  * - popularTags: string[]  (pre-computed list of tags)
  * - onTagClick: (tag: string) => void
  */
-const Sidebar = ({ popularTags = [], onTagClick }) => (
+const Sidebar = ({ popularTags = [], onTagClick, showAbout = true }) => (
   <aside className="lg:w-1/3 space-y-8">
-    <AboutCard />
+    {showAbout && <AboutCard />}
     <PopularTags tags={popularTags} onClick={onTagClick} />
     <NewsletterCard />
   </aside>

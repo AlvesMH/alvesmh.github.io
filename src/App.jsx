@@ -8,6 +8,11 @@ import ArchivePage from './pages/Archive';
 import ContactPage from './pages/Contact';
 import PostPage from './pages/Post';
 import ThankYou from './pages/ThankYou';
+import ToolsPage from './pages/Tools';
+import CriticalThinkingPage from './pages/CriticalThinking';
+import CVPage from './pages/CV';
+import ScrollToTop from './components/ScrollToTop';
+
 const TutorialsApp = React.lazy(() => import('./tutorials'));
 
 export default function App() {
@@ -16,6 +21,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <ScrollToTop />
+
       {!onTutorials && <Header />}
 
       <Routes>
@@ -25,6 +32,9 @@ export default function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/post/:slug" element={<PostPage />} />
         <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/tools" element={<ToolsPage />} />
+        <Route path="/critical-thinking" element={<CriticalThinkingPage />} />
+        <Route path="/cv" element={<CVPage />} />
         <Route
           path="/tutorials/*"
           element={
@@ -39,3 +49,4 @@ export default function App() {
     </div>
   );
 }
+

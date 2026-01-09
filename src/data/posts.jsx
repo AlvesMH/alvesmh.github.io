@@ -1,19 +1,30 @@
 import MarkdownRenderer from "../components/MarkdownRenderer";
 
 export const POSTS = [
-  { 
+  {
   id: 1,
+    slug: "transformative-education-ai-future",
+    title: "The False Comfort of “AI Literacy” in Higher Education",
+    excerpt:
+      "AI literacy alone is insufficient for preparing undergraduates in a generative AI world. As text and content production become cheap, the real educational challenge shifts to cultivating judgement, reasoning, and responsibility.",
+    category: "Education",
+    date: "2025-12-30",
+    readTime: "8 min read",
+    tags: ["Management", "Society"],
+  },
+  {
+  id: 2,
     slug: "future_of_work_and_worth",
     title: "“Work, Wealth, and Worth in the Age of AI",
     excerpt:
       "If we want an AI economy that delivers both comfort and fulfillment, we must confront the structural flaws in how we prepare, employ, and reward people. Policy that still taxes yesterday’s value, HR that manages yesterday’s jobs, and education that teaches yesterday’s tasks will waste what AI makes possible.",
     category: "Society",
     date: "2025-08-12",
-    readTime: "12 min read",
-    tags: ["Education", "Management", "Society"],
+    readTime: "10 min read",
+    tags: ["Education", "Management"],
   },
   {
-    id: 2,
+    id: 3,
     slug: "why_genai_literacy_new_entry_level_skill",
     title: "“Mediocre Expertise” Will Be Automated Away",
     excerpt:
@@ -21,10 +32,10 @@ export const POSTS = [
     category: "Management",
     date: "2025-08-09",
     readTime: "7 min read",
-    tags: ["Education", "Management"],
+    tags: ["Education"],
   },
   {
-    id: 3,
+    id: 4,
     slug: "prompting_science",
     title: "The Pedagogy of Prompting: Teaching Students to Think with AI",
     excerpt:
@@ -32,10 +43,10 @@ export const POSTS = [
     category: "Education",
     date: "2025-08-01",
     readTime: "8 min read",
-    tags: ["Education", "AI-Literacy"],
+    tags: ["AI-Literacy"],
   },
   {
-    id: 4,
+    id: 5,
     slug: "offloading_to_augmentation",
     title: "From Offloading to Augmentation: Reclaiming Cognitive Work in the Age of AI",
     excerpt:
@@ -43,10 +54,10 @@ export const POSTS = [
     category: "Education",
     date: "2025-07-11",
     readTime: "8 min read",
-    tags: ["Education", "Cognition"],
+    tags: ["Cognition"],
   },
   {
-    id: 5,
+    id: 6,
     slug: "flipped_classroom",
     title: "The Flipped Classroom Gets an Upgrade: Using GenAI for Deeper Learning",
     excerpt:
@@ -54,10 +65,10 @@ export const POSTS = [
     category: "Education",
     date: "2025-06-03",
     readTime: "9 min read",
-    tags: ["Education", "Flipped-Learning"],
+    tags: ["Flipped-Learning"],
   },
   {
-    id: 6,
+    id: 7,
     slug: "beyond-the-syllabus",
     title: "Beyond the Syllabus: How AI is Changing What (and How) We Teach",
     excerpt:
@@ -65,10 +76,10 @@ export const POSTS = [
     category: "Education",
     date: "2025-04-25",
     readTime: "8 min read",
-    tags: ["Education", "Curriculum"],
+    tags: ["Curriculum"],
   },
   {
-    id: 7,
+    id: 8,
     slug: "co-thinking-model",
     title: "Co-Thinking with Machines: A New Model for Human–AI Collaboration",
     excerpt:
@@ -79,7 +90,7 @@ export const POSTS = [
     tags: ["AI-Philosophy", "Cognition"],
   },
   {
-    id: 8,
+    id: 9,
     slug: "slow-thinking-fast-ai",
     title: "Teaching Slow Thinking in a Fast AI World",
     excerpt:
@@ -90,7 +101,7 @@ export const POSTS = [
     tags: ["Critical-Thinking", "Psychology"],
   },
   {
-    id: 9,
+    id: 10,
     slug: "ai-literacy-guiding-principles",
     title: "Guiding Principles for AI Literacy in Universities",
     excerpt:
