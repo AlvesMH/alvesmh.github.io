@@ -62,7 +62,7 @@ const tiles = [
     detailsTo: '/tools#academic-summariser',
     links: [
       { label: 'Live demo', href: 'https://summarizer-generator.onrender.com', kind: 'demo' },
-      { label: 'GitHub', href: 'https://github.com/AlvesMH/Article-Summarizer', kind: 'github' }
+      { label: 'GitHub', href: 'https://github.com/AlvesMH/summarizer_generator', kind: 'github' }
     ]
   }
 ];
