@@ -133,7 +133,7 @@ export default function ProofTiles() {
                     <Icon className="w-5 h-5 text-slate-700" />
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900">{t.title}</h4>
+                    <h4 className="text-xl md:text-2xl font-bold text-gray-900">{t.title}</h4>
                     <p className="mt-1 text-sm text-slate-600">{t.subtitle}</p>
                   </div>
                 </div>
