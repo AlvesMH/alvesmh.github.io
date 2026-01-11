@@ -356,6 +356,9 @@ export default function CVPage() {
               and consolidated reporting.
             </li>
             <li>
+              <strong>Six Thinking Hats</strong> — Student Group Analysis App for analysing an idea, solution, or problem statement using Edward de Bono’s Six Thinking Hats method.
+            </li>
+            <li>
               <strong>Generative Lesson Planner</strong> — Retrieval Augmented Generation - enabled lesson planning assistant that produces lesson plans and supporting
               materials from instructors&apos; source documents.
             </li>

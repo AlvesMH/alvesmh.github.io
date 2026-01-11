@@ -1,7 +1,7 @@
 import React from 'react';
 import Canonical from '../components/Canonical';
 import { Helmet } from 'react-helmet-async';
-import { Brain, ClipboardList, FileText, ExternalLink, Github, CheckCircle2 } from 'lucide-react';
+import { Brain, ClipboardList, FileText, ExternalLink, Github, CheckCircle2, Lightbulb } from 'lucide-react';
 
 const TOOLS = [
   {
@@ -29,6 +29,34 @@ const TOOLS = [
       'Ask for citations, data provenance, and limitations as assessed components.'
     ]
   },
+
+  // NEW: inserted as second item
+  {
+    id: 'six-thinking-hats',
+    title: 'Six Thinking Hats',
+    subtitle: 'Parallel thinking for clearer decisions, stronger discussion, and better reflection',
+    icon: Lightbulb,
+    demo: 'https://six-thinking-hats.onrender.com/',
+    repo: 'https://github.com/AlvesMH/six-thinking-hats-app',
+    summary:
+      'A structured workflow for De Bono’s Six Thinking Hats: separate facts, feelings, risks, benefits, creativity, and process control to improve the quality of group reasoning and decision-making.',
+    useCases: [
+      'Seminars and tutorials: run a timed “hat rotation” to ensure balanced participation and prevent debate from collapsing into a single mode (e.g., criticism-only).',
+      'Project work: use Blue Hat planning to define the question, then document White/Yellow/Black/Green outputs as a decision record and rationale.',
+      'Case discussions: assign hats to groups and require a synthesis step that reconciles conflicting perspectives into an action plan.'
+    ],
+    assessment: [
+      'Assessable artefact: capture hat-by-hat contributions to evidence balanced reasoning and explicit trade-offs.',
+      'Communication outcomes: evaluate quality of argumentation (evidence, realism, creativity, and reflection) rather than “winning” a debate.',
+      'Decision quality: require a final Blue Hat synthesis that justifies the chosen option with references to risks, benefits, and assumptions.'
+    ],
+    integrity: [
+      'Make thinking visible: require students to submit their own hat notes and a short rationale explaining how their view evolved.',
+      'Use in-class checkpoints: brief oral synthesis or timed writing reduces over-reliance on AI-generated text.',
+      'Mark the synthesis: prioritise the final integration (Blue Hat) where judgment and interpretation must be demonstrated.'
+    ]
+  },
+
   {
     id: 'lesson-planner',
     title: 'Generative Lesson Planner',
@@ -201,3 +229,4 @@ export default function ToolsPage() {
     </div>
   );
 }
+

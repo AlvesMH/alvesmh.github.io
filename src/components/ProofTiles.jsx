@@ -30,6 +30,18 @@ const tiles = [
     ]
   },
   {
+    title: 'Six Thinking Hats',
+    subtitle: 'Parallel thinking for clearer decisions, stronger discussion, and better reflection',
+    description:
+      'A structured workflow for De Bono’s Six Thinking Hats: separate facts, feelings, risks, benefits, creativity, and process control to improve the quality of group reasoning and decision-making.',
+    icon: ClipboardList,
+    detailsTo: '/tools#six-thinking-hats',
+    links: [
+      { label: 'Live demo', href: 'https://six-thinking-hats.onrender.com/', kind: 'demo' },
+      { label: 'GitHub', href: 'https://github.com/AlvesMH/six-thinking-hats-app', kind: 'github' }
+    ]
+  },
+  {
     title: 'Generative Lesson Planner',
     subtitle: 'Retrieval Augmented Generation-powered teaching assistant',
     description:
