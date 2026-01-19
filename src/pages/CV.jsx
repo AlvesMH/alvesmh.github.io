@@ -152,7 +152,7 @@ export default function CVPage() {
               </p>
               <ul className={ulTight}>
                 <li>Topics taught include quantitative reasoning, cybersecurity fundamentals, digital misinformation, and data ethics/privacy.</li>
-                <li>Teaching leadership: 6 tutorial groups (~150 students).</li>
+                <li>Teaching leadership: 6 TGs (~150 students).</li>
                 <li>Introduced real-world cases (e.g., misinformation analysis on social media) to strengthen transfer to practice.</li>
               </ul>
             </div>
@@ -165,7 +165,7 @@ export default function CVPage() {
                 and social perspectives, culminating in collaborative proposals addressing real-life challenges.
               </p>
               <ul className={ulTight}>
-                <li>Teaching leadership: 18 tutorial groups (~700 students).</li>
+                <li>Teaching leadership: 24 TGs (~900 students).</li>
                 <li>Facilitated structured debates on benefits, costs, and second-order implications of technology adoption.</li>
                 <li>Consistently strong student feedback for cultivating curiosity, responsibility, and human-centred judgment.</li>
               </ul>
@@ -398,27 +398,7 @@ export default function CVPage() {
             <li>Advanced methods: structural equation modelling, social network analysis, mediation analysis, experience sampling methods.</li>
             <li>Thesis: longitudinal team performance analysis using graph theory and ordered probit models with cross-nested hierarchical data (Python, SPSS, R).</li>
           </ul>
-        </div>
-
-        <div className="space-y-2">
-          <p className="font-semibold text-gray-900">Selected scholarly work</p>
-          <div className="bg-white border border-slate-200 rounded-xl p-5">
-            <ul className="mt-1 space-y-3 text-gray-800">
-              <li style={refItemStyle}>
-                Martins, A. H., Rockstuhl, T., &amp; Ang, S. (2022). <em>Home field advantage in professional soccer: The role of team tenure and fixture stability</em>. Oral presentation, Asia-Singapore Conference on Sport Science.
-              </li>
-              <li style={refItemStyle}>
-                Martins, A. H., Rockstuhl, T., &amp; Ang, S. (2020). <em>Injuries and performance: A scientometric analysis of the literature</em>. Dissertation essay.
-              </li>
-              <li style={refItemStyle}>
-                Martins, A. H., Rockstuhl, T., &amp; Ang, S. (2020). <em>Are injuries injurious? Evidence from professional soccer</em>. Dissertation essay.
-              </li>
-              <li style={refItemStyle}>
-                Martins, A. H., Rockstuhl, T., &amp; Ang, S. (2020). <em>Are injuries injurious? A replication and extension</em>. Dissertation essay.
-              </li>
-            </ul>
-          </div>
-        </div>
+        </div>       
       </section>
 
       <hr className="my-8 border-slate-200" />
