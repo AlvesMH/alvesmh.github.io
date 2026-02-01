@@ -1,6 +1,6 @@
-*“We become what we behold. We shape our tools, and thereafter our tools shape us.”* – Marshall McLuhan
+*“We become what we behold. We shape our tools, and thereafter our tools shape us.”* 
+- Marshall McLuhan
 
-## Redesigning Undergraduate Education for an AI-Augmented World
 
 ### Problem-Based Learning, Trial-and-Error Sense-Making, AI Augmentation, and Critical Thinking as the new core
 
