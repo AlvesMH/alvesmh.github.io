@@ -3,6 +3,17 @@ import MarkdownRenderer from "../components/MarkdownRenderer";
 export const POSTS = [
   {
   id: 1,
+    slug: "redesigning-undergraduate-education",
+    title: "Redesigning Undergraduate Education for an AI-Augmented World",
+    excerpt:
+      "Higher education is facing a structural contradiction: faculty report growing concern that generative AI accelerates cheating and weakens critical thinking, while simultaneously acknowledging that many graduates are not prepared to use AI effectively in the workplace. This gap is amplified by “shadow pedagogy,” where students learn AI practices informally through peers and social media rather than through structured curricula. This post proposes a research-aligned redesign of undergraduate learning around four mutually reinforcing pillars—Problem-Based Learning (PBL), trial-and-error exploration and sense-making, AI augmentation, and critical thinking.",
+    category: "Education",
+    date: "2025-12-30",
+    readTime: "8 min read",
+    tags: ["AI-Literacy", "Society" , "Curriculum"],
+  },
+  {
+  id: 2,
     slug: "transformative-education-ai-future",
     title: "The False Comfort of “AI Literacy” in Higher Education",
     excerpt:
@@ -13,7 +24,7 @@ export const POSTS = [
     tags: ["Management", "Society"],
   },
   {
-  id: 2,
+  id: 3,
     slug: "future_of_work_and_worth",
     title: "“Work, Wealth, and Worth in the Age of AI",
     excerpt:
@@ -24,7 +35,7 @@ export const POSTS = [
     tags: ["Education", "Management"],
   },
   {
-    id: 3,
+    id: 4,
     slug: "why_genai_literacy_new_entry_level_skill",
     title: "“Mediocre Expertise” Will Be Automated Away",
     excerpt:
@@ -35,7 +46,7 @@ export const POSTS = [
     tags: ["Education"],
   },
   {
-    id: 4,
+    id: 5,
     slug: "prompting_science",
     title: "The Pedagogy of Prompting: Teaching Students to Think with AI",
     excerpt:
@@ -46,7 +57,7 @@ export const POSTS = [
     tags: ["AI-Literacy"],
   },
   {
-    id: 5,
+    id: 6,
     slug: "offloading_to_augmentation",
     title: "From Offloading to Augmentation: Reclaiming Cognitive Work in the Age of AI",
     excerpt:
@@ -57,7 +68,7 @@ export const POSTS = [
     tags: ["Cognition"],
   },
   {
-    id: 6,
+    id: 7,
     slug: "flipped_classroom",
     title: "The Flipped Classroom Gets an Upgrade: Using GenAI for Deeper Learning",
     excerpt:
@@ -68,7 +79,7 @@ export const POSTS = [
     tags: ["Flipped-Learning"],
   },
   {
-    id: 7,
+    id: 8,
     slug: "beyond-the-syllabus",
     title: "Beyond the Syllabus: How AI is Changing What (and How) We Teach",
     excerpt:
@@ -79,7 +90,7 @@ export const POSTS = [
     tags: ["Curriculum"],
   },
   {
-    id: 8,
+    id: 9,
     slug: "co-thinking-model",
     title: "Co-Thinking with Machines: A New Model for Human–AI Collaboration",
     excerpt:
@@ -90,7 +101,7 @@ export const POSTS = [
     tags: ["AI-Philosophy", "Cognition"],
   },
   {
-    id: 9,
+    id: 10,
     slug: "slow-thinking-fast-ai",
     title: "Teaching Slow Thinking in a Fast AI World",
     excerpt:
@@ -101,7 +112,7 @@ export const POSTS = [
     tags: ["Critical-Thinking", "Psychology"],
   },
   {
-    id: 10,
+    id: 11,
     slug: "ai-literacy-guiding-principles",
     title: "Guiding Principles for AI Literacy in Universities",
     excerpt:
