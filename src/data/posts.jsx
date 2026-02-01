@@ -8,8 +8,8 @@ export const POSTS = [
     excerpt:
       "Higher education is facing a structural contradiction: faculty report growing concern that generative AI accelerates cheating and weakens critical thinking, while simultaneously acknowledging that many graduates are not prepared to use AI effectively in the workplace. This gap is amplified by “shadow pedagogy,” where students learn AI practices informally through peers and social media rather than through structured curricula. This post proposes a research-aligned redesign of undergraduate learning around four mutually reinforcing pillars—Problem-Based Learning (PBL), trial-and-error exploration and sense-making, AI augmentation, and critical thinking.",
     category: "Education",
-    date: "2025-12-30",
-    readTime: "8 min read",
+    date: "2026-02-01",
+    readTime: "15 min read",
     tags: ["AI-Literacy", "Society" , "Curriculum"],
   },
   {
