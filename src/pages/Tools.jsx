@@ -10,7 +10,7 @@ const TOOLS = [
     subtitle: 'Multi-agent critical thinking analysis aligned to Paul & Elder',
     icon: Brain,
     demo: 'https://critical-thinker.onrender.com',
-    repo: 'https://github.com/AlvesMH/Critical-Thinker',
+    repo: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/pack/critical-thinker/README.md',
     summary:
       'A classroom-ready workflow for structured critique: purpose, assumptions, evidence quality, inferences, implications, and fairness.',
     useCases: [
@@ -37,7 +37,7 @@ const TOOLS = [
     subtitle: 'Parallel thinking for clearer decisions, stronger discussion, and better reflection',
     icon: Lightbulb,
     demo: 'https://six-thinking-hats.onrender.com/',
-    repo: 'https://github.com/AlvesMH/six-thinking-hats-app',
+    repo: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/pack/six-hats/README.md',
     summary:
       'A structured workflow for De Bono’s Six Thinking Hats: separate facts, feelings, risks, benefits, creativity, and process control to improve the quality of group reasoning and decision-making.',
     useCases: [
