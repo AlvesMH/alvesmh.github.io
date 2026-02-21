@@ -148,7 +148,7 @@ export default function ProofTiles() {
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-slate-200 text-sm text-slate-600">
-                  Live demo may take up to 50 seconds to wake up (free hosting).
+                  Live demo may take up to 50 seconds to wake up on first use.
                 </div>
               </article>
             );
