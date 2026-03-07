@@ -1,35 +1,35 @@
 
-Over the past two years, students have come to know AI through one interface: the chatbot. You type a prompt, the system gives a response. It can summarise an article, explain a concept, draft an email, or generate a first version (or the last) of an assignment. That was already very significant, with wide impact at several levels of student learning journeys.
+Over the past two years, students have come to know AI through one interface: **the Chatbot.** You type a prompt, the system gives a response. It can summarise an article, explain a concept, draft an email, or generate a first version (or even the last) of an assignment. That was already very significant, with wide impact at several levels of student learning journeys.
 
-But I think a more important shift is now taking place. At a time where most of us are still trying to adapt to the previous blow.
+But I think a more important shift is now taking place—even while most of us are still trying to adapt to the previous wave.
 
-In simple terms, AI is becoming less like a clever reply machine and more like a system that can participate in execution.
+**AI is becoming less like a clever reply machine and more like a system that can participate in execution.**
 
-That is why this is not only a technology story. **It is also a work story, a learning story, and an institutional story.**
+That is why this is **not only a technology story. It is also a work story, a learning story, and an institutional story.**
 
 
-### AI is moving from Answering to Acting.
+### AI is moving from Answering to Acting
 
 
 **This shift matters.** A chatbot mainly responds. An agent can work towards an outcome. It can break a task into steps, use tools, retrieve information, check progress, and continue until a goal is reached.
 
-In other words, it is moving from systems that mainly respond to questions, to systems that can increasingly pursue goals, use tools, and complete multi-step tasks. 
+It is moving from systems that mainly respond to questions, to systems that can increasingly **pursue goals, use tools, and complete multi-step tasks.** 
 
-This is what makes recent developments in “Agentic AI” so important. The key issue is no longer only whether if AI can produce a fluent answer or if we can detect "Cognitive Offloading" in student's deliverables. The deeper issue is that AI can help execute parts of real work, or even the full work.
+This is what makes recent developments in **“Agentic AI”** so important. The key issue is no longer only whether AI can produce a fluent answer or if we can detect *"Cognitive Offloading"* in students' deliverables. The deeper issue is that AI can help execute parts of real work, or even the full work.
 
-That distinction matters a great deal for universities. Much more than **"teach them a few prompting tricks, and our job is done!"** that seems to be the default response to these challenges.
+That distinction matters a great deal for universities. It goes much further than **"teach them a few prompting tricks, and our job is done!"** which seems to be the default response to these challenges.
 
 ---
 
-## Why this matters?
+## Why this matters
 
-For students, this means that the old idea of academic effort also shifts. The question is no longer only, “Can I produce an answer?” It is increasingly, “Can I define the problem well, guide the process well, and judge the result well?”
+For students, this means that the old idea of academic effort also shifts. The question is no longer only, “Can I produce an answer?” The right questions are “Can I define the problem well, guide the process well, and judge the result well?”
 
 ### This is a much more demanding question, and much harder to teach *"How to"* do it well.
 
 ---
 
-## Why prompting is not enough?
+## Why prompting is not enough
 
 Many students assume that being “good at AI” means knowing a few clever prompting tricks. That view is understandable, but too shallow.
 
@@ -37,26 +37,26 @@ Prompting matters. Of course it does. A clearer prompt often leads to a better o
 
 A good prompt cannot compensate for weak judgment. It cannot replace domain understanding. It cannot detect every risk, omission, or misleading answer. It cannot decide whether an output fits the real problem context, a professional standard, or an ethical boundary.
 
-So, **We have to stop teaching prompting tricks and move on to the real thing!"**
+So, **we have to stop teaching prompting tricks and move on to the real thing!"**
 
 The **right prompt** becomes more or less obvious once we have a workable understanding of the problem we want to address.
 
 ---
 
-## Real AI-readiness is much deeper.
+## Real AI-readiness is much deeper
 
-It includes at least four things:
+It includes at least **four** things:
 
 - **Problem framing**: knowing what the real task is, what success looks like, and what constraints matter.
 - **Judgment**: knowing what to trust, what to question, and what to reject.
 - **Oversight**: knowing when AI can assist, when humans must intervene, and who remains accountable.
-- **Subject Domain Expertise application**: knowing how AI should be used in a real field such as education, business, health, sport, law, finance, public policy, and so on. Try to come up with an area where these agents would not add value? 
+- **Application of Domain Expertise**: knowing how AI should be used in a real field such as education, business, health, sport, law, finance, public policy, and so on. (Can you think of an area where these agents would not add value?) 
 
 For students, the future advantage will not go simply to those who can “talk to AI.” It will go to people who can direct it, evaluate it, and apply it wisely in their own domains to create real value.
 
 ---
 
-## What students should get from their "Education" now?
+## What students should get from their "Education" now
 
 If routine execution becomes cheaper, then **higher-value human capabilities** become more important.
 
@@ -84,7 +84,9 @@ That means moving beyond defensive conversations about detection and misconduct,
 
 An institution does not become AI-ready because it purchases a platform licence or publishes a short guideline. It becomes AI-ready when it develops a **culture of wise AI use**.
 
-As a famous *management guru* once said: **"Culture eats Strategy for breakfast, about everyday!"**
+As a famous *management guru* once said: **"Culture eats Strategy for breakfast!"**
+
+---
 
 ## Final thought
 
