@@ -4,9 +4,9 @@ export const POSTS = [
   {
   id: 1,
     slug: "agentic_ai_blog_post",
-    title: "From Chatbots to Agents: Why AI-Readiness Is About Judgment, Not Prompting",
+    title: "From Chatbots to Agents: Why AI-Readiness Is About Judgment, Not Prompting Tricks",
     excerpt:
-      "Many conversations about AI are still stuck at the chatbot stage. We ask a question. The system gives an answer. It explains, summarises, drafts, and suggests. That model is still useful. But it is no longer enough to describe where AI is heading.We are now moving from chatbots to agents.That shift matters. A chatbot mainly responds. An agent can work towards an outcome. It can break a task into steps, use tools, retrieve information, check progress, and continue until a goal is reached. In simple terms, AI is becoming less like a clever reply machine and more like a system that can participate in execution. That is why this is not only a technology story. It is also a work story, a learning story, and an institutional story.",
+      "A chatbot mainly responds. An agent can work towards an outcome. It can break a task into steps, use tools, retrieve information, check progress, and continue until a goal is reached. In simple terms, AI is becoming less like a clever reply machine and more like a system that can participate in execution. That is why this is not only a technology story. It is also a work story, a learning story, and an institutional story.",
     category: "Education",
     date: "2026-03-03",
     readTime: "15 min read",

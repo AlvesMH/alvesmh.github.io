@@ -1,5 +1,4 @@
-# From Chatbots to Agentic AI: Why AI-Readiness Is About Judgment, Not Prompting Tricks!
- 
+
 Over the past two years, students have come to know AI through one interface: the chatbot. You type a prompt, the system gives a response. It can summarise an article, explain a concept, draft an email, or generate a first version (or the last) of an assignment. That was already very significant, with wide impact at several levels of student learning journeys.
 
 But I think a more important shift is now taking place. At a time where most of us are still trying to adapt to the previous blow.
@@ -9,10 +8,10 @@ In simple terms, AI is becoming less like a clever reply machine and more like a
 That is why this is not only a technology story. **It is also a work story, a learning story, and an institutional story.**
 
 
-AI is moving from **Answering** to **Acting**.
+### AI is moving from Answering to Acting.
 
 
-That shift matters. A chatbot mainly responds. An agent can work towards an outcome. It can break a task into steps, use tools, retrieve information, check progress, and continue until a goal is reached.
+**This shift matters.** A chatbot mainly responds. An agent can work towards an outcome. It can break a task into steps, use tools, retrieve information, check progress, and continue until a goal is reached.
 
 In other words, it is moving from systems that mainly respond to questions, to systems that can increasingly pursue goals, use tools, and complete multi-step tasks. 
 
@@ -24,13 +23,13 @@ That distinction matters a great deal for universities. Much more than **"teach 
 
 ## Why this matters?
 
-For students, this means that the old idea of academic effort may also shift. The question is no longer only, “Can I produce an answer?” It is increasingly, “Can I define the problem well, guide the process well, and judge the result well?”
+For students, this means that the old idea of academic effort also shifts. The question is no longer only, “Can I produce an answer?” It is increasingly, “Can I define the problem well, guide the process well, and judge the result well?”
 
-**That is a much more demanding question**, and much harder to teach **"How to"** do it well.
+### This is a much more demanding question, and much harder to teach *"How to"* do it well.
 
 ---
 
-## Why prompting is not enough
+## Why prompting is not enough?
 
 Many students assume that being “good at AI” means knowing a few clever prompting tricks. That view is understandable, but too shallow.
 
@@ -65,13 +64,13 @@ This is where universities should be very careful not to send the wrong message.
 
 Four stand out.
 
-First, **creative thinking**. Students need to learn how to reframe a problem, not just respond to one. Better outputs often start with better questions.
+- First, **creative thinking**. Students need to learn how to reframe a problem, not just respond to one. Better outputs often start with better questions.
 
-Second, **critical thinking**. Students need to evaluate evidence, identify weak reasoning, notice what is missing, and resist the temptation to confuse fluency with truth.
+- Second, **critical thinking**. Students need to evaluate evidence, identify weak reasoning, notice what is missing, and resist the temptation to confuse fluency with truth.
 
-Third, **systems thinking**. Real-world problems rarely sit inside one neat box. Students need to understand interdependence, trade-offs, second-order effects, and unintended consequences, often spanning different expertise domains.
+- Third, **systems thinking**. Real-world problems rarely sit inside one neat box. Students need to understand interdependence, trade-offs, second-order effects, and unintended consequences, often spanning different expertise domains.
 
-Fourth, an **interdisciplinary mindset**. AI becomes genuinely useful when technical capability is combined with domain context. The most valuable graduates will likely not be those who know the most commands or more "prompting tricks", but those who can connect AI tools to the realities of a profession, an organisation, and society-at-large.
+- Fourth, an **interdisciplinary mindset**. AI becomes genuinely useful when technical capability is combined with domain context. The most valuable graduates will likely not be those who know the most commands or more "prompting tricks", but those who can connect AI tools to the interconnected realities of a complex world.
 
 ---
 
@@ -89,15 +88,15 @@ As a famous *management guru* once said: **"Culture eats Strategy for breakfast,
 
 ## Final thought
 
-Agentic AI will make some forms of low-value execution cheaper. But it will not make human judgment less important. Quite the opposite. It raises the value of judgment, oversight, context, and responsibility.
+**Agentic AI will make some forms of low-value execution cheaper**. But it will not make human judgment less important. Quite the opposite. **It raises the value of judgment, oversight, context, and responsibility.**
 
-So the question for students is not, “How do I become good at prompting?”
+So the question for students is not, **“How do I become good at prompting?”**
 
-A better question is: “How do I become the kind of person who can use AI wisely in the real world?”
+A better question is: **“How do I become the kind of person who can use AI wisely and effectively in the real world?”**
 
-And the question for universities is closely related: are we still rewarding routine production, or are we preparing students for a world in which the premium lies in directing, evaluating, and applying intelligence well?
+And the question for universities is closely related: **"Are we still rewarding routine production, or are we preparing students for a world in which the premium lies in directing, evaluating, and applying intelligence well?**
 
-That is the real educational challenge now.
+### This is the real educational challenge now.
 
 ---
 
