@@ -44,7 +44,7 @@ Used well, GenAI can strip away the friction of low-level tasks, giving learners
 
 ---
 
-Let’s build human-centered futures—together.
+Let’s build human-centred futures—together.
 
   
 Thanks for reading.  

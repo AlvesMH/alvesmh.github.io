@@ -26,7 +26,7 @@ In the age of AI, the distinction between offloading and augmenting cognition is
 
 ---
 
-Let’s build human-centered futures—together.
+Let’s build human-centred futures—together.
 
   
 Thanks for reading.  

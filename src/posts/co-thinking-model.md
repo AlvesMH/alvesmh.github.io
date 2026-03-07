@@ -28,7 +28,7 @@ Such a model of co-thinking transforms the relationship from one of dependency o
 
 ---
 
-Let’s build human-centered futures—together.
+Let’s build human-centred futures—together.
 
   
 Thanks for reading.  

@@ -26,7 +26,7 @@ In the new job market that is emerging, the winners will not be those who can co
 
 ---
 
-Let’s build human-centered futures—together.
+Let’s build human-centred futures—together.
 
   
 Thanks for reading.  

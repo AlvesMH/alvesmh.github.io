@@ -22,7 +22,7 @@ Ultimately, teaching slow thinking in a fast AI world means redefining education
 
 ---
 
-Let’s build human-centered futures—together.
+Let’s build human-centred futures—together.
 
   
 Thanks for reading.  

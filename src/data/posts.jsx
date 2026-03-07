@@ -3,6 +3,17 @@ import MarkdownRenderer from "../components/MarkdownRenderer";
 export const POSTS = [
   {
   id: 1,
+    slug: "agentic_ai_blog_post",
+    title: "From Chatbots to Agents: Why AI-Readiness Is About Judgment, Not Prompting",
+    excerpt:
+      "Many conversations about AI are still stuck at the chatbot stage. We ask a question. The system gives an answer. It explains, summarises, drafts, and suggests. That model is still useful. But it is no longer enough to describe where AI is heading.We are now moving from chatbots to agents.That shift matters. A chatbot mainly responds. An agent can work towards an outcome. It can break a task into steps, use tools, retrieve information, check progress, and continue until a goal is reached. In simple terms, AI is becoming less like a clever reply machine and more like a system that can participate in execution. That is why this is not only a technology story. It is also a work story, a learning story, and an institutional story.",
+    category: "Education",
+    date: "2026-03-03",
+    readTime: "15 min read",
+    tags: ["Education", "AI-Literacy", "Society" , "Curriculum"],
+  },
+  {
+  id: 2,
     slug: "redesigning-undergraduate-education",
     title: "Redesigning Undergraduate Education for an AI-Augmented World",
     excerpt:
@@ -13,7 +24,7 @@ export const POSTS = [
     tags: ["AI-Literacy", "Society" , "Curriculum"],
   },
   {
-  id: 2,
+  id: 3,
     slug: "transformative-education-ai-future",
     title: "The False Comfort of “AI Literacy” in Higher Education",
     excerpt:
@@ -24,7 +35,7 @@ export const POSTS = [
     tags: ["Management", "Society"],
   },
   {
-  id: 3,
+  id: 4,
     slug: "future_of_work_and_worth",
     title: "“Work, Wealth, and Worth in the Age of AI",
     excerpt:
@@ -35,7 +46,7 @@ export const POSTS = [
     tags: ["Education", "Management"],
   },
   {
-    id: 4,
+    id: 5,
     slug: "why_genai_literacy_new_entry_level_skill",
     title: "“Mediocre Expertise” Will Be Automated Away",
     excerpt:
@@ -46,7 +57,7 @@ export const POSTS = [
     tags: ["Education"],
   },
   {
-    id: 5,
+    id: 6,
     slug: "prompting_science",
     title: "The Pedagogy of Prompting: Teaching Students to Think with AI",
     excerpt:
@@ -57,7 +68,7 @@ export const POSTS = [
     tags: ["AI-Literacy"],
   },
   {
-    id: 6,
+    id: 7,
     slug: "offloading_to_augmentation",
     title: "From Offloading to Augmentation: Reclaiming Cognitive Work in the Age of AI",
     excerpt:
@@ -68,7 +79,7 @@ export const POSTS = [
     tags: ["Cognition"],
   },
   {
-    id: 7,
+    id: 8,
     slug: "flipped_classroom",
     title: "The Flipped Classroom Gets an Upgrade: Using GenAI for Deeper Learning",
     excerpt:
@@ -79,7 +90,7 @@ export const POSTS = [
     tags: ["Flipped-Learning"],
   },
   {
-    id: 8,
+    id: 9,
     slug: "beyond-the-syllabus",
     title: "Beyond the Syllabus: How AI is Changing What (and How) We Teach",
     excerpt:
@@ -90,7 +101,7 @@ export const POSTS = [
     tags: ["Curriculum"],
   },
   {
-    id: 9,
+    id: 10,
     slug: "co-thinking-model",
     title: "Co-Thinking with Machines: A New Model for Human–AI Collaboration",
     excerpt:
@@ -101,7 +112,7 @@ export const POSTS = [
     tags: ["AI-Philosophy", "Cognition"],
   },
   {
-    id: 10,
+    id: 11,
     slug: "slow-thinking-fast-ai",
     title: "Teaching Slow Thinking in a Fast AI World",
     excerpt:
@@ -112,7 +123,7 @@ export const POSTS = [
     tags: ["Critical-Thinking", "Psychology"],
   },
   {
-    id: 11,
+    id: 12,
     slug: "ai-literacy-guiding-principles",
     title: "Guiding Principles for AI Literacy in Universities",
     excerpt:

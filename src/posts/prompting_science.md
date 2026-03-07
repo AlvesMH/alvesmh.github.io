@@ -26,7 +26,7 @@ Instead, **prompting as pedagogy should emphasize active cognitive engagement**.
 
 ---
 
-Let’s build human-centered futures—together.
+Let’s build human-centred futures—together.
 
   
 Thanks for reading.  

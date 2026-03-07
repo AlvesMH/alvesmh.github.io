@@ -52,7 +52,7 @@ If we leave work design, HR practices, and fiscal systems unchanged, **young peo
 
 ---
 
-Let’s build human-centered futures—together.
+Let’s build human-centred futures—together.
 
 Thanks for reading.
 **— HM**

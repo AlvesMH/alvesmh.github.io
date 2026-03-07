@@ -24,7 +24,7 @@ In this vision of the classroom, students aren't merely consumers of AI-generate
 
 ---
 
-Let’s build human-centered futures—together.
+Let’s build human-centred futures—together.
 
   
 Thanks for reading.  

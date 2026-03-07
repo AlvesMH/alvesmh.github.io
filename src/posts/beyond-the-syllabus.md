@@ -17,7 +17,7 @@ Educators must evolve from knowledge dispensers into facilitators of intellectua
 
 ---
 
-Let’s build human-centered futures—together.
+Let’s build human-centred futures—together.
 
   
 Thanks for reading.  
