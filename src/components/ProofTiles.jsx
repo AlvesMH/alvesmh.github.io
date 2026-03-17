@@ -26,7 +26,7 @@ const tiles = [
     detailsTo: '/tools#critical-thinker',
     links: [
       { label: 'Live demo', href: 'https://critical-thinker.onrender.com', kind: 'demo' },
-      { label: 'GitHub', href: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/pack/critical-thinker/README.md', kind: 'github' }
+      { label: 'GitHub', href: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/six-thinking-hats.md', kind: 'github' }
     ]
   },
   {
@@ -62,7 +62,7 @@ const tiles = [
     detailsTo: '/tools#academic-summariser',
     links: [
       { label: 'Live demo', href: 'https://summarizer-generator.onrender.com', kind: 'demo' },
-      { label: 'GitHub', href: 'https://github.com/AlvesMH/summarizer_generator', kind: 'github' }
+      { label: 'GitHub', href: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/Summarizer.md', kind: 'github' }
     ]
   }
 ];
