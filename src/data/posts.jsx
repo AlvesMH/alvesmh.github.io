@@ -6,12 +6,7 @@ export const POSTS = [
     slug: "ai_advantage_services",
     title: "The Real Advantage Is Not Having Better AI. It Is Building a Better Human-AI Service System.",
     excerpt: `The successful AI adopter is not necessarily the one that automates the most. It is the one that redesigns work most intelligently.
-
-  This point is crucial: **AI can reduce the cost of routine production. But competitive advantage comes from reinvesting that efficiency into higher-value human work.**
-
-  So when AI saves time, the management question becomes: What happens to that time? Do employees simply serve more customers mechanically? Do we need fewer people? Or do we use the freed capacity to improve judgment, recovery, personalization, and relationship quality?
-
-  This is likely the trap many organizations will fall into. Cost savings appear immediately in spreadsheet projections. Better service consistency, customer experience, satisfaction, and loyalty are slower to appear, but they accumulate over time. And this is exactly where organizational design affects growth and profitability.`,
+    This is likely the trap many organizations will fall into. Cost savings appear immediately in spreadsheet projections. Better service consistency, customer experience, satisfaction, and loyalty are slower to appear, but they accumulate over time. And this is exactly where organizational design affects growth and profitability.`,
     category: "Management",
     date: "2026-05-08",
     readTime: "8 min read",
