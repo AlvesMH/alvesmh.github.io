@@ -2,18 +2,23 @@ import MarkdownRenderer from "../components/MarkdownRenderer";
 
 export const POSTS = [
   {
-  id: 1,
+    id: 1,
     slug: "ai_advantage_services",
     title: "The Real Advantage Is Not Having Better AI. It Is Building a Better Human-AI Service System.",
-    excerpt:
-      "The successful AI adopter is not necessarily the one that automates the most. It is the one that redesigns work most intelligently. This point is crucial: **AI can reduce the cost of routine production. But competitive advantage comes from reinvesting that efficiency into higher-value human work.** So when AI saves time, the management question becomes: What happens to that time? Do employees simply serve more customers mechanically? Do we need fewer people? Or do we use the freed capacity to improve judgment, recovery, personalization, and relationship quality?\n This is likely the trap many organizations will fall into. Cost savings appear immediately in spreadsheet projections. Better service consistency, customer experience, satisfaction, and loyalty are slower to appear, but they accumulate over time. And this is exactly where organizational design affects growth and profitability.",
+    excerpt: `The successful AI adopter is not necessarily the one that automates the most. It is the one that redesigns work most intelligently.
+
+  This point is crucial: **AI can reduce the cost of routine production. But competitive advantage comes from reinvesting that efficiency into higher-value human work.**
+
+  So when AI saves time, the management question becomes: What happens to that time? Do employees simply serve more customers mechanically? Do we need fewer people? Or do we use the freed capacity to improve judgment, recovery, personalization, and relationship quality?
+
+  This is likely the trap many organizations will fall into. Cost savings appear immediately in spreadsheet projections. Better service consistency, customer experience, satisfaction, and loyalty are slower to appear, but they accumulate over time. And this is exactly where organizational design affects growth and profitability.`,
     category: "Management",
     date: "2026-05-08",
     readTime: "8 min read",
     tags: ["AI-Philosophy", "AI-Literacy", "Society"],
   },
   {
-  id: 2,
+    id: 2,
     slug: "agentic_ai_blog_post",
     title: "From Chatbots to Agents: Why AI-Readiness Is About Judgment, Not Prompting Tricks",
     excerpt:
@@ -24,7 +29,7 @@ export const POSTS = [
     tags: ["Education", "AI-Literacy", "Society" , "Curriculum"],
   },
   {
-  id: 3,
+    id: 3,
     slug: "redesigning-undergraduate-education",
     title: "Redesigning Undergraduate Education for an AI-Augmented World",
     excerpt:
@@ -35,7 +40,7 @@ export const POSTS = [
     tags: ["AI-Literacy", "Society" , "Curriculum"],
   },
   {
-  id: 4,
+    id: 4,
     slug: "transformative-education-ai-future",
     title: "The False Comfort of “AI Literacy” in Higher Education",
     excerpt:
@@ -46,7 +51,7 @@ export const POSTS = [
     tags: ["Management", "Society"],
   },
   {
-  id: 5,
+    id: 5,
     slug: "future_of_work_and_worth",
     title: "“Work, Wealth, and Worth in the Age of AI",
     excerpt:
