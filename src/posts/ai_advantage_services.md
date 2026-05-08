@@ -92,11 +92,11 @@ In service operations, the final output is only part of the value.
 
 A hotel can check a guest in quickly and still make the guest feel like an inconvenience. A university can deliver content efficiently and still leave students disengaged. A healthcare provider can process patients quickly and still create anxiety or distrust. A customer support team can close tickets fast and still leave customers feeling unheard. A gym can produce technically sound training plans and still fail to motivate clients to continue.
 
-This is why service quality is not simply operational. It is relational.
+**This is why service quality is not simply operational. It is relational.**
 
-The customer evaluates not only the solution, but the interaction.
+**The customer evaluates not only the solution, but the interaction.**
 
-And this is where AI adoption becomes delicate.
+**And this is where AI adoption becomes delicate.**
 
 AI can support service operations in powerful ways. It can summarize information, anticipate needs, route requests, detect patterns, recommend actions, support training, prepare frontline staff, and reduce administrative load. Used well, it can improve both efficiency and service quality.
 
@@ -106,7 +106,7 @@ The customer may experience the service as faster but colder. More standardized 
 
 This is particularly risky in human services, where the recipient’s cooperation is part of the service itself.
 
-If the customer does not trust the system, they may withhold information. If the student feels judged or unseen, they may disengage. If the patient feels rushed, they may not ask the important question. If the guest feels processed rather than welcomed, the “efficient” interaction may still be evaluated negatively.
+If the customer does not trust the system, they may withhold information. If the student feels judged or unseen, they may disengage. If the patient feels rushed, they may not ask the important question. **If the guest feels processed rather than welcomed**, the “efficient” interaction may still be evaluated negatively.
 
 So the central service question is not:
 
@@ -126,23 +126,23 @@ One of the most common mistakes in AI adoption is assuming that efficiency autom
 
 Sometimes it does. If a customer needs a simple answer, speed matters. If a staff member is buried in administration, automation helps. If a process is slow and repetitive, AI can reduce waste.
 
-But in human services, efficiency is often only the baseline.
+**But in human services, efficiency is often only the baseline.**
 
 People expect the organization to be competent. They expect the booking to work, the answer to arrive, the class to be delivered, the diagnosis to be accurate, and the service request to be resolved.
 
 Efficiency is not usually what creates emotional loyalty.
 
-What creates loyalty is often the feeling that the organization handled the situation well.
+What creates loyalty is often the feeling that the organization handled the situation "well".
 
 - Not just quickly.
 - Not just correctly.
-- But well.
+- But "well".
 
 This is why organizations should be careful when they define the business case for AI only in terms of productivity. A faster service can still be a worse experience. A more automated service can still increase frustration. A more data-driven service can still feel less trustworthy. A more standardized workflow can still fail in the exact moments where human judgment matters most.
 
-AI strategy in service operations must therefore go beyond efficiency.
+**AI strategy in service operations must therefore go beyond efficiency.**
 
-The more important question is how AI can help the organization become more responsive, more adaptive, more coordinated, and more human where it matters.
+** How AI can help the organization become more responsive, more adaptive, more coordinated, and more human where it matters.**
 
 ---
 
@@ -154,7 +154,7 @@ A firm may adopt a strong model, but competitors can often access something simi
 
 This does not mean technology is irrelevant. It means technology alone is rarely a sustainable advantage.
 
-The harder thing to copy is the organizational system around the technology.
+**The harder thing to copy is the organizational system around the technology.**
 
 How well do employees know when to trust AI and when to challenge it? How clearly are decision rights defined? How quickly do teams learn from failed AI interactions? How effectively does the organization redesign roles instead of merely adding tools? How safe do employees feel escalating concerns? How well do managers balance efficiency, service quality, and human judgment? How consistently does the organization turn AI insight into a better customer experience?
 
@@ -164,7 +164,7 @@ They are organizational capabilities.
 
 One organization uses AI to make service cheaper. Another may use the same AI model or provider to make employees better prepared, customers better understood, and service recovery more intelligent.
 
-The second has the advantage.
+**The second has the advantage.**
 
 Not because its AI is necessarily better, but because its workflows are designed better.
 
@@ -192,7 +192,7 @@ It is:
 
 That question affects recruitment, training, performance management, promotion, leadership development, job design, and culture.
 
-AI adoption is not, in its essence, a technology agenda. It is a human capability agenda.
+**AI adoption is not, in its essence, a technology agenda. It is a human capability agenda.**
 
 ---
 
@@ -202,7 +202,7 @@ Many organizations are investing in AI literacy. That is necessary. But it is no
 
 AI literacy usually means knowing what AI can do, how to use it, what risks it creates, and how to apply basic safeguards. These are useful foundations.
 
-But enterprise advantage requires something deeper: adaptive expertise.
+But enterprise advantage requires something deeper: **adaptive expertise.**
 
 Adaptive expertise is the ability to use existing knowledge efficiently while also adapting, learning, and creating new responses when situations change.
 
@@ -217,9 +217,9 @@ Is this AI output appropriate for this customer? What context is missing? What s
 This is the difference between tool use and professional judgment.
 
 - AI literacy helps people operate the tool.
-- Adaptive expertise helps people create value with the tool.
+- **Adaptive expertise helps people create value with the tool.**
 
-This is where competitive advantage begins.
+**This is where competitive advantage begins.**
 
 ---
 
@@ -242,9 +242,9 @@ Work design asks a different set of questions.
 - Which metrics need to change?
 - Which escalation pathways must be redesigned?
 
-Without work design, AI is just added to work.
+**Without work design, AI is just added to work.**
 
-With work design, AI changes the quality of work.
+**With work design, AI changes the quality of work.**
 
 This is especially important in service operations because the customer experience depends on how backstage systems and frontstage interactions connect.
 
@@ -274,11 +274,11 @@ Poor AI adoption can create hidden costs: frustrated customers, lower trust, poo
 
 Good AI adoption can create value through faster but still thoughtful service, better-prepared frontline employees, more consistent service recovery, improved personalization without loss of trust, reduced administrative burden, better employee learning, stronger customer relationships, and better managerial insight.
 
-The successful adopter is not necessarily the one that automates the most.
+**The successful adopter is not necessarily the one that automates the most.**
 
-It is the one that redesigns work most intelligently.
+**It is the one that redesigns work most intelligently.**
 
-This point is crucial.
+*This point is crucial.*
 
 AI can reduce the cost of routine production. But competitive advantage comes from reinvesting that efficiency into higher-value human work.
 
@@ -289,9 +289,9 @@ So when AI saves time, the management question becomes:
 - Do we need fewer people?
 - Or do we use the freed capacity to improve judgment, recovery, personalization, and relationship quality?
 
-This is likely the trap many organizations will fall into.
+**This is likely the trap many organizations will fall into.**
 
-Cost savings appear immediately in spreadsheet projections. Better service consistency, customer experience, satisfaction, and loyalty are slower to appear, but they accumulate over time.
+Cost savings appear immediately in spreadsheet projections. Better service consistency, customer experience, satisfaction, and loyalty are slower to appear, but they steadily accumulate over time.
 
 And this is exactly where organizational design affects growth and profitability.
 
@@ -305,7 +305,7 @@ But employees do not adopt AI only because it is available.
 
 They adopt it when it makes sense within their work, when they trust the system enough, when they understand expectations, and when the organization gives them permission to use judgment.
 
-People do not really adapt to technology in the abstract. They adapt to new ways of working that the technology makes possible. Or they resist it when those new workflows are unclear, unfair, risky, or burdensome.
+**People do not really adapt to technology in the abstract. They adapt to new ways of working that the technology makes possible. Or they resist it when those new workflows are unclear, unfair, risky, or burdensome.**
 
 Employees ask practical questions.
 
@@ -335,11 +335,11 @@ In service operations, frontline employees are often where AI strategy becomes r
 
 They see what customers accept, resist, misunderstand, or appreciate. They see when AI recommendations are useful and when they are inappropriate. They see which parts of the workflow break down. They experience where automation saves time and where it creates more work. They understand when a customer needs efficiency and when they need reassurance.
 
-This makes frontline employees a critical source of organizational learning.
+**This makes frontline employees a critical source of organizational learning.**
 
-They should not be treated merely as end users of AI systems designed elsewhere.
+**They should not be treated merely as end users of AI systems designed elsewhere.**
 
-They should be treated as co-designers of human-AI service work.
+**They should be treated as co-designers of human-AI service work.**
 
 Organizations should be asking them: Where does AI help you serve better? Where does it make service feel worse? Which recommendations do you ignore? What do customers complain about? Which situations require human discretion? What new skills are you developing informally? Where does the system misunderstand the real work?
 
@@ -349,7 +349,7 @@ It is strategic intelligence.
 
 The organizations that learn from frontline experience will adapt faster than those that impose AI from the top down.
 
-In service operations, this matters because the frontline is where the customer’s affective evaluation is formed.
+In service operations, this matters because **the frontline is where the customer’s affective evaluation is formed.**
 
 The customer rarely evaluates the AI system directly.
 
@@ -361,7 +361,7 @@ These are leadership questions, not IT questions.
 
 AI adoption must involve technology teams, but it cannot be owned by technology teams. It requires HR, operations, service design, risk, learning and development, and frontline management.
 
-This means accepting that AI will change work, while refusing to let the technology define the organization by default.
+**This means accepting that AI will change work, while refusing to let the technology define the organization by default.**
 
 The organizations that understand this will move beyond tool adoption toward human-AI capability.
 
