@@ -5,10 +5,10 @@ import { Brain, ClipboardList, FileText, ExternalLink, Github } from 'lucide-rea
 
 const tiles = [
   {
-    title: 'Ask-Julia - Interactive Avatar Assistant',
-    subtitle: 'A conversational avatar providing spoken answers, evidence summaries, and fuller explanations to make a curated knowledge base easier to use.',
+    title: 'Ask-Julia - Interactive Assistant',
+    subtitle: 'A conversational avatar providing spoken answers and grounded evidence-based summaries.',
     description:
-      'Ask Julia is an interactive avatar guide designed to help people explore evidence-informed ideas about AI, teaching, learning, and higher education.',
+      'Ask Julia is an interactive avatar designed to help explore evidence-informed ideas about AI, teaching, learning, and higher education.',
     icon: FileText,
     detailsTo: '/tools#ask-julia',
     links: [
