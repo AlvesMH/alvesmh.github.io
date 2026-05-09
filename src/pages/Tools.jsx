@@ -5,6 +5,36 @@ import { Brain, ClipboardList, FileText, ExternalLink, Github, CheckCircle2, Lig
 
 const TOOLS = [
   {
+    id: 'ask-julia',
+    title: 'Ask Julia - Interactive Assistant Avatar',
+    subtitle: 'Interactive assistant avatar to explore ideas about AI, teaching, learning, and higher education.',
+    icon: FileText,
+    demo: 'https://ask-julia.onrender.com',
+    repo: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/ask-julia.md',
+    summary:
+      'Ask Julia is an interactive avatar guide designed to help people explore evidence-informed ideas about AI, teaching, learning, and higher education. It combines a conversational avatar, spoken answers, evidence summaries, and fuller explanations to make a curated knowledge base easier to use.',
+    useCases: [
+      'Julia can help users think through questions such as:',
+      ' - How AI may affect teaching and learning.',
+      ' - How educators can use AI responsibly.',
+      ' - What opportunities and risks AI creates in higher education.',
+      ' - How institutions might support students and staff in AI-augmented learning environments.',
+      ' - What practical design implications follow from current research and expert discussion.',
+      'Julia is especially useful for quick exploration, preparation for discussion, and making complex ideas easier to understand.'
+    ],
+    assessment: [
+      'How institutions might support students and staff in AI-augmented learning environments.',
+      'What practical design implications follow from current research and expert discussion.',
+      'Require “evidence-to-claim” mapping: students must connect claims to the specific evidence in the paper.'      
+    ],
+    integrity: [
+      '“What are the main risks of using AI in teaching?”',
+      '“How should educators think about student use of AI?”',
+      '“What does responsible AI adoption mean in higher education?”'
+    ]
+  },
+
+  {
     id: 'critical-thinker',
     title: 'Critical Thinker',
     subtitle: 'Multi-agent critical thinking analysis aligned to Paul & Elder',
@@ -81,32 +111,7 @@ const TOOLS = [
       'Retain transparency: document what was generated and what was revised (for QA and reflective practice).',
       'Avoid sensitive data: do not upload student-identifiable information.'
     ]
-  },
-  {
-    id: 'academic-summariser',
-    title: 'Academic Summariser / Generator',
-    subtitle: 'Structured summaries for research, literacy and evidence-based reasoning',
-    icon: FileText,
-    demo: 'https://summarizer-generator.onrender.com',
-    repo: 'https://github.com/AlvesMH/Article-Summarizer',
-    summary:
-      'A structured reading companion that supports comprehension, synthesis, and critique—useful for research methods, policy, and interdisciplinary modules.',
-    useCases: [
-      'Reading preparation: generate a structured preview (research question, methods, findings, limitations) before seminar discussions.',
-      'Synthesis tasks: compare multiple articles and extract convergences, conflicts, and gaps.',
-      'Evidence training: require students to identify what would change their conclusion (robustness and falsifiability).'
-    ],
-    assessment: [
-      'Demonstrate research literacy: assess the quality of the student’s critique, not the existence of a summary.',
-      'Require “evidence-to-claim” mapping: students must connect claims to the specific evidence in the paper.',
-      'Include limitations and implications: evaluate whether students can articulate scope conditions and practical consequences.'
-    ],
-    integrity: [
-      'Prevent shallow summarisation: require direct quotations with page/section references and a student-written interpretation.',
-      'Use comparative prompts (two papers, one question) to discourage generic outputs.',
-      'For graded work, use short in-class checks to confirm understanding.'
-    ]
-  }
+  }  
 ];
 
 export default function ToolsPage() {

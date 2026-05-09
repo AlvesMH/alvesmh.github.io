@@ -5,6 +5,18 @@ import { Brain, ClipboardList, FileText, ExternalLink, Github } from 'lucide-rea
 
 const tiles = [
   {
+    title: 'Ask-Julia - Interactive Avatar Assistant',
+    subtitle: 'A conversational avatar providing spoken answers, evidence summaries, and fuller explanations to make a curated knowledge base easier to use.',
+    description:
+      'Ask Julia is an interactive avatar guide designed to help people explore evidence-informed ideas about AI, teaching, learning, and higher education.',
+    icon: FileText,
+    detailsTo: '/tools#ask-julia',
+    links: [
+      { label: 'Live demo', href: 'https://ask-julia.onrender.com', kind: 'demo' },
+      { label: 'GitHub', href: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/ask-julia.md', kind: 'github' }
+    ]
+  },
+  {
     title: 'Critical Thinker',
     subtitle: (
       <>
@@ -52,19 +64,7 @@ const tiles = [
       { label: 'Live demo', href: 'https://lesson-planner-app.onrender.com', kind: 'demo' },
       { label: 'GitHub', href: 'https://github.com/AlvesMH/Lesson-Planner-App', kind: 'github' }
     ]
-  },
-  {
-    title: 'Academic Summariser / Generator',
-    subtitle: 'Structured summaries for academic text content, also supports PDFs',
-    description:
-      'An effective summariser-generator, with Retrieval Augmented Generation, designed to support efficient comprehension, seminar discussion, and evidence-based writing.',
-    icon: FileText,
-    detailsTo: '/tools#academic-summariser',
-    links: [
-      { label: 'Live demo', href: 'https://summarizer-generator.onrender.com', kind: 'demo' },
-      { label: 'GitHub', href: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/Summarizer.md', kind: 'github' }
-    ]
-  }
+  }  
 ];
 
 function LinkButton({ href, label, kind }) {
