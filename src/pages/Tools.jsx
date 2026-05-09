@@ -15,9 +15,6 @@ const TOOLS = [
       'Ask Julia is an interactive avatar guide designed to help people explore evidence-informed ideas about AI, teaching, learning, and higher education. It combines a conversational avatar, spoken answers, evidence summaries, and fuller explanations to make a curated knowledge base easier to use.',
     useCases: [
       'Julia can help users think through questions such as:',
-      ' - How AI may affect teaching and learning.',
-      ' - How educators can use AI responsibly.',
-      ' - What opportunities and risks AI creates in higher education.',
       ' - How institutions might support students and staff in AI-augmented learning environments.',
       ' - What practical design implications follow from current research and expert discussion.',
       'Julia is especially useful for quick exploration, preparation for discussion, and making complex ideas easier to understand.'
