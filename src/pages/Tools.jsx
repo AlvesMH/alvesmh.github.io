@@ -6,109 +6,104 @@ import { Brain, ClipboardList, FileText, ExternalLink, Github, CheckCircle2, Lig
 const TOOLS = [
   {
     id: 'ask-julia',
-    title: 'Ask Julia - Interactive Assistant Avatar',
-    subtitle: 'Interactive assistant avatar to explore ideas about AI, teaching, learning, and higher education.',
+    title: 'Ask-Julia',
+    subtitle: 'Evidence-grounded conversational avatar for higher education knowledge exploration',
     icon: FileText,
     demo: 'https://ask-julia.onrender.com',
     repo: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/ask-julia.md',
     summary:
-      'Ask Julia is an interactive avatar guide designed to help people explore evidence-informed ideas about AI, teaching, learning, and higher education. It combines a conversational avatar, spoken answers, evidence summaries, and fuller explanations to make a curated knowledge base easier to use.',
+      'Ask-Julia is a voice-enabled avatar that helps users explore a curated knowledge base through spoken answers, evidence summaries, and fuller explanations. It demonstrates retrieval-augmented generation, avatar interaction, evidence-card design, and human-centred educational UX.',
     useCases: [
-      'Julia can help users think through questions such as:',
-      ' - How institutions might support students and staff in AI-augmented learning environments.',
-      ' - What practical design implications follow from current research and expert discussion.',
-      'Julia is especially useful for quick exploration, preparation for discussion, and making complex ideas easier to understand.'
+      'Discussion preparation: users ask natural-language questions and receive concise, evidence-grounded explanations.',
+      'Knowledge exploration: complex material becomes easier to navigate through a conversational interface.',
+      'Public demonstration: shows how AI can make curated knowledge more accessible without removing the need for judgement.'
     ],
     assessment: [
-      'How institutions might support students and staff in AI-augmented learning environments.',
-      'What practical design implications follow from current research and expert discussion.',
-      'Require “evidence-to-claim” mapping: students must connect claims to the specific evidence in the paper.'      
+      'Ask students to map each claim to the evidence summary or source material.',
+      'Use the avatar as a rehearsal partner, then require students to write their own synthesis and limitations.',
+      'Pair with short oral checkpoints to verify understanding beyond the generated answer.'
     ],
-    integrity: [
-      '“What are the main risks of using AI in teaching?”',
-      '“How should educators think about student use of AI?”',
-      '“What does responsible AI adoption mean in higher education?”'
+    responsibleUse: [
+      'Use curated knowledge bases rather than open-ended unsupported claims.',
+      'Treat spoken answers as starting points for inquiry, not final authority.',
+      'Make uncertainty, evidence boundaries, and source limitations explicit.'
     ]
   },
-
   {
     id: 'critical-thinker',
     title: 'Critical Thinker',
-    subtitle: 'Multi-agent critical thinking analysis aligned to Paul & Elder',
+    subtitle: 'Structured argument analysis aligned to Paul and Elder’s critical thinking framework',
     icon: Brain,
     demo: 'https://critical-thinker.onrender.com',
     repo: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/pack/critical-thinker/README.md',
     summary:
-      'A classroom-ready workflow for structured critique: purpose, assumptions, evidence quality, inferences, implications, and fairness.',
+      'Critical Thinker supports rigorous evaluation of arguments, essays, policy proposals, and academic texts. It operationalises critique through multiple analytical perspectives and produces a consolidated report that students can annotate and defend.',
     useCases: [
-      'Pre-class: students submit a short argument/position statement; the tool produces a structured critique scaffold.',
-      'In-class: small-group comparison of competing critiques; students defend or revise their argument using standards of clarity, depth, and logic.',
-      'Post-class: individual reflection on what changed (assumptions, evidence, or implications) and why.'
+      'Pre-class: students submit a short argument and receive a critique scaffold.',
+      'In-class: groups compare critiques and revise claims using explicit standards of reasoning.',
+      'Post-class: students document what changed in their assumptions, evidence, and implications.'
     ],
     assessment: [
-      'Outcome evidence: a structured report students can annotate and append as an evidence trail.',
-      'Rubric alignment: map directly to criteria such as clarity, accuracy, relevance, depth, breadth, and fairness.',
-      'Process marks: require students to document revisions and justify decisions using explicit standards.'
+      'Use the report as an evidence trail for reasoning quality, not as a final submission by itself.',
+      'Map directly to criteria such as clarity, accuracy, relevance, depth, breadth, and fairness.',
+      'Require students to justify which critique points they accepted, rejected, or revised.'
     ],
-    integrity: [
-      'Require “student voice” sections: personal rationale, choices, and trade-offs are not delegable to AI.',
-      'Use oral or in-class checkpoints (short viva, mini-defence) for high-stakes submissions.',
-      'Ask for citations, data provenance, and limitations as assessed components.'
+    responsibleUse: [
+      'Require a student-authored rationale and reflection section.',
+      'Use short viva, mini-defence, or in-class checkpoints for higher-stakes submissions.',
+      'Assess citations, data provenance, limitations, and interpretation.'
     ]
   },
-
-  // NEW: inserted as second item
   {
     id: 'six-thinking-hats',
     title: 'Six Thinking Hats',
-    subtitle: 'Parallel thinking for clearer decisions, stronger discussion, and better reflection',
+    subtitle: 'Parallel thinking workflow for group reasoning, decision quality, and reflection',
     icon: Lightbulb,
     demo: 'https://six-thinking-hats.onrender.com/',
     repo: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/pack/six-hats/README.md',
     summary:
-      'A structured workflow for De Bono’s Six Thinking Hats: separate facts, feelings, risks, benefits, creativity, and process control to improve the quality of group reasoning and decision-making.',
+      'A structured workflow based on Edward de Bono’s Six Thinking Hats: facts, feelings, risks, benefits, creativity, and process control. The tool helps groups separate modes of thinking before integrating them into a final synthesis.',
     useCases: [
-      'Seminars and tutorials: run a timed “hat rotation” to ensure balanced participation and prevent debate from collapsing into a single mode (e.g., criticism-only).',
-      'Project work: use Blue Hat planning to define the question, then document White/Yellow/Black/Green outputs as a decision record and rationale.',
-      'Case discussions: assign hats to groups and require a synthesis step that reconciles conflicting perspectives into an action plan.'
+      'Seminars: run timed hat rotations so discussion does not collapse into criticism-only debate.',
+      'Project work: create a decision record that documents facts, assumptions, risks, benefits, and alternatives.',
+      'Case discussions: assign hats to groups and require a final synthesis that reconciles competing perspectives.'
     ],
     assessment: [
-      'Assessable artefact: capture hat-by-hat contributions to evidence balanced reasoning and explicit trade-offs.',
-      'Communication outcomes: evaluate quality of argumentation (evidence, realism, creativity, and reflection) rather than “winning” a debate.',
-      'Decision quality: require a final Blue Hat synthesis that justifies the chosen option with references to risks, benefits, and assumptions.'
+      'Assess hat-by-hat contributions as evidence of balanced reasoning and explicit trade-offs.',
+      'Evaluate the final Blue Hat synthesis for integration, prioritisation, and judgement.',
+      'Use the artefact as a group process record alongside individual reflection.'
     ],
-    integrity: [
-      'Make thinking visible: require students to submit their own hat notes and a short rationale explaining how their view evolved.',
-      'Use in-class checkpoints: brief oral synthesis or timed writing reduces over-reliance on AI-generated text.',
-      'Mark the synthesis: prioritise the final integration (Blue Hat) where judgment and interpretation must be demonstrated.'
+    responsibleUse: [
+      'Require students to submit their own hat notes and a short account of how their view changed.',
+      'Use in-class synthesis to reduce over-reliance on generated text.',
+      'Mark integration quality rather than volume of AI-assisted output.'
     ]
   },
-
   {
     id: 'lesson-planner',
     title: 'Generative Lesson Planner',
-    subtitle: 'AI-assisted lesson plan generation with context from your own materials',
+    subtitle: 'AI-assisted lesson design using instructor-provided source materials',
     icon: ClipboardList,
     demo: 'https://lesson-planner-app.onrender.com',
     repo: 'https://github.com/AlvesMH/Lesson-Planner-App',
     summary:
-      'A practical assistant for designing learning activities, sequencing, and differentiation - while keeping the educator in control of outcomes and standards.',
+      'A practical assistant for designing lesson plans, group activity handouts, and instructor pointers from uploaded teaching materials. It supports faster preparation while keeping the educator responsible for learning outcomes, sequencing, and contextual fit.',
     useCases: [
-      'Rapid prototyping: generate a lesson outline then refine for local context, student profile, and institutional requirements.',
-      'Activity design: convert readings/slides into active learning tasks (think-pair-share, structured debate, jigsaw, studio briefs).',
-      'Inclusive practice: propose scaffolds and variations for mixed readiness, language proficiency, and confidence levels.'
+      'Rapid prototyping: generate a lesson outline, then adapt it to cohort profile and institutional requirements.',
+      'Activity design: convert readings or slides into active learning tasks such as structured debate, jigsaw, or studio briefs.',
+      'Instructor support: produce pointers, timing plans, and facilitation prompts for consistent delivery.'
     ],
     assessment: [
-      'Constructive alignment: link activities to explicit learning outcomes and competency statements.',
-      'Assessment design support: generate rubric descriptors and performance levels aligned to the intended competencies.',
-      'Efficiency: create consistent feedback language and marking guides for large cohorts.'
+      'Link activities to explicit learning outcomes and competency statements.',
+      'Generate draft rubric descriptors and performance levels for educator review.',
+      'Create consistent feedback language and marking guides for large cohorts.'
     ],
-    integrity: [
-      'Treat outputs as drafts: require educator sign-off and contextual adaptation.',
-      'Retain transparency: document what was generated and what was revised (for QA and reflective practice).',
-      'Avoid sensitive data: do not upload student-identifiable information.'
+    responsibleUse: [
+      'Treat outputs as drafts requiring educator sign-off and local adaptation.',
+      'Document what was generated and what was revised for quality assurance.',
+      'Avoid uploading student-identifiable or sensitive information.'
     ]
-  }  
+  }
 ];
 
 export default function ToolsPage() {
@@ -116,19 +111,22 @@ export default function ToolsPage() {
     <div className="p-6 max-w-5xl mx-auto">
       <Canonical path="/tools" />
       <Helmet>
-        <title>Tools - Classroom-ready AI workflows for critical thinking and learning design</title>
+        <title>AI Tools — Human-centred prototypes for learning, judgement, and teaching work</title>
         <meta
           name="description"
-          content="A curated set of classroom-ready tools: critical thinking analysis, lesson planning support, and structured academic summarisation—designed for competency-based and project-based undergraduate education."
+          content="A curated portfolio of human-centred AI tools: evidence-grounded avatars, critical thinking workflows, Six Thinking Hats analysis, and lesson planning support for responsible learning with AI."
         />
       </Helmet>
 
       <header className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Tools</h1>
-        <p className="mt-3 text-gray-700 max-w-3xl">
-          This page consolidates teaching tools and workflows that support <strong>learning with AI</strong> - while keeping
-          assessment integrity and human judgment at the centre. Each tool includes suggested pedagogical use cases and
-          assessment alignment patterns.
+        <p className="text-sm font-semibold tracking-[0.18em] uppercase text-blue-700">Tools</p>
+        <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-gray-950">
+          Human-centred AI tools and prototypes
+        </h1>
+        <p className="mt-3 text-gray-700 max-w-4xl leading-relaxed">
+          This portfolio consolidates applied AI tools for learning, assessment, reasoning, and teaching work. The common
+          design principle is augmentation: the tools should make reasoning more visible, evidence use more explicit, and
+          human judgement more accountable.
         </p>
       </header>
 
@@ -148,7 +146,7 @@ export default function ToolsPage() {
                   <div>
                     <h2 className="text-xl sm:text-2xl font-semibold text-gray-900">{t.title}</h2>
                     <p className="mt-1 text-gray-700">{t.subtitle}</p>
-                    <p className="mt-3 text-sm text-slate-700 max-w-3xl">{t.summary}</p>
+                    <p className="mt-3 text-sm text-slate-700 max-w-3xl leading-relaxed">{t.summary}</p>
                   </div>
                 </div>
 
@@ -178,11 +176,11 @@ export default function ToolsPage() {
 
               <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-5">
                 <div className="rounded-xl bg-slate-50 border border-slate-200 p-5">
-                  <h3 className="font-semibold text-gray-900">Pedagogical use cases</h3>
+                  <h3 className="font-semibold text-gray-900">Use cases</h3>
                   <ul className="mt-3 space-y-2 text-sm text-gray-700 leading-relaxed">
                     {t.useCases.map((u) => (
                       <li key={u} className="flex gap-2">
-                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-slate-600" />
+                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-slate-600 shrink-0" />
                         <span>{u}</span>
                       </li>
                     ))}
@@ -194,7 +192,7 @@ export default function ToolsPage() {
                   <ul className="mt-3 space-y-2 text-sm text-gray-700 leading-relaxed">
                     {t.assessment.map((a) => (
                       <li key={a} className="flex gap-2">
-                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-slate-600" />
+                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-slate-600 shrink-0" />
                         <span>{a}</span>
                       </li>
                     ))}
@@ -202,11 +200,11 @@ export default function ToolsPage() {
                 </div>
 
                 <div className="rounded-xl bg-slate-50 border border-slate-200 p-5">
-                  <h3 className="font-semibold text-gray-900">Integrity and responsible use</h3>
+                  <h3 className="font-semibold text-gray-900">Responsible use</h3>
                   <ul className="mt-3 space-y-2 text-sm text-gray-700 leading-relaxed">
-                    {t.integrity.map((i) => (
+                    {t.responsibleUse.map((i) => (
                       <li key={i} className="flex gap-2">
-                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-slate-600" />
+                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-slate-600 shrink-0" />
                         <span>{i}</span>
                       </li>
                     ))}
@@ -220,15 +218,14 @@ export default function ToolsPage() {
 
       <section className="mt-10 bg-white border border-slate-200 rounded-2xl shadow-sm">
         <div className="p-6 sm:p-8">
-          <h2 className="text-xl font-semibold text-gray-900">How this supports “learning with AI”</h2>
-          <p className="mt-3 text-gray-700 max-w-4xl">
-            Across tools, the emphasis is on making reasoning visible, producing assessable artefacts, and supporting
-            iterative improvement. In practice, these tools work best when paired with explicit rubrics, short in-class
-            checkpoints, and reflective components that keep students accountable for judgment and interpretation.
+          <h2 className="text-xl font-semibold text-gray-900">The design logic</h2>
+          <p className="mt-3 text-gray-700 max-w-4xl leading-relaxed">
+            Across tools, the emphasis is on making thinking inspectable: assumptions, evidence, alternatives, synthesis,
+            and reflection. In practice, these tools work best when paired with explicit rubrics, short in-class checkpoints,
+            and reflective components that keep learners accountable for interpretation and judgement.
           </p>
         </div>
       </section>
     </div>
   );
 }
-

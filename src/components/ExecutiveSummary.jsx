@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Compass, LineChart } from 'lucide-react';
+import { Brain, GraduationCap, Network, Workflow } from 'lucide-react';
 
 export default function ExecutiveSummary() {
   return (
@@ -17,55 +17,55 @@ export default function ExecutiveSummary() {
         >
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center shrink-0">
-              <GraduationCap className="w-5 h-5 text-white" />
+              <Brain className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
                 60-second summary
-              </h3>
-              <p className="mt-2 text-gray-700 leading-relaxed">
-                I am a Lecturer at Nanyang Technological University (Singapore),
-                teaching and designing learning experiences that develop demonstrable competencies in critical thinking,
-                responsible technology use, and evidence-based decision-making.
+              </h2>
+              <p className="mt-2 text-gray-700 leading-relaxed max-w-4xl">
+                I am a Lecturer at Nanyang Technological University working at the intersection of higher education,
+                organisational behaviour, and applied AI. My focus is human-centred AI: how intelligent systems can
+                support learning, judgement, assessment, service quality, and organisational adaptation without
+                replacing the human capabilities that make these activities valuable.
               </p>
-              <br />
             </div>
           </div>
 
           <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="rounded-xl bg-slate-50 border border-slate-200 p-4">
               <div className="flex items-center gap-2">
-                <Compass className="w-5 h-5 text-slate-700" />
-                <p className="font-semibold text-gray-900">Education focus</p>
-              </div>
-              <ul className="mt-3 space-y-2 text-gray-700">
-                <li>Competency-based outcomes and clear performance standards</li>
-                <li>Project-based learning that integrates theory with practice</li>
-                <li>Learning with AI through structured, method-driven workflows</li>
-              </ul>
-            </div>
-
-            <div className="rounded-xl bg-slate-50 border border-slate-200 p-4">
-              <div className="flex items-center gap-2">
-                <LineChart className="w-5 h-5 text-slate-700" />
-                <p className="font-semibold text-gray-900">Assessment approach</p>
-              </div>
-              <ul className="mt-3 space-y-2 text-gray-700">
-                <li>Digital assessments that strengthen feedback and reflection</li>
-                <li>Process + outcomes, with peer and self-assessment where appropriate</li>
-                <li>Portfolio-ready artefacts to support employability signalling</li>
-              </ul>
-            </div>
-
-            <div className="rounded-xl bg-slate-50 border border-slate-200 p-4">
-              <div className="flex items-center gap-2">
                 <GraduationCap className="w-5 h-5 text-slate-700" />
-                <p className="font-semibold text-gray-900">Current priorities</p>
+                <p className="font-semibold text-gray-900">Learning and assessment</p>
               </div>
               <ul className="mt-3 space-y-2 text-gray-700">
-                <li>Human–AI collaboration and meta-cognitive skill development</li>
-                <li>AI-enabled teaching assistants that reduce overhead and raise quality</li>
-                <li>Responsible learning analytics for student development pathways</li>
+                <li>AI literacy, critical thinking, and evidence-based decision-making</li>
+                <li>Competency-based curriculum and project-based learning</li>
+                <li>Assessment designs that make reasoning, process, and judgement visible</li>
+              </ul>
+            </div>
+
+            <div className="rounded-xl bg-slate-50 border border-slate-200 p-4">
+              <div className="flex items-center gap-2">
+                <Network className="w-5 h-5 text-slate-700" />
+                <p className="font-semibold text-gray-900">Work and service systems</p>
+              </div>
+              <ul className="mt-3 space-y-2 text-gray-700">
+                <li>Human-AI collaboration, role redesign, and organisational adaptation</li>
+                <li>Service work where technology must strengthen, not flatten, human care</li>
+                <li>Responsible adoption patterns for teams, institutions, and service settings</li>
+              </ul>
+            </div>
+
+            <div className="rounded-xl bg-slate-50 border border-slate-200 p-4">
+              <div className="flex items-center gap-2">
+                <Workflow className="w-5 h-5 text-slate-700" />
+                <p className="font-semibold text-gray-900">Applied AI prototypes</p>
+              </div>
+              <ul className="mt-3 space-y-2 text-gray-700">
+                <li>Retrieval-augmented assistants, avatars, and structured reasoning tools</li>
+                <li>Teaching workflows for lesson design, feedback, and knowledge exploration</li>
+                <li>Tools that operationalise augmentation rather than automate judgement away</li>
               </ul>
             </div>
           </div>

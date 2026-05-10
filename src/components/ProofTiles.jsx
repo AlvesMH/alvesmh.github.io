@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Brain, ClipboardList, FileText, ExternalLink, Github } from 'lucide-react';
+import { Brain, ClipboardList, FileText, ExternalLink, Github, Lightbulb } from 'lucide-react';
 
 const tiles = [
   {
-    title: 'Ask-Julia - Interactive Assistant',
-    subtitle: 'A conversational avatar providing spoken answers and grounded evidence-based summaries.',
+    title: 'Ask-Julia',
+    subtitle: 'Evidence-grounded conversational avatar for higher education knowledge exploration',
     description:
-      'Ask Julia is an interactive avatar designed to help explore evidence-informed ideas about AI, teaching, learning, and higher education.',
+      'A voice-enabled avatar that helps users ask questions about a curated knowledge base and receive spoken answers, concise evidence summaries, and fuller explanations. It demonstrates RAG, avatar UX, evidence cards, and human-centred educational interaction design.',
     icon: FileText,
     detailsTo: '/tools#ask-julia',
     links: [
@@ -18,35 +18,22 @@ const tiles = [
   },
   {
     title: 'Critical Thinker',
-    subtitle: (
-      <>
-        Multi-agent critical thinking analysis (
-        <a
-          href="https://louisville.edu/ideastoaction/about/criticalthinking/framework/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 underline hover:text-blue-700 visited:text-purple-600"
-        >
-          Paul-Elder Critical Thinking Framework
-        </a>
-        )
-      </>
-    ),
+    subtitle: 'Structured argument analysis using the Paul-Elder Critical Thinking Framework',
     description:
-      'A web app that supports rigorous evaluation of arguments, essays, and academic texts through four independent Critical Thinking Agents, producing a consolidated, downloadable report.',
+      'A web app for evaluating arguments, essays, policy proposals, and academic texts through multiple analytical perspectives. It turns critique into an inspectable workflow: assumptions, evidence quality, reasoning standards, implications, and a downloadable report.',
     icon: Brain,
     detailsTo: '/tools#critical-thinker',
     links: [
       { label: 'Live demo', href: 'https://critical-thinker.onrender.com', kind: 'demo' },
-      { label: 'GitHub', href: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/six-thinking-hats.md', kind: 'github' }
+      { label: 'GitHub', href: 'https://github.com/AlvesMH/AlvesMH/blob/main/img/pack/critical-thinker/README.md', kind: 'github' }
     ]
   },
   {
     title: 'Six Thinking Hats',
-    subtitle: 'Parallel thinking for clearer decisions, stronger discussion, and better reflection',
+    subtitle: 'Parallel thinking workflow for group reasoning and decision quality',
     description:
-      'A structured workflow for De Bono’s Six Thinking Hats: separate facts, feelings, risks, benefits, creativity, and process control to improve the quality of group reasoning and decision-making.',
-    icon: ClipboardList,
+      'A structured classroom workflow based on Edward de Bono’s Six Thinking Hats. It separates facts, feelings, risks, benefits, creativity, and process control so students can move beyond unstructured debate into balanced analysis and synthesis.',
+    icon: Lightbulb,
     detailsTo: '/tools#six-thinking-hats',
     links: [
       { label: 'Live demo', href: 'https://six-thinking-hats.onrender.com/', kind: 'demo' },
@@ -55,16 +42,16 @@ const tiles = [
   },
   {
     title: 'Generative Lesson Planner',
-    subtitle: 'Retrieval Augmented Generation-powered teaching assistant',
+    subtitle: 'AI-supported lesson design workflow using instructor-provided materials',
     description:
-      'Generates professional-grade lesson plans, activity handouts, and instructor pointers from uploaded lesson materials, supporting faster preparation and more consistent learning design.',
+      'A teaching assistant that generates lesson plans, group activity handouts, and instructor pointers from uploaded materials. It supports faster preparation while keeping learning outcomes, local context, and educator judgement in control.',
     icon: ClipboardList,
     detailsTo: '/tools#lesson-planner',
     links: [
       { label: 'Live demo', href: 'https://lesson-planner-app.onrender.com', kind: 'demo' },
       { label: 'GitHub', href: 'https://github.com/AlvesMH/Lesson-Planner-App', kind: 'github' }
     ]
-  }  
+  }
 ];
 
 function LinkButton({ href, label, kind }) {
@@ -106,7 +93,7 @@ function InternalLinkButton({ label, to }) {
 
 export default function ProofTiles() {
   return (
-    <section id="proof" aria-label="AI teaching tools" className="scroll-mt-24">
+    <section id="proof" aria-label="Featured AI tools and prototypes" className="scroll-mt-24">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -115,15 +102,18 @@ export default function ProofTiles() {
       >
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div>
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">AI Teaching Tools</h3>
-            <p className="mt-2 text-gray-700 max-w-3xl leading-relaxed">
-              Selected classroom tools that operationalise “learning with AI”: structured workflows, clear outputs, and
-              artefacts that support competency-based assessment and project-based learning.
+            <p className="text-sm font-semibold tracking-[0.18em] uppercase text-blue-700">Proof of work</p>
+            <h2 className="mt-2 text-2xl sm:text-3xl font-semibold text-gray-950">
+              Featured AI tools and prototypes
+            </h2>
+            <p className="mt-3 text-gray-700 max-w-4xl leading-relaxed">
+              Selected tools that operationalise human-centred AI: structured workflows, evidence-grounded outputs,
+              learning artefacts, and interfaces that support judgement rather than replace it.
             </p>
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           {tiles.map((t) => {
             const Icon = t.icon;
             return (
@@ -133,7 +123,7 @@ export default function ProofTiles() {
                     <Icon className="w-5 h-5 text-slate-700" />
                   </div>
                   <div>
-                    <h4 className="text-xl md:text-2xl font-bold text-gray-900">{t.title}</h4>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900">{t.title}</h3>
                     <p className="mt-1 text-sm text-slate-600">{t.subtitle}</p>
                   </div>
                 </div>
@@ -148,7 +138,7 @@ export default function ProofTiles() {
                 </div>
 
                 <div className="mt-4 pt-4 border-t border-slate-200 text-sm text-slate-600">
-                  Live demo may take up to 50 seconds to wake up on first use.
+                  Live demos may take up to 50 seconds to wake up on first use.
                 </div>
               </article>
             );

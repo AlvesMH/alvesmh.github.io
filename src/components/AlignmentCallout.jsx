@@ -1,67 +1,71 @@
 import React from 'react';
-import { GraduationCap, Sparkles, ClipboardCheck } from 'lucide-react';
+import { Brain, ClipboardCheck, GraduationCap, Sparkles } from 'lucide-react';
 
 export default function AlignmentCallout() {
   return (
     <section
-      aria-label="Alignment to Transformative UG Education for an AI-Future"
+      aria-label="Human-centred AI design pillars"
       className="bg-white border border-slate-200 rounded-2xl shadow-sm"
     >
       <div className="p-6 sm:p-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
           <div>
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-900">
-              Alignment to Transformative Education for an AI-Future
-            </h3>
-            <p className="mt-2 text-gray-700 max-w-3xl">
-              The tools and teaching artefacts on this site are designed to support competency-based learning, project-based
-              pedagogy, and digital assessment practices that scale responsibly in large undergraduate settings.
+            <h2 className="text-lg sm:text-xl font-semibold text-gray-900">
+              Four design pillars
+            </h2>
+            <p className="mt-2 text-gray-700 max-w-4xl leading-relaxed">
+              The tools and writing on this site are organised around a single question: how can AI strengthen human
+              learning, judgement, and work systems rather than simply automate tasks? The answer is not more technology
+              alone; it is better design of roles, evidence practices, learning processes, and accountability.
             </p>
           </div>
         </div>
 
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
           <div className="rounded-xl bg-slate-50 border border-slate-200 p-5">
             <div className="flex items-center gap-2">
               <GraduationCap className="w-5 h-5 text-slate-700" />
-              <p className="font-semibold text-gray-900">Competency-based curriculum</p>
+              <p className="font-semibold text-gray-900">AI for learning</p>
             </div>
-            <ul className="mt-3 space-y-2 text-gray-700 text-sm leading-relaxed">
-              <li>Make competencies explicit (critical thinking, AI literacy, evidence use) and map tasks to outcomes.</li>
-              <li>Generate assessable artefacts: structured reports, lesson plans, and annotated summaries.</li>
-              <li>Support iterative improvement through rubric-aligned prompts and reflection checkpoints.</li>
-            </ul>
+            <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+              Curriculum, assessment, AI literacy, critical thinking, and learning designs that help students use AI
+              without outsourcing judgement.
+            </p>
+          </div>
+
+          <div className="rounded-xl bg-slate-50 border border-slate-200 p-5">
+            <div className="flex items-center gap-2">
+              <Brain className="w-5 h-5 text-slate-700" />
+              <p className="font-semibold text-gray-900">AI for judgement</p>
+            </div>
+            <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+              Structured workflows that surface assumptions, evaluate evidence, compare alternatives, and make reasoning
+              inspectable.
+            </p>
           </div>
 
           <div className="rounded-xl bg-slate-50 border border-slate-200 p-5">
             <div className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-slate-700" />
-              <p className="font-semibold text-gray-900">Signature pedagogy</p>
+              <p className="font-semibold text-gray-900">AI for work</p>
             </div>
-            <ul className="mt-3 space-y-2 text-gray-700 text-sm leading-relaxed">
-              <li>Learning with AI: guided use of AI tools for drafting, critique, and sense-making.</li>
-              <li>Project-based learning: less didactic teaching, with authentic briefs and “learning by doing”.</li>
-              <li>Human-centred framing: focus on judgment, assumptions, and implications—not tool outputs alone.</li>
-            </ul>
+            <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+              Human-AI collaboration, work redesign, and service systems where technology improves capability,
+              consistency, and quality of interaction.
+            </p>
           </div>
 
           <div className="rounded-xl bg-slate-50 border border-slate-200 p-5">
             <div className="flex items-center gap-2">
               <ClipboardCheck className="w-5 h-5 text-slate-700" />
-              <p className="font-semibold text-gray-900">Assessments</p>
+              <p className="font-semibold text-gray-900">Responsible adoption</p>
             </div>
-            <ul className="mt-3 space-y-2 text-gray-700 text-sm leading-relaxed">
-              <li>Digital assessment readiness: artefacts are structured for efficient marking and feedback.</li>
-              <li>Assess process and outcomes: include reasoning steps, evidence trails, and reflection.</li>
-              <li>Enable peer/self elements: prompts and templates can be used for calibrated peer review.</li>
-            </ul>
+            <p className="mt-3 text-sm text-gray-700 leading-relaxed">
+              Transparent use, evidence trails, process accountability, and safeguards against over-reliance, shallow
+              fluency, and cognitive offloading.
+            </p>
           </div>
         </div>
-
-        <p className="mt-6 text-xs text-slate-600">
-          Note: These are generic design patterns intended to support responsible AI use in education. Final assessment design should
-          comply with course policies, academic integrity requirements, and institutional guidance.
-        </p>
       </div>
     </section>
   );
