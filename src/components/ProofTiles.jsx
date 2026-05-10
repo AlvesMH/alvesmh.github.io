@@ -20,7 +20,7 @@ const tiles = [
     title: 'Critical Thinker',
     subtitle: 'Structured argument analysis using the Paul-Elder Critical Thinking Framework',
     description:
-      'A web app for evaluating arguments, essays, policy proposals, and academic texts through multiple analytical perspectives. It turns critique into an inspectable workflow through analytical perspectives that examine purpose, assumptions, evidence quality, reasoning standards, implications, and fairness.: assumptions, evidence quality, reasoning standards, implications, and a downloadable report.',
+      'A web app for evaluating arguments, essays, policy proposals, and academic texts through multiple analytical perspectives. It turns critique into an inspectable workflow through analytical perspectives that examine purpose, assumptions, evidence quality, reasoning standards, implications, and fairness.',
     icon: Brain,
     detailsTo: '/tools#critical-thinker',
     links: [
