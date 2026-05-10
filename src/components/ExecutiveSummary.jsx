@@ -51,9 +51,9 @@ export default function ExecutiveSummary() {
                 <p className="font-semibold text-gray-900">Work and service systems</p>
               </div>
               <ul className="mt-3 space-y-2 text-gray-700">
-                <li>Human-AI collaboration, role redesign, and organisational adaptation</li>
-                <li>Service work where technology must strengthen, not flatten, human care</li>
-                <li>Responsible adoption patterns for teams, institutions, and service settings</li>
+                <li>Human-AI work redesign, and AI adoption</li>
+                <li>Human services, where AI strengthens the human touch</li>
+                <li>AI Adoption for teams, institutions, and service settings</li>
               </ul>
             </div>
 
@@ -64,8 +64,7 @@ export default function ExecutiveSummary() {
               </div>
               <ul className="mt-3 space-y-2 text-gray-700">
                 <li>Retrieval-augmented assistants, avatars, and structured reasoning tools</li>
-                <li>Teaching workflows for lesson design, feedback, and knowledge exploration</li>
-                <li>Tools that operationalise augmentation rather than automate judgement away</li>
+                <li>Workflows and Tools that operationalise augmentation rather than automate judgement away</li>
               </ul>
             </div>
           </div>

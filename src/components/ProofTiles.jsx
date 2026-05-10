@@ -20,7 +20,7 @@ const tiles = [
     title: 'Critical Thinker',
     subtitle: 'Structured argument analysis using the Paul-Elder Critical Thinking Framework',
     description:
-      'A web app for evaluating arguments, essays, policy proposals, and academic texts through multiple analytical perspectives. It turns critique into an inspectable workflow: assumptions, evidence quality, reasoning standards, implications, and a downloadable report.',
+      'A web app for evaluating arguments, essays, policy proposals, and academic texts through multiple analytical perspectives. It turns critique into an inspectable workflow through analytical perspectives that examine purpose, assumptions, evidence quality, reasoning standards, implications, and fairness.: assumptions, evidence quality, reasoning standards, implications, and a downloadable report.',
     icon: Brain,
     detailsTo: '/tools#critical-thinker',
     links: [
@@ -42,7 +42,7 @@ const tiles = [
   },
   {
     title: 'Generative Lesson Planner',
-    subtitle: 'AI-supported lesson design workflow using instructor-provided materials',
+    subtitle: 'AI-supported lesson design workflow generator',
     description:
       'A teaching assistant that generates lesson plans, group activity handouts, and instructor pointers from uploaded materials. It supports faster preparation while keeping learning outcomes, local context, and educator judgement in control.',
     icon: ClipboardList,

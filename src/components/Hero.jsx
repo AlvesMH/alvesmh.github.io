@@ -29,7 +29,7 @@ const Hero = () => (
         <p className="text-lg sm:text-xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">
           I study, teach, and build practical AI-enabled tools that help people think, learn, decide, and work better.
           My work connects organisational behaviour, curriculum design, assessment innovation, and applied AI
-          prototyping—with a focus on augmentation rather than technology for its own sake.
+          prototyping.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
