@@ -47,8 +47,8 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Build
-        run: npm run build
+      - name: Build and verify public routes
+        run: npm run check
 
       # SPA fallback for BrowserRouter
       - name: Ensure SPA 404 fallback

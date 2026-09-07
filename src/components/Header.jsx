@@ -1,88 +1,72 @@
-import React, { useState } from 'react';
-import { BookOpen, Menu } from 'lucide-react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Menu, X } from 'lucide-react';
 
-const navItems = [
-  { label: 'Home', to: '/' },
-  { label: 'CV', to: '/cv' },
-  { label: 'Tools', to: '/tools' },
-  { label: 'Critical Thinking', to: '/critical-thinking' },
-  { label: 'About', to: '/about' },
-  { label: 'Archive', to: '/archive' },
-  { label: 'Contact', to: '/contact' }
+const nav = [
+  ['Teaching', '/teaching'],
+  ['Work', '/work'],
+  ['Writing', '/ideas'],
+  ['About', '/about'],
+  ['CV', '/cv'],
+  ['Contact', '/contact']
 ];
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
 
-  const linkClass = ({ isActive }) =>
-    isActive ? 'text-blue-700 font-semibold' : 'text-gray-700 hover:text-blue-600 transition-colors';
+  useEffect(() => setOpen(false), [location.pathname]);
 
-  const clearSearchOnHome = (item) => {
-    if (item !== 'Home') return;
-    const url = new URL(window.location.href);
-    url.searchParams.delete('q');
-    window.history.replaceState({}, '', url.pathname);
-  };
+  const linkClass = ({ isActive }) => [
+    'relative py-2 text-[13.5px] font-medium tracking-[-.005em] transition-colors',
+    isActive
+      ? 'text-[#153e75] after:absolute after:inset-x-0 after:-bottom-[17px] after:h-[2px] after:bg-[#1d4f91]'
+      : 'text-[#4b5360] hover:text-[#111318]'
+  ].join(' ');
 
   return (
-    <header className="bg-white shadow-sm border-b border-slate-200">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-6">
-          <Link to="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <BookOpen className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">Augmented Minds</h1>
-              <p className="text-sm text-gray-600">Personal & Academic Insights</p>
-            </div>
-          </Link>
+    <header className="sticky top-0 z-50 border-b border-[#c9cdd3]/70 bg-[#f7f7f5]/95 backdrop-blur-[14px]">
+      <div className="site-shell flex h-[78px] items-center justify-between">
+        <Link to="/" className="group leading-none" aria-label="Hugo Martins — home">
+          <span className="block text-[16px] font-bold tracking-[-0.02em] text-[#111318] group-hover:text-[#153e75]">Hugo Martins</span>
+          <span className="mt-[7px] block text-[11.5px] font-medium tracking-[0.005em] text-[#687181]">AI Literacy · Higher Education</span>
+        </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex space-x-8" aria-label="Primary">
-            {navItems.map((nav) => (
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
+          {nav.map(([label, to]) => (
+            <NavLink key={to} to={to} className={linkClass}>
+              {label}
+            </NavLink>
+          ))}
+        </nav>
 
+        <button
+          type="button"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-[7px] border border-transparent text-[#4b5360] hover:border-[#c9cdd3] hover:text-[#111318] md:hidden"
+          onClick={() => setOpen(value => !value)}
+          aria-label={open ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+        >
+          {open ? <X aria-hidden="true" className="h-5 w-5" /> : <Menu aria-hidden="true" className="h-5 w-5" />}
+        </button>
+      </div>
+
+      {open && (
+        <nav id="mobile-navigation" className="border-t border-[#e1e4e8] bg-[#f7f7f5] md:hidden" aria-label="Mobile navigation">
+          <div className="site-shell flex flex-col py-4">
+            {nav.map(([label, to]) => (
               <NavLink
-                key={nav.label}
-                to={nav.to}
-                className={linkClass}
-                onClick={() => clearSearchOnHome(nav.label)}
+                key={to}
+                to={to}
+                className={({ isActive }) => `border-b border-[#e1e4e8] py-3 text-sm font-medium last:border-0 ${isActive ? 'text-[#153e75]' : 'text-[#4b5360]'}`}
               >
-                {nav.label}
-              </NavLink>
-            ))}
-          </nav>
-
-          {/* Mobile Menu Icon */}
-          <button
-            className="md:hidden text-gray-700"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-menu"
-            aria-label="Toggle menu"
-          >
-            <Menu className="w-6 h-6" />
-          </button>
-        </div>
-
-        {/* Mobile Nav */}
-        {menuOpen && (
-          <div id="mobile-menu" className="md:hidden flex flex-col space-y-4 pb-4" aria-label="Mobile">
-            {navItems.map((nav) => (
-
-              <NavLink
-                key={nav.label}
-                to={nav.to}
-                className={linkClass}
-                onClick={() => { clearSearchOnHome(nav.label); setMenuOpen(false); }}
-              >
-                {nav.label}
+                {label}
               </NavLink>
             ))}
           </div>
-        )}
-      </div>
+        </nav>
+      )}
     </header>
   );
 }

@@ -1,74 +1,44 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Github, PenLine } from 'lucide-react';
 
-const Hero = () => (
-  <section className="relative overflow-hidden py-16 px-4 sm:px-6 lg:px-8">
-    <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(37,99,235,0.12),transparent_34%),radial-gradient(circle_at_top_right,rgba(147,51,234,0.12),transparent_32%)]" />
-
-    <div className="max-w-5xl mx-auto text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <p className="mb-4 text-sm font-semibold tracking-[0.22em] uppercase text-blue-700">
-          Applied AI · Learning Design · Human-Centred Work
-        </p>
-
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-950 mb-6">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-            Human-Centred AI
-          </span>
-          <span className="block mt-3 text-3xl sm:text-4xl md:text-5xl text-gray-950">
-            for Learning, Work, and Service Systems
-          </span>
-        </h1>
-
-        <p className="text-lg sm:text-xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">
-          I study, teach, and build practical AI-enabled tools that help people think, learn, decide, and work better.
-          My work connects organisational behaviour, curriculum design, assessment innovation, and applied AI
-          prototyping.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#proof"
-            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 text-center"
-          >
-            Explore tools
-            <ArrowRight className="w-4 h-4" />
-          </a>
-
-          <a
-            href="#latest"
-            className="inline-flex items-center justify-center gap-2 border border-slate-300 bg-white text-gray-800 px-8 py-3 rounded-xl font-semibold hover:border-blue-600 hover:text-blue-700 transition-colors text-center"
-          >
-            <PenLine className="w-4 h-4" />
-            Read essays
-          </a>
-
-          <a
-            href="https://github.com/AlvesMH"
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 border border-slate-300 bg-white text-gray-800 px-8 py-3 rounded-xl font-semibold hover:border-blue-600 hover:text-blue-700 transition-colors text-center"
-          >
-            <Github className="w-4 h-4" />
-            View GitHub
-          </a>
-
-          <Link
-            to="/about"
-            className="inline-flex items-center justify-center border border-slate-300 bg-white text-gray-800 px-8 py-3 rounded-xl font-semibold hover:border-blue-600 hover:text-blue-700 transition-colors text-center"
-          >
-            About
-          </Link>
+export default function Hero() {
+  return (
+    <section className="bg-[#f7f7f5]">
+      <div className="site-shell grid min-h-[610px] gap-14 py-[96px] md:grid-cols-[7.5fr_4.5fr] md:items-center lg:py-[112px]">
+        <div className="max-w-[700px]">
+          <p className="section-kicker">Hugo Martins, PhD · AI literacy educator</p>
+          <h1 className="hero-title mt-5 max-w-[690px] font-[680] leading-[.98] tracking-[-.048em] text-[#111318]">
+            AI Literacy
+            <span className="block">for Higher Education</span>
+          </h1>
+          <p className="mt-8 max-w-[680px] text-[19px] leading-[1.62] text-[#272b33] sm:text-[20px]">
+            I design AI-literacy curriculum, assessment and hands-on learning that prepares university students to use generative and agentic AI with knowledge, judgement and accountability.
+          </p>
+          <p className="mt-4 max-w-[650px] text-[16px] leading-7 text-[#687181]">
+            My work connects <strong className="font-semibold text-[#4b5360]">curriculum design, adaptive expertise and responsible human–AI work</strong>.
+          </p>
+          <p className="mt-7 max-w-[680px] text-[13px] leading-6 text-[#687181]">
+            Lecturer at Nanyang Technological University <span aria-hidden="true">·</span><br className="sm:hidden" /> CC0007 Science &amp; Technology for Humanity · Based in Singapore
+          </p>
+          <div className="mt-9 flex flex-wrap gap-3">
+            <Link to="/teaching" className="button-primary">Explore teaching and curriculum</Link>
+            <Link to="/cv" className="button-secondary">View CV</Link>
+          </div>
         </div>
-      </motion.div>
-    </div>
-  </section>
-);
 
-export default Hero;
+        <div className="relative mx-auto w-full max-w-[300px] md:mx-0 md:justify-self-end">
+          <div aria-hidden="true" className="absolute -bottom-5 -left-5 h-full w-full rounded-[14px] border border-[#d9dde1] bg-[#eceeeb]" />
+          <img
+            src="/profile.jpg"
+            alt="Portrait of Hugo Martins"
+            width="300"
+            height="350"
+            className="relative h-[325px] w-full rounded-[14px] object-cover object-top shadow-[0_1px_2px_rgba(15,23,42,.03),0_12px_36px_rgba(15,23,42,.055)] sm:h-[350px]"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}

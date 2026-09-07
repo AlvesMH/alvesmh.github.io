@@ -2,6 +2,17 @@ import MarkdownRenderer from "../components/MarkdownRenderer";
 
 export const POSTS = [
   {
+    id: 14,
+    slug: "the-cost-of-making-an-expert",
+    title: "The Cost of Making an Expert: Why AI Changes the University’s Job",
+    excerpt:
+      "AI can perform much of the clean, checkable junior work through which people once developed judgement. If expertise no longer emerges as a by-product of production, universities must deliberately rebuild the practice, feedback and accountable performance that make it possible.",
+    category: "Education",
+    date: "2026-09-07",
+    readTime: "9 min read",
+    tags: ["AI-Literacy", "Higher-Education", "Adaptive-Expertise", "Assessment"],
+  },
+  {
     id: 1,
     slug: "ai_advantage_services",
     title: "The Real Advantage Is Not Having Better AI. It Is Building a Better Human-AI Service System.",

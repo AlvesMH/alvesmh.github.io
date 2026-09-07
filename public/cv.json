@@ -1,0 +1,28 @@
+{
+  "basics": {
+    "name": "Hugo Martins",
+    "label": "AI Literacy | Higher Education Curriculum & Assessment",
+    "location": { "city": "Singapore", "countryCode": "SG" },
+    "url": "https://hugomartins.eu",
+    "profiles": [
+      { "network": "LinkedIn", "url": "https://www.linkedin.com/in/hugoalvesmartins/" },
+      { "network": "GitHub", "url": "https://github.com/AlvesMH" }
+    ]
+  },
+  "work": [
+    { "name": "Nanyang Technological University", "position": "Lecturer — Interdisciplinary Core Curriculum", "startDate": "2024", "summary": "AI literacy, higher-education curriculum, interdisciplinary learning and assessment." },
+    { "name": "National Institute of Education, NTU", "position": "Lecturer / Part-Time Lecturer", "startDate": "2023", "summary": "Human Resource Management in Sport." },
+    { "name": "International projects", "position": "Business Management Consultant", "startDate": "2017", "endDate": "2023" },
+    { "name": "Banco Invest S.A.", "position": "Trader", "startDate": "2000", "endDate": "2014" }
+  ],
+  "education": [
+    { "institution": "Nanyang Technological University", "studyType": "PhD", "area": "Management — Organisational Behaviour" },
+    { "institution": "London Business School", "studyType": "MSc", "area": "Leadership and Strategy — Sloan Fellowship" },
+    { "institution": "University of Porto", "studyType": "BSc", "area": "Economics" }
+  ],
+  "skills": [
+    { "name": "AI literacy", "keywords": ["Human-AI collaboration", "Adaptive expertise", "Responsible AI", "Human oversight"] },
+    { "name": "Higher education", "keywords": ["Curriculum design", "Assessment design", "Learning innovation", "Project-based learning"] },
+    { "name": "Applied AI", "keywords": ["RAG", "Prompt design", "LLM evaluation", "Python", "R", "SQL", "FastAPI", "React"] }
+  ]
+}

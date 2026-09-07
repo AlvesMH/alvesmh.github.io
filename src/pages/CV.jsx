@@ -1,256 +1,157 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Github, Linkedin, Mail, Printer } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Canonical from '../components/Canonical';
+import { SITE } from '../data/site';
 
-export default function CVPage() {
-  const ulTight = 'mt-2 list-disc list-outside pl-5 text-gray-800 space-y-1';
-  const ulNormal = 'mt-2 list-disc list-outside pl-5 text-gray-800 space-y-2';
+const sections = [
+  ['profile', 'Professional Profile'], ['impact', 'Impact'], ['appointments', 'Academic Appointments'],
+  ['innovation', 'Teaching Innovation'], ['engagement', 'Engagement'], ['education', 'Education'],
+  ['training', 'Training'], ['research', 'Research'], ['industry', 'Industry'],
+  ['applied-ai', 'Applied AI'], ['languages', 'Languages']
+];
 
+function Block({ id, title, children }) {
+  return <section id={id} className="cv-block"><h2>{title}</h2>{children}</section>;
+}
+
+export default function CV() {
   return (
-    <div className="p-6 max-w-5xl mx-auto">
+    <main id="main-content" className="page-shell cv-page">
       <Canonical path="/cv" />
-
       <Helmet>
-        <title>CV — Hugo Martins</title>
-        <meta
-          name="description"
-          content="Curriculum Vitae — Hugo Martins, PhD. Lecturer at NTU working on human-centred AI for learning, work, assessment, service systems, and responsible technology adoption."
-        />
+        <title>CV — Hugo Martins, PhD</title>
+        <meta name="description" content="Curriculum Vitae of Hugo Martins, PhD: AI literacy, higher-education curriculum and assessment, learning innovation and responsible human–AI work." />
       </Helmet>
 
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Curriculum Vitae</h1>
-          <p className="mt-2 text-xl text-gray-900 font-semibold tracking-tight">Hugo Martins, PhD</p>
-          <p className="text-gray-700">
-            Lecturer, Nanyang Technological University · Human-centred AI for learning, work, and service systems
-          </p>
-
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-gray-700">
-            <a href="https://github.com/alvesmh" className="inline-flex items-center gap-2 hover:text-blue-700 transition-colors" aria-label="GitHub">
-              <Github className="w-4 h-4" />
-              github.com/alvesmh
-            </a>
-            <a href="https://www.linkedin.com/in/hugoalvesmartins/" className="inline-flex items-center gap-2 hover:text-blue-700 transition-colors" aria-label="LinkedIn">
-              <Linkedin className="w-4 h-4" />
-              linkedin.com/in/hugoalvesmartins
-            </a>
-            <Link to="/contact" className="inline-flex items-center gap-2 hover:text-blue-700 transition-colors" aria-label="Contact" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              <Mail className="w-4 h-4" />
-              Contact
-            </Link>
-            <button type="button" onClick={() => window.print()} className="inline-flex items-center gap-2 rounded-lg border border-slate-300 px-3 py-2 text-sm font-semibold hover:border-blue-600 hover:text-blue-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" aria-label="Print CV">
-              <Printer className="w-4 h-4" />
-              Print
-            </button>
-          </div>
+      <header className="border-b border-[#c9cdd3] pb-11">
+        <p className="section-kicker">Curriculum Vitae</p>
+        <h1 className="mt-3 text-[clamp(2.65rem,4.5vw,4.05rem)] font-semibold leading-[1.02] tracking-[-.04em] text-[#111318]">Hugo Martins, PhD</h1>
+        <p className="mt-4 text-[20px] leading-[1.5] text-[#272b33]">AI Literacy · Higher Education Curriculum &amp; Assessment</p>
+        <p className="mt-3 text-[14px] text-[#687181]">Lecturer, Nanyang Technological University · Singapore</p>
+        <div className="no-print mt-6 flex flex-wrap gap-x-6 gap-y-3 text-[13px]">
+          <a className="text-link" href={SITE.links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a className="text-link" href={SITE.links.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <Link className="text-link" to="/contact">Contact →</Link>
+          <button type="button" className="text-link" onClick={() => window.print()}>Print / save PDF</button>
         </div>
+      </header>
 
-        <div className="shrink-0">
-          <img src="/profile.jpg" alt="Hugo Martins" className="w-28 h-28 rounded-full object-cover shadow-md border border-slate-200" loading="lazy" decoding="async" />
+      <div className="cv-layout">
+        <aside className="cv-rail no-print" aria-label="CV sections">
+          <p>Navigate CV</p>
+          <nav>{sections.map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}</nav>
+        </aside>
+
+        <div>
+          <Block id="profile" title="Professional profile">
+            <p>AI literacy educator and Lecturer at Nanyang Technological University specialising in higher-education curriculum, assessment and responsible human–AI work. I teach CC0007 Science &amp; Technology for Humanity and contribute to AI-enabled learning within the Core Curriculum. My work combines teaching at scale with organisational-behaviour research and applied AI, helping students build knowledge, frame problems, evaluate evidence, supervise AI-supported work and remain accountable for decisions.</p>
+          </Block>
+
+          <Block id="impact" title="Selected impact">
+            <ul>
+              <li>42 CC0007 tutorial classes across four consecutive semesters.</li>
+              <li>Approximately 1,700+ unique undergraduate students reached.</li>
+              <li>Student Feedback on Teaching averaging approximately 4.3/5 across CC0007 classes.</li>
+              <li>Weekly AI-enabled learning using Gemini, NotebookLM and agent-building approaches.</li>
+              <li>Competitive presenter at the NTU Annual Learning and Teaching Conference 2026.</li>
+              <li>Invited EHL × NTUitive × SGInnovate industry-academic panelist, 2026.</li>
+            </ul>
+          </Block>
+
+          <Block id="appointments" title="Academic appointments and teaching impact">
+            <h3>Nanyang Technological University — Lecturer, Interdisciplinary Core Curriculum · 2024–Present</h3>
+            <p><strong>CC0007 Science &amp; Technology for Humanity</strong></p>
+            <ul>
+              <li>Led 42 tutorial classes across four consecutive semesters, reaching approximately 1,700+ unique undergraduate students.</li>
+              <li>Co-created and delivered AI-literacy curriculum with generative AI and agentic tools embedded into weekly learning activities.</li>
+              <li>Structured learning across foundational readiness, facilitated application and project-based mastery, moving students from guided tool use toward active auditing and agentic inquiry.</li>
+              <li>Designed and facilitated work involving problem decomposition, information search, evidence review and synthesis, stakeholder analysis, persona-agent construction, simple agent development, and evaluation of AI-supported solutions.</li>
+              <li>Integrated curated source libraries, citation-backed synthesis and human-intervention documentation to make data provenance, verification and student judgement visible.</li>
+              <li>Supported a three-phase assessment path spanning collaborative research and problem framing, an interdisciplinary solution pitch, and individual synthesis and reflection.</li>
+              <li>Designed learning around critical judgement, evidence verification, perspective-taking, responsible delegation and preservation of human agency.</li>
+              <li>Student Feedback on Teaching averaged approximately 4.3/5, with recurring strengths around feedback, approachability, participation and analytical thinking.</li>
+            </ul>
+            <p><strong>CC0002 Navigating the Digital World</strong></p>
+            <ul>
+              <li>Led 6 tutorial classes reaching approximately 240 undergraduate students.</li>
+              <li>Facilitated interdisciplinary digital-literacy teaching, collaborative learning and project feedback.</li>
+            </ul>
+            <h3>National Institute of Education, NTU — Lecturer / Part-Time Lecturer · 2023–Present</h3>
+            <ul>
+              <li>Taught Human Resource Management in Sport across five cohorts, reaching approximately 80 students.</li>
+              <li>Designed case studies, role plays, assessments and rubrics around recruitment, development, performance, rewards, volunteers and organisational behaviour.</li>
+              <li>Detailed NIE teaching evaluation: overall 4.7/5, including 4.8/5 for knowledge.</li>
+            </ul>
+          </Block>
+
+          <Block id="innovation" title="Teaching innovation and human-centred AI">
+            <p>My pedagogical approach treats AI literacy as more than tool proficiency. The objective is to help learners work productively and critically with AI while retaining responsibility for judgement and decisions.</p>
+            <ul>
+              <li>AI as cognitive augmentation rather than substitution for reasoning.</li>
+              <li>Problem framing before solution generation.</li>
+              <li>Inquiry-driven, project-based learning that progresses from structured guidance to open-ended application.</li>
+              <li>Source provenance and grounded synthesis before fluent generation.</li>
+              <li>Evaluation of AI outputs for evidence quality, assumptions, feasibility and limitations.</li>
+              <li>Explicit documentation of human intervention, verification and accountability.</li>
+              <li>Structured human–AI collaboration in team-based work.</li>
+              <li>Ethical, responsible and context-sensitive use of AI.</li>
+            </ul>
+          </Block>
+
+          <Block id="engagement" title="Selected engagement">
+            <h3>NTU Annual Learning and Teaching Conference 2026 — Competitive Roundtable Presenter</h3>
+            <p><strong>Rethinking Job Readiness: Designing Adaptive Expertise for Human–AI Work</strong> — examined how education should evolve when work is distributed across humans, agents and digital tools.</p>
+            <h3>EHL × NTUitive × SGInnovate — Invited Panelist, 2026</h3>
+            <p><strong>AI Adoption vs AI Advantage in Service Operations</strong> — human-centred AI, work redesign, organisational capability and responsible adoption in service systems.</p>
+          </Block>
+
+          <Block id="education" title="Education">
+            <h3>PhD in Management — Organisational Behaviour</h3><p>Nanyang Business School, Nanyang Technological University</p>
+            <h3>MSc in Leadership and Strategy — Sloan Fellowship</h3><p>London Business School</p>
+            <h3>BSc in Economics</h3><p>University of Porto</p>
+          </Block>
+
+          <Block id="training" title="Professional training">
+            <ul>
+              <li>Advanced Professional Certificate in Data Science and Artificial Intelligence — NTU PACE · 2025–Present</li>
+              <li>Graduate Certificate in Teaching and Learning in Higher Education — NIE · 2024–Present</li>
+              <li>Advanced Certificate in Learning for Performance (ACLP 2.0) — Institute for Adult Learning · 2024</li>
+              <li>Professional Certificate in Applied Artificial Intelligence — Republic Polytechnic / AI Singapore / Microsoft · 2020</li>
+            </ul>
+          </Block>
+
+          <Block id="research" title="Research expertise and methods">
+            <p><strong>Areas:</strong> human-centred AI; human–AI collaboration; AI literacy; adaptive expertise; organisational behaviour; team performance; decision-making; organisational adaptation; work redesign; responsible AI adoption.</p>
+            <p><strong>Methods:</strong> research design; data discovery and integration; statistical modelling; structural equation modelling; social network analysis; mediation; psychological measurement; experience sampling; longitudinal and hierarchical modelling; random-effects ordered probit; graph-theoretic analysis.</p>
+            <p><strong>Software:</strong> Python, R, SPSS, SQL.</p>
+          </Block>
+
+          <Block id="industry" title="Industry experience">
+            <h3>Business Management Consultant · 2017–2023</h3>
+            <ul>
+              <li>Strategic advisory on internationalisation, market entry, stakeholder engagement and multi-partner execution.</li>
+              <li>Projects spanning emerging technologies, digital business models, organisational adaptation, sport, entertainment and service innovation.</li>
+            </ul>
+            <h3>Trader — Banco Invest S.A., Portugal · 2000–2014</h3>
+            <ul>
+              <li>Managed equity and derivatives positions, translating macroeconomic, news and market-structure signals into trade construction, sizing and risk controls.</li>
+              <li>Developed extensive practical experience in evidence assessment, risk management and rapid judgement under uncertainty.</li>
+            </ul>
+          </Block>
+
+          <Block id="applied-ai" title="Selected applied AI work">
+            <ul>
+              <li><strong>Ask-Julia</strong> — evidence-grounded conversational avatar for knowledge exploration.</li>
+              <li><strong>Critical Thinker</strong> — structured multi-perspective argument analysis.</li>
+              <li><strong>Six Thinking Hats</strong> — AI-supported group reasoning workflow.</li>
+              <li><strong>Generative Lesson Planner</strong> — AI-supported instructional-design workflow.</li>
+            </ul>
+          </Block>
+
+          <Block id="languages" title="Languages"><p>Portuguese — Native · English — Fluent · Spanish — Fluent</p></Block>
         </div>
       </div>
-
-      <hr className="my-8 border-slate-200" />
-
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Professional profile</h2>
-        <p className="text-gray-800 leading-relaxed">
-          I work at the intersection of higher education, organisational behaviour, and applied AI. My focus is
-          human-centred AI: how intelligent systems can support learning, judgement, assessment, service quality, and
-          organisational adaptation without replacing the human capabilities that make these activities valuable.
-        </p>
-        <p className="text-gray-800 leading-relaxed">
-          I design curricula, assessment approaches, and AI-enabled teaching tools that help students and professionals
-          think more critically, use evidence more carefully, and collaborate more effectively with intelligent systems.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-          <div className="bg-white border border-slate-200 rounded-xl p-4">
-            <p className="font-semibold text-gray-900">Learning and assessment</p>
-            <ul className={ulTight}>
-              <li>AI literacy, critical thinking, and evidence use</li>
-              <li>Competency-based curriculum and project-based learning</li>
-              <li>Assessment designs for generative AI contexts</li>
-            </ul>
-          </div>
-          <div className="bg-white border border-slate-200 rounded-xl p-4">
-            <p className="font-semibold text-gray-900">Work and service systems</p>
-            <ul className={ulTight}>
-              <li>Human-AI collaboration and work redesign</li>
-              <li>Organisational adaptation and responsible adoption</li>
-              <li>Human-centred technology in service contexts</li>
-            </ul>
-          </div>
-          <div className="bg-white border border-slate-200 rounded-xl p-4">
-            <p className="font-semibold text-gray-900">Applied AI prototyping</p>
-            <ul className={ulTight}>
-              <li>RAG assistants and conversational avatars</li>
-              <li>Structured reasoning and feedback tools</li>
-              <li>React/FastAPI prototypes and decision-support workflows</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <hr className="my-8 border-slate-200" />
-
-      <section className="space-y-5">
-        <h2 className="text-xl font-semibold text-gray-900">Academic appointments and university teaching</h2>
-
-        <div className="bg-white border border-slate-200 rounded-xl p-5">
-          <p className="text-gray-900 font-semibold">Nanyang Technological University (NTU), Singapore — Lecturer</p>
-          <p className="text-gray-700">Interdisciplinary Core Curriculum / undergraduate interdisciplinary education (2024 – Present)</p>
-          <ul className={ulNormal}>
-            <li>Teach interdisciplinary undergraduate modules on science, technology, humanity, AI literacy, and the future of work.</li>
-            <li>Design learning experiences that connect technical change with organisational, social, ethical, and human implications.</li>
-            <li>Develop project-based assessments and structured feedback approaches that build critical thinking, evidence use, and applied problem-solving.</li>
-            <li>Build and test AI-enabled teaching tools, including retrieval-augmented assistants, critical thinking scaffolds, lesson-planning workflows, and conversational knowledge avatars.</li>
-            <li>Translate research on organisational behaviour, learning, and human-centred AI into practical classroom methods and public-facing tools.</li>
-          </ul>
-        </div>
-
-        <div className="bg-white border border-slate-200 rounded-xl p-5">
-          <p className="text-gray-900 font-semibold">National Institute of Education (NIE), Singapore — Lecturer</p>
-          <p className="text-gray-700">Sport Science &amp; Management Programme (2023 – Present)</p>
-          <ul className={ulTight}>
-            <li>Teach Human Resource Management in Sport, including recruitment, training, performance appraisal, reward systems, and volunteer management.</li>
-            <li>Design case studies and role-play exercises to develop applied HR judgement.</li>
-            <li>Develop teaching materials, rubrics, and graded assessments aligned with programme requirements.</li>
-          </ul>
-        </div>
-      </section>
-
-      <hr className="my-8 border-slate-200" />
-
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-gray-900">Education</h2>
-        <div className="bg-white border border-slate-200 rounded-xl p-5 space-y-6">
-          <div>
-            <p className="text-gray-900 font-semibold">PhD in Management — Organisational Behaviour</p>
-            <p className="text-gray-700">Nanyang Technological University, Singapore</p>
-            <ul className={ulTight}>
-              <li>Research focus: team collaboration, human behaviour, and performance.</li>
-              <li>Methods: structural equation modelling, social network analysis, mediation analysis, experience sampling, and longitudinal/hierarchical modelling.</li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-gray-900 font-semibold">MSc in Leadership and Strategy — Sloan Fellowship</p>
-            <p className="text-gray-700">London Business School, United Kingdom</p>
-            <ul className={ulTight}>
-              <li>Executive-format programme focused on global business strategy, organisational leadership, and innovation.</li>
-            </ul>
-          </div>
-          <div>
-            <p className="text-gray-900 font-semibold">BSc in Economics</p>
-            <p className="text-gray-700">University of Porto, Portugal</p>
-            <ul className={ulTight}>
-              <li>Foundation in economic reasoning, quantitative analysis, and decision-making under uncertainty.</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <hr className="my-8 border-slate-200" />
-
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Certifications and professional development</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white border border-slate-200 rounded-xl p-5">
-            <p className="font-semibold text-gray-900">Teaching and education</p>
-            <ul className={ulNormal}>
-              <li>Graduate Certificate in Teaching and Learning in Higher Education — NIE, Singapore</li>
-              <li>Advanced Certificate in Learning and Performance — Institute for Adult Learning, Singapore</li>
-              <li>Professional Certificate in Educational Technology for Educators — SMU Academy</li>
-            </ul>
-          </div>
-          <div className="bg-white border border-slate-200 rounded-xl p-5">
-            <p className="font-semibold text-gray-900">Data science and AI</p>
-            <ul className={ulNormal}>
-              <li>Advanced Professional Certificate in Data Science and AI — NTU PaCE</li>
-              <li>Professional Certificate in Applied Artificial Intelligence — Republic Polytechnic / IMDA</li>
-              <li>Generative AI Engineering with LLMs and Generative AI for Educators — IBM</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <hr className="my-8 border-slate-200" />
-
-      <section className="space-y-3">
-        <div className="bg-white border border-slate-200 rounded-xl p-5">
-          <h2 className="text-xl font-semibold text-gray-900">AI tools and prototypes</h2>
-          <p className="text-gray-800 leading-relaxed">
-            I build practical AI-enabled tools to support pedagogy, feedback, structured reasoning, and evidence-grounded
-            knowledge exploration. These tools are experimental and designed to strengthen—not replace—human judgement.
-          </p>
-          <ul className={ulNormal}>
-            <li><strong>Ask-Julia</strong> — evidence-grounded conversational avatar for knowledge exploration.</li>
-            <li><strong>Critical Thinker</strong> — structured multi-perspective argument analysis and reporting.</li>
-            <li><strong>Six Thinking Hats</strong> — student group analysis workflow for balanced reasoning.</li>
-            <li><strong>Generative Lesson Planner</strong> — AI-supported lesson plans and instructor materials from source documents.</li>
-          </ul>
-          <p className="mt-4 text-gray-700">
-            See detailed pedagogical use cases and assessment alignment on the{' '}
-            <Link className="text-blue-700 hover:underline" to="/tools" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              Tools
-            </Link>{' '}
-            page.
-          </p>
-        </div>
-      </section>
-
-      <hr className="my-8 border-slate-200" />
-
-      <section className="space-y-4">
-        <h2 className="text-xl font-semibold text-gray-900">Industry experience</h2>
-        <div className="bg-white border border-slate-200 rounded-xl p-5">
-          <p className="font-semibold text-gray-900">Business Management Consultant — Singapore and international projects</p>
-          <p className="text-gray-700">2017 – 2023</p>
-          <ul className={ulTight}>
-            <li>Strategic advisory on internationalisation, market entry, stakeholder engagement, and multi-partner execution.</li>
-            <li>Projects involving emerging technologies, digital business models, sport, entertainment, and organisational adaptation.</li>
-          </ul>
-        </div>
-        <div className="bg-white border border-slate-200 rounded-xl p-5">
-          <p className="font-semibold text-gray-900">Trader — Banco Invest S.A., Portugal</p>
-          <p className="text-gray-700">2000 – 2014</p>
-          <ul className={ulTight}>
-            <li>Managed equity and derivatives positions, translating macro/news flow and microstructure signals into trade construction, sizing, and risk controls.</li>
-            <li>Produced trading commentary and performance attribution, documenting rationale, catalysts, and decision rules.</li>
-          </ul>
-        </div>
-      </section>
-
-      <hr className="my-8 border-slate-200" />
-
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold text-gray-900">Selected skills</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white border border-slate-200 rounded-xl p-4">
-            <p className="font-semibold text-gray-900">Learning, work, and organisations</p>
-            <ul className={ulTight}>
-              <li>Human-centred AI; learning design; assessment design; educational technology</li>
-              <li>Organisational behaviour; future of work; service systems; human-AI collaboration</li>
-              <li>Critical thinking; evidence-based decision-making; responsible AI adoption</li>
-            </ul>
-          </div>
-          <div className="bg-white border border-slate-200 rounded-xl p-4">
-            <p className="font-semibold text-gray-900">Applied data and AI</p>
-            <ul className={ulTight}>
-              <li>Python, R, SQL; analytics and modelling workflows</li>
-              <li>Retrieval-augmented generation, prompt design, LLM application evaluation</li>
-              <li>FastAPI, React, dashboards, and applied decision-support prototypes</li>
-            </ul>
-          </div>
-        </div>
-        <div className="bg-white border border-slate-200 rounded-xl p-4">
-          <p className="font-semibold text-gray-900">Languages</p>
-          <p className="mt-2 text-gray-800">English, Portuguese, Spanish</p>
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }

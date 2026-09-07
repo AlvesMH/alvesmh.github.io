@@ -1,137 +1,98 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import AboutCard from '../components/Sidebar/AboutCard';
 import Canonical from '../components/Canonical';
+import { personJsonLd } from '../data/site';
 
-export default function AboutPage() {
+export default function About() {
+  const profile = { '@context': 'https://schema.org', '@type': 'ProfilePage', url: 'https://hugomartins.eu/about', mainEntity: personJsonLd };
+
   return (
-    <div className="p-6 max-w-5xl mx-auto">
+    <main id="main-content" className="page-shell">
       <Canonical path="/about" />
-
       <Helmet>
-        <title>About — Hugo Martins</title>
-        <meta
-          name="description"
-          content="Hugo Martins, PhD — Lecturer at NTU working at the intersection of higher education, organisational behaviour, and applied AI. Human-centred AI for learning, work, assessment, and service systems."
-        />
+        <title>About Hugo Martins — AI Literacy Educator</title>
+        <meta name="description" content="About Hugo Martins, PhD: AI literacy educator and Lecturer at NTU specialising in higher-education curriculum, assessment and responsible human–AI work." />
+        <script type="application/ld+json">{JSON.stringify(profile)}</script>
       </Helmet>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <main className="lg:col-span-2 space-y-6">
-          <header className="space-y-3">
-            <p className="text-sm font-semibold tracking-[0.18em] uppercase text-blue-700">About</p>
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-950">
-              Human-centred AI for learning, work, and service systems
-            </h1>
-            <p className="text-gray-800 leading-relaxed text-lg">
-              I’m <strong>Hugo Martins</strong>, a Lecturer at Nanyang Technological University (NTU), Singapore.
-              I work at the intersection of higher education, organisational behaviour, and applied AI.
-            </p>
-            <p className="text-gray-800 leading-relaxed">
-              My focus is human-centred AI: how intelligent systems can support learning, judgement, assessment,
-              service quality, and organisational adaptation without replacing the human capabilities that make these
-              activities valuable.
-            </p>
-          </header>
+      <header className="page-intro max-w-[820px]">
+        <p className="section-kicker">About</p>
+        <h1>An educator’s route into AI literacy</h1>
+        <p className="!text-[21px] !leading-[1.55]">I work on a practical question: how should higher education develop knowledge and judgement when AI can search, generate, recommend and increasingly act?</p>
+        <p className="mt-5 max-w-[760px] text-[16px] leading-[1.72] text-[#687181]">My answer connects curriculum and assessment design with organisational behaviour, adaptive expertise and hands-on experimentation with AI-supported systems.</p>
+      </header>
 
-          <section className="bg-white border border-slate-200 rounded-xl p-5">
-            <h2 className="text-xl font-semibold text-gray-900">What I work on</h2>
-            <ul className="mt-3 list-disc list-outside pl-5 text-gray-800 space-y-2">
-              <li>
-                <strong>AI and learning design:</strong> AI literacy, curriculum design, project-based learning,
-                assessment innovation, and critical thinking.
-              </li>
-              <li>
-                <strong>AI and work design:</strong> human-AI collaboration, role redesign, organisational adaptation,
-                and service systems.
-              </li>
-              <li>
-                <strong>AI-enabled tools and prototypes:</strong> retrieval-augmented assistants, structured reasoning
-                tools, lesson-design workflows, and conversational avatars.
-              </li>
-              <li>
-                <strong>Responsible augmentation:</strong> evidence use, process accountability, human judgement,
-                academic integrity, and safeguards against shallow automation.
-              </li>
-            </ul>
-          </section>
-
-          <section className="bg-white border border-slate-200 rounded-xl p-5">
-            <h2 className="text-xl font-semibold text-gray-900">Professional background</h2>
-            <p className="mt-3 text-gray-800 leading-relaxed">
-              I teach interdisciplinary undergraduate modules on science, technology, humanity, and the future of work.
-              My teaching focuses on helping students develop AI literacy, critical thinking, responsible technology use,
-              and applied problem-solving.
-            </p>
-            <p className="mt-3 text-gray-800 leading-relaxed">
-              Before academia, I worked in finance and business environments shaped by complex socio-technical systems.
-              That experience continues to inform my perspective: the central question is not only what AI can do, but
-              how people, teams, and institutions adapt around it.
-            </p>
-          </section>
-
-          <section className="bg-slate-50 border border-slate-200 rounded-xl p-5">
-            <h2 className="text-xl font-semibold text-gray-900">Start here</h2>
-            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Link
-                to="/tools"
-                className="rounded-xl border border-slate-200 bg-white p-4 hover:border-blue-600 transition-colors"
-              >
-                <p className="font-semibold text-gray-900">AI tools and prototypes</p>
-                <p className="mt-1 text-gray-800">
-                  Classroom-ready and public-facing tools for learning, reasoning, and knowledge exploration.
-                </p>
-                <p className="mt-2 text-sm font-semibold text-blue-700">Explore tools →</p>
-              </Link>
-
-              <Link
-                to="/archive"
-                className="rounded-xl border border-slate-200 bg-white p-4 hover:border-blue-600 transition-colors"
-              >
-                <p className="font-semibold text-gray-900">Writing</p>
-                <p className="mt-1 text-gray-800">
-                  Notes and essays on AI, education, human judgement, work, and socio-technical change.
-                </p>
-                <p className="mt-2 text-sm font-semibold text-blue-700">Browse posts →</p>
-              </Link>
-
-              <Link
-                to="/critical-thinking"
-                className="rounded-xl border border-slate-200 bg-white p-4 hover:border-blue-600 transition-colors"
-              >
-                <p className="font-semibold text-gray-900">Critical thinking</p>
-                <p className="mt-1 text-gray-800">
-                  Practical patterns to embed structured reasoning into higher education and AI-supported work.
-                </p>
-                <p className="mt-2 text-sm font-semibold text-blue-700">View approach →</p>
-              </Link>
-
-              <Link
-                to="/cv"
-                className="rounded-xl border border-slate-200 bg-white p-4 hover:border-blue-600 transition-colors"
-              >
-                <p className="font-semibold text-gray-900">CV</p>
-                <p className="mt-1 text-gray-800">
-                  Academic appointments, teaching profile, professional background, and selected credentials.
-                </p>
-                <p className="mt-2 text-sm font-semibold text-blue-700">Read CV →</p>
-              </Link>
-            </div>
-          </section>
-
-          <section className="text-gray-800 leading-relaxed">
-            I believe in <strong>augmented intelligence</strong>: AI that strengthens human judgement, clarity, capability,
-            and responsibility rather than substituting for them.
-          </section>
-        </main>
-
-        <aside className="lg:col-span-1">
-          <div className="sticky top-6">
-            <AboutCard />
+      <div className="editorial-sections">
+        <section className="editorial-section">
+          <h2>Current work</h2>
+          <div className="editorial-copy">
+            <p>I am an <strong>AI literacy educator and Lecturer at Nanyang Technological University in Singapore</strong>.</p>
+            <p>Across four consecutive semesters, I have led 42 CC0007 tutorial classes reaching approximately 1,700+ undergraduates. My teaching focuses on <strong>grounded inquiry, problem framing, evidence evaluation, assessment and responsible human–AI collaboration</strong>.</p>
+            <p>I am particularly interested in how universities can prepare students to use generative and agentic AI without weakening the deep knowledge, productive practice and accountability through which expertise develops.</p>
+            <p>I also build small AI systems — retrieval-grounded assistants, structured reasoning environments and learning workflows — because working prototypes make theoretical assumptions concrete. They force a practical question:</p>
+            <p className="border-l-2 border-[#1d4f91] pl-5 font-medium text-[#272b33]">What should the AI do, what should the human continue to do, and how should the system shape that relationship?</p>
           </div>
-        </aside>
+        </section>
+
+        <section className="editorial-section">
+          <h2>Intellectual agenda</h2>
+          <div className="editorial-copy">
+            <p>I think about AI through a simple lens:</p>
+            <div className="formula" aria-label="Human capability multiplied by AI capability multiplied by system design">
+              <span>Human capability</span><span className="times" aria-hidden="true">×</span><span>AI capability</span><span className="times" aria-hidden="true">×</span><span>system design</span>
+            </div>
+            <p>The practical effect of AI depends not only on what a model can do. It also depends on how learning and work are structured around it:</p>
+            <ul>
+              <li>what people delegate;</li>
+              <li>what they continue to practise themselves;</li>
+              <li>what they verify;</li>
+              <li>where judgement remains essential;</li>
+              <li>how responsibility is allocated; and</li>
+              <li>which capabilities are strengthened or allowed to atrophy.</li>
+            </ul>
+            <p>That is why I am less interested in AI adoption as an end in itself than in <strong>the design of effective human–AI systems</strong>.</p>
+          </div>
+        </section>
+
+        <section className="editorial-section">
+          <h2>Background</h2>
+          <div className="editorial-copy">
+            <p>I hold a <strong>PhD in Management (Organisational Behaviour)</strong> from Nanyang Technological University, an <strong>MSc in Leadership and Strategy through the Sloan Fellowship</strong> at London Business School, and a <strong>BSc in Economics</strong> from the University of Porto.</p>
+            <p>Before academia, I spent roughly fifteen years in financial markets and later worked on international business and advisory projects.</p>
+            <p>That background continues to shape how I think about AI: through <strong>uncertainty, incentives, adaptation, evidence quality, risk and decision-making under pressure</strong> — not through technology in isolation.</p>
+            <p>The movement into AI and higher education is therefore less of a break than it might initially appear. Across markets, organisations and learning environments, the underlying problem is similar: people must make good decisions when information is abundant, incomplete, rapidly changing and increasingly mediated by technology.</p>
+          </div>
+        </section>
+
+        <section className="editorial-section">
+          <h2>From possibility to prototype</h2>
+          <div className="editorial-copy">
+            <p>I treat imagination as an operation on existing reality rather than creation from nothing. New systems begin by recombining available materials, knowledge, constraints and technical capabilities into a possibility that does not yet have a working form.</p>
+            <p>That is why prototyping matters to my work. An idea can be intellectually coherent and still fail when it meets evidence, users or institutional constraints. A prototype turns an imagined arrangement into something that can be inspected, tested and revised.</p>
+            <p>In both teaching and system design, the movement is the same: <strong>frame a possibility, ground it in what is known, make it concrete, and learn from the encounter with reality.</strong></p>
+          </div>
+        </section>
+
+        <section className="editorial-section">
+          <h2>Augmented Minds</h2>
+          <div className="editorial-copy">
+            <p><strong>Augmented Minds</strong> is the writing and applied-work imprint of this site.</p>
+            <p>It brings together essays, prototypes and teaching experiments around one proposition:</p>
+            <blockquote className="border-l-2 border-[#1d4f91] pl-6 font-serif text-[22px] leading-[1.55] text-[#272b33]">Intelligent systems are most valuable when they expand human capability and responsibility rather than simply remove humans from the loop.</blockquote>
+            <p>The emphasis is therefore on augmentation rather than automation for its own sake — and on designing environments in which people can think, learn and decide better with AI.</p>
+          </div>
+        </section>
+
+        <section className="editorial-section">
+          <h2>Continue</h2>
+          <div className="flex flex-wrap gap-x-7 gap-y-3">
+            <Link className="text-link" to="/teaching">Teaching portfolio →</Link>
+            <Link className="text-link" to="/work">Selected work →</Link>
+            <Link className="text-link" to="/cv">Full CV →</Link>
+          </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }

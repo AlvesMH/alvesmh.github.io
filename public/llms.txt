@@ -1,0 +1,26 @@
+# Hugo Martins, PhD
+
+> Hugo Martins is an AI literacy educator and Lecturer at Nanyang Technological University in Singapore, specialising in higher-education curriculum, assessment and responsible human–AI work.
+
+## Teaching
+- https://hugomartins.eu/teaching — teaching philosophy, capability model, methods and evidence
+- https://hugomartins.eu/teaching/ai-literacy-ntu — CC0007 AI literacy teaching case in NTU’s Interdisciplinary Core Curriculum
+
+## Professional profile
+- https://hugomartins.eu/profile — concise professional profile and selected evidence
+- https://hugomartins.eu/about — biography and intellectual agenda
+- https://hugomartins.eu/cv — detailed curriculum vitae
+
+## Selected work
+- https://hugomartins.eu/work — teaching cases, frameworks and applied systems
+- https://hugomartins.eu/work/adaptive-expertise — adaptive expertise for human–AI work
+- https://hugomartins.eu/work/human-ai-work — organisational adaptation and human–AI work
+- https://hugomartins.eu/tools — applied educational AI prototypes
+
+## Writing
+- https://hugomartins.eu/ideas — essays on AI literacy, higher education, expertise and human capability
+- https://hugomartins.eu/post/the-cost-of-making-an-expert — teaching philosophy on expertise formation in an AI-enabled world
+
+## External profiles
+- https://github.com/AlvesMH
+- https://www.linkedin.com/in/hugoalvesmartins/

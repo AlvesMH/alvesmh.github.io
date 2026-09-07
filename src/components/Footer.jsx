@@ -1,54 +1,28 @@
 import React from 'react';
-import { BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { SITE } from '../data/site';
 
 export default function Footer() {
-  const handleClick = (item) => {
-    if (item === 'Home') {
-      const url = new URL(window.location.href);
-      url.searchParams.delete('q');
-      window.history.replaceState({}, '', url.pathname);
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="bg-white border-t border-gray-200 py-12">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <Link to="/" className="flex items-center justify-center space-x-3 mb-4">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <BookOpen className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold text-gray-900">Augmented Minds</span>
-          </Link>
-
-          <p className="text-gray-600 mb-6"> Teaching tools, methodologies,and personal perspectives.</p>
-
-          <div className="flex justify-center space-x-6 mb-6">
-            {['Home', 'Tools', 'Critical Thinking', 'CV', 'About', 'Archive', 'Contact'].map((item) => (
-              <Link
-                key={item}
-                to={
-                  item === 'Home'
-                    ? '/'
-                    : item === 'Tools'
-                    ? '/tools'
-                    : item === 'Critical Thinking'
-                    ? '/critical-thinking'
-                    : `/${item.toLowerCase()}`
-                }
-                onClick={() => handleClick(item)}
-                className="text-gray-400 hover:text-blue-600 transition-colors"
-              >
-                {item}
-              </Link>
-            ))}
+    <footer className="border-t border-[#c9cdd3] bg-[#f2f2ef]">
+      <div className="site-shell pb-9 pt-14">
+        <div className="grid gap-10 md:grid-cols-[3fr_2fr] md:items-start">
+          <div>
+            <p className="text-[17px] font-semibold tracking-[-0.015em] text-[#111318]">Hugo Martins, PhD</p>
+            <p className="mt-3 max-w-[560px] text-[14px] leading-6 text-[#4b5360]">
+              AI literacy, curriculum and assessment for higher education. Based in Singapore; open to selected academic and learning-innovation opportunities internationally.
+            </p>
           </div>
-
-          <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} Augmented Minds. Built with React.
-          </div>
+          <nav className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] font-medium text-[#4b5360] md:justify-end" aria-label="Footer navigation">
+            <Link to="/teaching" className="hover:text-[#153e75]">Teaching</Link>
+            <Link to="/cv" className="hover:text-[#153e75]">CV</Link>
+            <a href={SITE.links.linkedin} target="_blank" rel="noreferrer" className="hover:text-[#153e75]">LinkedIn</a>
+            <a href={SITE.links.github} target="_blank" rel="noreferrer" className="hover:text-[#153e75]">GitHub</a>
+            <Link to="/contact" className="hover:text-[#153e75]">Contact</Link>
+          </nav>
+        </div>
+        <div className="mt-11 border-t border-[#d7d9d5] pt-6 text-[11px] tracking-[0.02em] text-[#687181]">
+          © 2026 Hugo Martins · <strong className="font-medium">Augmented Minds</strong> is the writing and applied-work imprint of this site.
         </div>
       </div>
     </footer>

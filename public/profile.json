@@ -1,0 +1,41 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://hugomartins.eu/#hugo-martins",
+  "name": "Hugo Martins",
+  "honorificSuffix": "PhD",
+  "headline": "AI Literacy | Higher Education Curriculum & Assessment",
+  "location": "Singapore",
+  "currentRole": {
+    "title": "Lecturer",
+    "institution": "Nanyang Technological University"
+  },
+  "expertise": [
+    "AI literacy",
+    "Higher education",
+    "Curriculum design",
+    "Assessment design",
+    "Human-AI collaboration",
+    "Adaptive expertise",
+    "Learning innovation",
+    "Human-centred AI",
+    "Organisational behaviour",
+    "Responsible AI"
+  ],
+  "selectedImpact": [
+    "42 CC0007 tutorial classes across four consecutive semesters",
+    "Approximately 1,700+ unique undergraduate students reached",
+    "Student feedback on teaching averaging approximately 4.3/5 across CC0007 classes",
+    "Competitive presenter at the NTU Annual Learning and Teaching Conference 2026",
+    "Invited EHL × NTUitive × SGInnovate panelist in 2026"
+  ],
+  "education": [
+    "PhD in Management — Organisational Behaviour, Nanyang Technological University",
+    "MSc in Leadership and Strategy — Sloan Fellowship, London Business School",
+    "BSc in Economics, University of Porto"
+  ],
+  "sameAs": [
+    "https://github.com/AlvesMH",
+    "https://www.linkedin.com/in/hugoalvesmartins/"
+  ]
+}

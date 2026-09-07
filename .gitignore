@@ -14,3 +14,9 @@ yarn-error.log*
 .vscode/
 .env.local
 .env
+
+# private application drafts (not published with the public repository)
+private-application-materials/
+
+# local refactor recovery snapshots
+.refactor-backup-*/

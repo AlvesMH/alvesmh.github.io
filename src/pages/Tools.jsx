@@ -1,7 +1,7 @@
 import React from 'react';
 import Canonical from '../components/Canonical';
 import { Helmet } from 'react-helmet-async';
-import { Brain, ClipboardList, FileText, ExternalLink, Github, CheckCircle2, Lightbulb } from 'lucide-react';
+import { Brain, ClipboardList, FileText, Lightbulb } from 'lucide-react';
 
 const TOOLS = [
   {
@@ -108,107 +108,52 @@ const TOOLS = [
 
 export default function ToolsPage() {
   return (
-    <div className="p-6 max-w-5xl mx-auto">
+    <main id="main-content" className="page-shell">
       <Canonical path="/tools" />
       <Helmet>
-        <title>AI Tools — Human-centred prototypes for learning, judgement, and teaching work</title>
+        <title>Applied Educational AI Systems — Hugo Martins</title>
         <meta
           name="description"
           content="A curated portfolio of human-centred AI tools: evidence-grounded avatars, critical thinking workflows, Six Thinking Hats analysis, and lesson planning support for responsible learning with AI."
         />
       </Helmet>
 
-      <header className="mb-8">
-        <p className="text-sm font-semibold tracking-[0.18em] uppercase text-blue-700">Tools</p>
-        <h1 className="mt-2 text-3xl sm:text-4xl font-bold text-gray-950">
-          Human-centred AI tools and prototypes
-        </h1>
-        <p className="mt-3 text-gray-700 max-w-4xl leading-relaxed">
-          This portfolio consolidates applied AI tools for learning, assessment, reasoning, and teaching work. The common
-          design principle is augmentation: the tools should make reasoning more visible, evidence use more explicit, and
-          human judgement more accountable.
-        </p>
+      <header className="page-intro">
+        <p className="section-kicker">Applied educational AI</p>
+        <h1>Tools as inspectable teaching practice</h1>
+        <p>Public prototypes for evidence-grounded inquiry, structured reasoning, collaborative thinking and learning design. Each makes a pedagogical assumption concrete enough to inspect, test and improve.</p>
+        <p className="mt-5 text-[14px] leading-6 text-[#687181]">These are working prototypes, not validated products. Their value lies in the design questions they expose and the learning practices they support.</p>
       </header>
 
-      <section className="space-y-10">
+      <section className="mt-16">
         {TOOLS.map((t) => (
-          <article
-            key={t.id}
-            id={t.id}
-            className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden scroll-mt-24"
-          >
-            <div className="p-6 sm:p-8">
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-5">
-                <div className="flex items-start gap-3">
-                  <div className="p-3 rounded-xl bg-slate-50 border border-slate-200">
-                    <t.icon className="w-6 h-6 text-slate-700" />
-                  </div>
-                  <div>
-                    <h2 className="text-xl sm:text-2xl font-semibold text-gray-900">{t.title}</h2>
-                    <p className="mt-1 text-gray-700">{t.subtitle}</p>
-                    <p className="mt-3 text-sm text-slate-700 max-w-3xl leading-relaxed">{t.summary}</p>
-                  </div>
-                </div>
-
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href={t.demo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
-                    aria-label={`${t.title} live demo (opens in a new tab)`}
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Live demo
-                  </a>
-                  <a
-                    href={t.repo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium border border-slate-300 text-slate-700 hover:border-blue-600 hover:text-blue-700 bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
-                    aria-label={`${t.title} GitHub repository (opens in a new tab)`}
-                  >
-                    <Github className="w-4 h-4" />
-                    GitHub
-                  </a>
+          <article key={t.id} id={t.id} className="scroll-mt-28 border-t border-[#c9cdd3] py-12 last:border-b">
+            <div className="grid gap-8 md:grid-cols-[4fr_8fr] md:gap-14">
+              <div>
+                <p className="section-kicker">Public prototype</p>
+                <h2 className="mt-3 text-[28px] font-semibold tracking-[-.03em] text-[#111318]">{t.title}</h2>
+                <p className="mt-3 text-[14px] leading-6 text-[#687181]">{t.subtitle}</p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <a href={t.demo} target="_blank" rel="noreferrer" className="button-primary" aria-label={`${t.title} live demo (opens in a new tab)`}>Live demo ↗</a>
+                  <a href={t.repo} target="_blank" rel="noreferrer" className="button-secondary" aria-label={`${t.title} GitHub repository (opens in a new tab)`}>GitHub ↗</a>
                 </div>
               </div>
-
-              <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-5">
-                <div className="rounded-xl bg-slate-50 border border-slate-200 p-5">
-                  <h3 className="font-semibold text-gray-900">Use cases</h3>
-                  <ul className="mt-3 space-y-2 text-sm text-gray-700 leading-relaxed">
-                    {t.useCases.map((u) => (
-                      <li key={u} className="flex gap-2">
-                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-slate-600 shrink-0" />
-                        <span>{u}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="rounded-xl bg-slate-50 border border-slate-200 p-5">
-                  <h3 className="font-semibold text-gray-900">Assessment alignment</h3>
-                  <ul className="mt-3 space-y-2 text-sm text-gray-700 leading-relaxed">
-                    {t.assessment.map((a) => (
-                      <li key={a} className="flex gap-2">
-                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-slate-600 shrink-0" />
-                        <span>{a}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="rounded-xl bg-slate-50 border border-slate-200 p-5">
-                  <h3 className="font-semibold text-gray-900">Responsible use</h3>
-                  <ul className="mt-3 space-y-2 text-sm text-gray-700 leading-relaxed">
-                    {t.responsibleUse.map((i) => (
-                      <li key={i} className="flex gap-2">
-                        <CheckCircle2 className="w-4 h-4 mt-0.5 text-slate-600 shrink-0" />
-                        <span>{i}</span>
-                      </li>
-                    ))}
-                  </ul>
+              <div>
+                <p className="max-w-[760px] text-[16px] leading-[1.75] text-[#4b5360]">{t.summary}</p>
+                <p className="mt-4 text-[12px] font-semibold uppercase tracking-[.11em] text-[#687181]">Maturity · Prototype for demonstration and iterative evaluation</p>
+                <div className="mt-9 grid gap-7 lg:grid-cols-3">
+                  {[
+                    ['Use cases', t.useCases],
+                    ['Assessment alignment', t.assessment],
+                    ['Responsible use', t.responsibleUse]
+                  ].map(([heading, items]) => (
+                    <section key={heading} className="border-t border-[#e1e4e8] pt-5">
+                      <h3 className="text-[14px] font-semibold text-[#111318]">{heading}</h3>
+                      <ul className="mt-4 space-y-3 text-[13px] leading-[1.6] text-[#687181]">
+                        {items.map(item => <li key={item}>{item}</li>)}
+                      </ul>
+                    </section>
+                  ))}
                 </div>
               </div>
             </div>
@@ -216,16 +161,12 @@ export default function ToolsPage() {
         ))}
       </section>
 
-      <section className="mt-10 bg-white border border-slate-200 rounded-2xl shadow-sm">
-        <div className="p-6 sm:p-8">
-          <h2 className="text-xl font-semibold text-gray-900">The design logic</h2>
-          <p className="mt-3 text-gray-700 max-w-4xl leading-relaxed">
-            Across tools, the emphasis is on making thinking inspectable: assumptions, evidence, alternatives, synthesis,
-            and reflection. In practice, these tools work best when paired with explicit rubrics, short in-class checkpoints,
-            and reflective components that keep learners accountable for interpretation and judgement.
-          </p>
-        </div>
+      <section className="mt-16 bg-[#111827] px-7 py-12 text-white sm:px-10" aria-labelledby="design-logic-heading">
+        <p className="text-[11px] font-bold uppercase tracking-[.17em] text-[#8eb7e1]">Design logic</p>
+        <h2 id="design-logic-heading" className="mt-3 text-[30px] font-semibold tracking-[-.03em]">Make thinking inspectable</h2>
+        <p className="mt-5 max-w-[850px] text-[16px] leading-[1.75] text-[#ccd4e0]">Across systems, the emphasis is on exposing assumptions, evidence, alternatives, synthesis and reflection. They work best when paired with explicit rubrics, short checkpoints and reflective components that keep learners accountable for interpretation and judgement.</p>
+        <p className="mt-7 text-[12px] text-[#9caac0]">Last reviewed September 2026.</p>
       </section>
-    </div>
+    </main>
   );
 }

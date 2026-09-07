@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node scripts/copy404.js",
+    "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/prerender.js",
+    "check": "npm run build && node scripts/check-site.mjs",
     "preview": "vite preview",
-    "postbuild": "cp dist/index.html dist/404.html",
-    "deploy": "vite build && cp dist/index.html dist/404.html && gh-pages -d dist"
+    "postbuild": "node scripts/copy404.js",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
