@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default function Hero() {
   return (
     <section className="bg-[#f7f7f5]">
-      <div className="site-shell grid min-h-[610px] gap-14 py-[96px] md:grid-cols-[7.5fr_4.5fr] md:items-center lg:py-[112px]">
+      <div className="site-shell grid min-h-[650px] gap-16 py-[96px] md:grid-cols-[7.5fr_4.5fr] md:items-center lg:py-[118px]">
         <div className="max-w-[700px]">
           <p className="section-kicker">Hugo Martins, PhD · AI literacy educator</p>
           <h1 className="hero-title mt-5 max-w-[690px] font-[680] leading-[.98] tracking-[-.048em] text-[#111318]">
@@ -26,14 +26,14 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[300px] md:mx-0 md:justify-self-end">
+        <div className="relative mx-auto w-full max-w-[320px] md:mx-0 md:justify-self-end">
           <div aria-hidden="true" className="absolute -bottom-5 -left-5 h-full w-full rounded-[14px] border border-[#d9dde1] bg-[#eceeeb]" />
           <img
             src="/profile.jpg"
             alt="Portrait of Hugo Martins"
-            width="300"
-            height="350"
-            className="relative h-[325px] w-full rounded-[14px] object-cover object-top shadow-[0_1px_2px_rgba(15,23,42,.03),0_12px_36px_rgba(15,23,42,.055)] sm:h-[350px]"
+            width="320"
+            height="375"
+            className="relative h-[350px] w-full rounded-[14px] object-cover object-top shadow-[0_1px_2px_rgba(15,23,42,.03),0_12px_36px_rgba(15,23,42,.055)] sm:h-[375px]"
             loading="eager"
             decoding="async"
           />

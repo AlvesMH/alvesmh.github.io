@@ -55,10 +55,10 @@ export default function Home() {
       <main id="main-content">
         <section className="evidence-section" aria-label="Selected professional evidence">
           <div className="site-shell evidence-line">
-            <span><strong>42</strong> CC0007 tutorial classes</span>
-            <span><strong>1,700+</strong> undergraduates reached</span>
-            <span><strong>4</strong> consecutive semesters</span>
-            <span><strong>≈4.3/5</strong> student feedback</span>
+            <span><strong>42</strong><small>CC0007 tutorial classes</small></span>
+            <span><strong>1,700+</strong><small>undergraduates reached</small></span>
+            <span><strong>4</strong><small>consecutive semesters</small></span>
+            <span><strong>≈4.3/5</strong><small>average student feedback</small></span>
           </div>
         </section>
 

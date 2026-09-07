@@ -75,6 +75,11 @@ export default function Work() {
             <p className="text-[11px] font-semibold uppercase tracking-[.13em] text-[#687181]">Nanyang Technological University</p>
             <h2 id="curriculum-heading" className="mt-4 text-[clamp(1.7rem,3vw,2.25rem)] font-semibold leading-[1.12] tracking-[-.03em] text-[#111318]">AI Literacy in the NTU Core Curriculum</h2>
             <p className="mt-5 text-[13px] text-[#687181]">2024–Present</p>
+            <dl className="work-proof" aria-label="Selected case evidence">
+              <div><dt>Scale</dt><dd>1,700+ students</dd></div>
+              <div><dt>Delivery</dt><dd>42 tutorial classes</dd></div>
+              <div><dt>Focus</dt><dd>Judgement with AI</dd></div>
+            </dl>
           </div>
           <div className="text-[16px] leading-[1.75] text-[#4b5360]">
             <p>A case study in integrating grounded research and agentic AI into interdisciplinary undergraduate learning.</p>

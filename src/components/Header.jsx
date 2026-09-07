@@ -18,7 +18,7 @@ export default function Header() {
   useEffect(() => setOpen(false), [location.pathname]);
 
   const linkClass = ({ isActive }) => [
-    'relative py-2 text-[13.5px] font-medium tracking-[-.005em] transition-colors',
+    'relative py-2 text-[14px] font-medium tracking-[-.005em] transition-colors',
     isActive
       ? 'text-[#153e75] after:absolute after:inset-x-0 after:-bottom-[17px] after:h-[2px] after:bg-[#1d4f91]'
       : 'text-[#4b5360] hover:text-[#111318]'
@@ -28,8 +28,8 @@ export default function Header() {
     <header className="sticky top-0 z-50 border-b border-[#c9cdd3]/70 bg-[#f7f7f5]/95 backdrop-blur-[14px]">
       <div className="site-shell flex h-[78px] items-center justify-between">
         <Link to="/" className="group leading-none" aria-label="Hugo Martins — home">
-          <span className="block text-[16px] font-bold tracking-[-0.02em] text-[#111318] group-hover:text-[#153e75]">Hugo Martins</span>
-          <span className="mt-[7px] block text-[11.5px] font-medium tracking-[0.005em] text-[#687181]">AI Literacy · Higher Education</span>
+          <span className="block text-[17px] font-bold tracking-[-0.02em] text-[#111318] group-hover:text-[#153e75]">Hugo Martins</span>
+          <span className="mt-[7px] block text-[12px] font-medium tracking-[0.005em] text-[#687181]">AI Literacy · Higher Education</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary navigation">

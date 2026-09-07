@@ -42,6 +42,24 @@ const credentials = [
   'Professional Certificate in Applied Artificial Intelligence — Republic Polytechnic / AI Singapore / Microsoft'
 ];
 
+const practiceAreas = [
+  {
+    number: '01',
+    title: 'Curriculum architecture',
+    text: 'Align AI literacy with programme outcomes, disciplinary knowledge and a deliberate progression from guided use to independent judgement.'
+  },
+  {
+    number: '02',
+    title: 'Assessment redesign',
+    text: 'Assess the quality of inquiry, evidence choices, human intervention and defence—not only the polish of an AI-assisted output.'
+  },
+  {
+    number: '03',
+    title: 'Learning innovation',
+    text: 'Turn emerging tools into teachable workflows with clear roles for the learner, the educator and the AI system.'
+  }
+];
+
 export default function Teaching() {
   const courseJsonLd = {
     '@context': 'https://schema.org',
@@ -54,7 +72,7 @@ export default function Teaching() {
   };
 
   return (
-    <main id="main-content" className="page-shell">
+    <main id="main-content" className="page-shell teaching-portfolio">
       <Canonical path="/teaching" />
       <Helmet>
         <title>Teaching AI Literacy in Higher Education — Hugo Martins</title>
@@ -67,10 +85,10 @@ export default function Teaching() {
         <h1>Teaching AI literacy at university scale</h1>
         <p>I design learning that helps students use generative and agentic AI without outsourcing the knowledge, judgement and responsibility that make their work valuable.</p>
         <div className="evidence-line mt-10" aria-label="Selected teaching evidence">
-          <span><strong>42</strong> tutorial classes</span>
-          <span><strong>1,700+</strong> undergraduates</span>
-          <span><strong>4</strong> consecutive semesters</span>
-          <span><strong>≈4.3/5</strong> student feedback</span>
+          <span><strong>42</strong><small>tutorial classes</small></span>
+          <span><strong>1,700+</strong><small>undergraduates</small></span>
+          <span><strong>4</strong><small>consecutive semesters</small></span>
+          <span><strong>≈4.3/5</strong><small>average student feedback</small></span>
         </div>
       </header>
 
@@ -82,6 +100,22 @@ export default function Teaching() {
         <div className="statement-copy">
           <p>Tool familiarity is useful, but it is not enough. Students need to understand the domain, formulate consequential questions, evaluate evidence, supervise AI-supported work and remain answerable for the result.</p>
           <blockquote>AI can make performance easier. Education must still make expertise possible.</blockquote>
+        </div>
+      </section>
+
+      <section className="practice-areas" aria-labelledby="practice-areas-heading">
+        <div className="practice-areas-intro">
+          <p className="section-kicker">What I design</p>
+          <h2 id="practice-areas-heading">From institutional ambition to observable student capability</h2>
+        </div>
+        <div className="practice-areas-grid">
+          {practiceAreas.map(area => (
+            <article key={area.number}>
+              <span>{area.number}</span>
+              <h3>{area.title}</h3>
+              <p>{area.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 

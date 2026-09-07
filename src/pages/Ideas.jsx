@@ -46,6 +46,8 @@ export default function Ideas() {
     () => [...POSTS].map(ensureSlug).sort((a, b) => new Date(b.date) - new Date(a.date)).filter(post => theme === 'all' || themeOf(post) === theme),
     [theme]
   );
+  const leadPost = posts[0];
+  const remainingPosts = posts.slice(1);
 
   return (
     <main id="main-content" className="page-shell">
@@ -76,11 +78,32 @@ export default function Ideas() {
         ))}
       </div>
 
-      <div className="mt-10 border-y border-[#c9cdd3]" aria-live="polite">
-        {posts.map((post, index) => (
+      {leadPost && (
+        <article className="featured-essay" aria-live="polite">
+          <div className="featured-essay-meta">
+            <span>Featured essay</span>
+            <p>{displayDate(leadPost.date)}</p>
+            <p>{themes[themeOf(leadPost)]}</p>
+            {leadPost.readTime && <p>{leadPost.readTime}</p>}
+          </div>
+          <div>
+            <h2><Link to={makePostPath(leadPost)}>{leadPost.title.replace(/^“(?=[^”]+$)/, '')}</Link></h2>
+            <p>{refinedExcerpts[leadPost.slug] || leadPost.excerpt}</p>
+            <Link to={makePostPath(leadPost)} className="button-primary mt-7">Read the essay</Link>
+          </div>
+        </article>
+      )}
+
+      <div className="writing-archive-heading">
+        <p className="section-kicker">More from the archive</p>
+        <span>{remainingPosts.length} essays</span>
+      </div>
+
+      <div className="border-y border-[#c9cdd3]" aria-live="polite">
+        {remainingPosts.map((post, index) => (
           <article key={post.slug} className="ideas-entry group">
             <div className="text-[11px] font-semibold uppercase leading-6 tracking-[.12em] text-[#687181]">
-              <span className="ideas-entry-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+              <span className="ideas-entry-number" aria-hidden="true">{String(index + 2).padStart(2, '0')}</span>
               <p>{displayDate(post.date)}</p>
               <p className="text-[#1d4f91]">{themes[themeOf(post)]}</p>
               {post.readTime && <p className="normal-case tracking-normal text-[#8b929e]">{post.readTime}</p>}

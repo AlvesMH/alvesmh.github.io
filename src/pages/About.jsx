@@ -23,6 +23,24 @@ export default function About() {
         <p className="mt-5 max-w-[760px] text-[16px] leading-[1.72] text-[#687181]">My answer connects curriculum and assessment design with organisational behaviour, adaptive expertise and hands-on experimentation with AI-supported systems.</p>
       </header>
 
+      <section className="profile-proof-grid" aria-label="Professional profile at a glance">
+        <article>
+          <p>Higher education</p>
+          <h2>Teaching AI literacy at scale</h2>
+          <span>Curriculum, assessment and facilitation across a diverse undergraduate population.</span>
+        </article>
+        <article>
+          <p>Research foundation</p>
+          <h2>Organisational behaviour</h2>
+          <span>A PhD-level lens on judgement, adaptation, incentives and human–AI work.</span>
+        </article>
+        <article>
+          <p>Applied practice</p>
+          <h2>Working systems, not abstractions</h2>
+          <span>Prototypes that make assumptions about evidence, agency and accountability inspectable.</span>
+        </article>
+      </section>
+
       <div className="editorial-sections">
         <section className="editorial-section">
           <h2>Current work</h2>
@@ -30,7 +48,7 @@ export default function About() {
             <p>I am an <strong>AI literacy educator and Lecturer at Nanyang Technological University in Singapore</strong>.</p>
             <p>Across four consecutive semesters, I have led 42 CC0007 tutorial classes reaching approximately 1,700+ undergraduates. My teaching focuses on <strong>grounded inquiry, problem framing, evidence evaluation, assessment and responsible human–AI collaboration</strong>.</p>
             <p>I am particularly interested in how universities can prepare students to use generative and agentic AI without weakening the deep knowledge, productive practice and accountability through which expertise develops.</p>
-            <p>I also build small AI systems — retrieval-grounded assistants, structured reasoning environments and learning workflows — because working prototypes make theoretical assumptions concrete. They force a practical question:</p>
+            <p>I also build small AI systems because working prototypes make theoretical assumptions concrete. They force a practical question:</p>
             <p className="border-l-2 border-[#1d4f91] pl-5 font-medium text-[#272b33]">What should the AI do, what should the human continue to do, and how should the system shape that relationship?</p>
           </div>
         </section>

@@ -37,6 +37,12 @@ export default function CV() {
         </div>
       </header>
 
+      <section className="cv-summary no-print" aria-label="CV highlights">
+        <div><span>Primary expertise</span><strong>AI literacy curriculum and assessment</strong></div>
+        <div><span>Teaching evidence</span><strong>1,700+ undergraduates across 42 tutorials</strong></div>
+        <div><span>Professional lens</span><strong>Organisational behaviour and human–AI work</strong></div>
+      </section>
+
       <div className="cv-layout">
         <aside className="cv-rail no-print" aria-label="CV sections">
           <p>Navigate CV</p>
@@ -49,11 +55,13 @@ export default function CV() {
           </Block>
 
           <Block id="impact" title="Selected impact">
+            <div className="cv-impact-grid">
+              <div><strong>42</strong><span>CC0007 tutorial classes across four consecutive semesters</span></div>
+              <div><strong>1,700+</strong><span>unique undergraduate students reached</span></div>
+              <div><strong>≈4.3/5</strong><span>average Student Feedback on Teaching across CC0007 classes</span></div>
+              <div><strong>Weekly</strong><span>AI-enabled learning using Gemini, NotebookLM and agent-building approaches</span></div>
+            </div>
             <ul>
-              <li>42 CC0007 tutorial classes across four consecutive semesters.</li>
-              <li>Approximately 1,700+ unique undergraduate students reached.</li>
-              <li>Student Feedback on Teaching averaging approximately 4.3/5 across CC0007 classes.</li>
-              <li>Weekly AI-enabled learning using Gemini, NotebookLM and agent-building approaches.</li>
               <li>Competitive presenter at the NTU Annual Learning and Teaching Conference 2026.</li>
               <li>Invited EHL × NTUitive × SGInnovate industry-academic panelist, 2026.</li>
             </ul>
