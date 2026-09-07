@@ -39,7 +39,7 @@ export default function CV() {
 
       <section className="cv-summary no-print" aria-label="CV highlights">
         <div><span>Primary expertise</span><strong>AI literacy curriculum and assessment</strong></div>
-        <div><span>Teaching evidence</span><strong>1,700+ undergraduates across 42 tutorials</strong></div>
+        <div><span>Teaching evidence</span><strong>1,700+ undergraduates across 42 tutorials classes</strong></div>
         <div><span>Professional lens</span><strong>Organisational behaviour and human–AI work</strong></div>
       </section>
 
@@ -56,22 +56,19 @@ export default function CV() {
 
           <Block id="impact" title="Selected impact">
             <div className="cv-impact-grid">
-              <div><strong>42</strong><span>CC0007 tutorial classes across four consecutive semesters</span></div>
-              <div><strong>1,700+</strong><span>unique undergraduate students reached</span></div>
-              <div><strong>≈4.3/5</strong><span>average Student Feedback on Teaching across CC0007 classes</span></div>
+              <div><strong>42</strong><span>CC0007 tutorial classes and counting</span></div>
+              <div><strong>1,700+</strong><span>unique undergraduate students </span></div>
+
               <div><strong>Weekly</strong><span>AI-enabled learning using Gemini, NotebookLM and agent-building approaches</span></div>
             </div>
-            <ul>
-              <li>Competitive presenter at the NTU Annual Learning and Teaching Conference 2026.</li>
-              <li>Invited EHL × NTUitive × SGInnovate industry-academic panelist, 2026.</li>
-            </ul>
+
           </Block>
 
           <Block id="appointments" title="Academic appointments and teaching impact">
-            <h3>Nanyang Technological University — Lecturer, Interdisciplinary Core Curriculum · 2024–Present</h3>
+            <h3>Nanyang Technological University — Part-Time Lecturer, Interdisciplinary Core Curriculum · 2024–Present</h3>
             <p><strong>CC0007 Science &amp; Technology for Humanity</strong></p>
             <ul>
-              <li>Led 42 tutorial classes across four consecutive semesters, reaching approximately 1,700+ unique undergraduate students.</li>
+              <li>Led 42 tutorial classes, with 1,700+ unique undergraduate students.</li>
               <li>Co-created and delivered AI-literacy curriculum with generative AI and agentic tools embedded into weekly learning activities.</li>
               <li>Structured learning across foundational readiness, facilitated application and project-based mastery, moving students from guided tool use toward active auditing and agentic inquiry.</li>
               <li>Designed and facilitated work involving problem decomposition, information search, evidence review and synthesis, stakeholder analysis, persona-agent construction, simple agent development, and evaluation of AI-supported solutions.</li>
@@ -80,12 +77,14 @@ export default function CV() {
               <li>Designed learning around critical judgement, evidence verification, perspective-taking, responsible delegation and preservation of human agency.</li>
               <li>Student Feedback on Teaching averaged approximately 4.3/5, with recurring strengths around feedback, approachability, participation and analytical thinking.</li>
             </ul>
+            <br></br>
             <p><strong>CC0002 Navigating the Digital World</strong></p>
             <ul>
               <li>Led 6 tutorial classes reaching approximately 240 undergraduate students.</li>
               <li>Facilitated interdisciplinary digital-literacy teaching, collaborative learning and project feedback.</li>
             </ul>
-            <h3>National Institute of Education, NTU — Lecturer / Part-Time Lecturer · 2023–Present</h3>
+            <br></br>
+            <h3>National Institute of Education, NTU — Part-Time Lecturer · 2023–Present</h3>
             <ul>
               <li>Taught Human Resource Management in Sport across five cohorts, reaching approximately 80 students.</li>
               <li>Designed case studies, role plays, assessments and rubrics around recruitment, development, performance, rewards, volunteers and organisational behaviour.</li>

@@ -52,15 +52,6 @@ export default function Home() {
 
       <Hero />
 
-      <main id="main-content">
-        <section className="evidence-section" aria-label="Selected professional evidence">
-          <div className="site-shell evidence-line">
-            <span><strong>42</strong><small>CC0007 tutorial classes</small></span>
-            <span><strong>1,700+</strong><small>undergraduates reached</small></span>
-            <span><strong>4</strong><small>consecutive semesters</small></span>
-            <span><strong>≈4.3/5</strong><small>average student feedback</small></span>
-          </div>
-        </section>
 
         <section className="bg-white py-24 md:py-[112px]" aria-labelledby="literacy-thesis-title">
           <div className="site-shell statement-panel">
@@ -174,7 +165,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </main>
     </>
   );
 }

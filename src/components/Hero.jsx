@@ -12,13 +12,13 @@ export default function Hero() {
             <span className="block">for Higher Education</span>
           </h1>
           <p className="mt-8 max-w-[680px] text-[19px] leading-[1.62] text-[#272b33] sm:text-[20px]">
-            I design AI-literacy curriculum, assessment and hands-on learning that prepares university students to use generative and agentic AI with knowledge, judgement and accountability.
+            Applied and interdisciplinary AI-literacy curriculum, assessment and Project-Based Learning (PBL) for an AI-enabled world.
           </p>
           <p className="mt-4 max-w-[650px] text-[16px] leading-7 text-[#687181]">
-            My work connects <strong className="font-semibold text-[#4b5360]">curriculum design, adaptive expertise and responsible human–AI work</strong>.
+            My work connects <strong className="font-semibold text-[#4b5360]">Project-Based Learning (PBL), interdisciplinary adaptive expertise and responsible human–AI work</strong>.
           </p>
           <p className="mt-7 max-w-[680px] text-[13px] leading-6 text-[#687181]">
-            Lecturer at Nanyang Technological University <span aria-hidden="true">·</span><br className="sm:hidden" /> CC0007 Science &amp; Technology for Humanity · Based in Singapore
+            Nanyang Technological University <span aria-hidden="true">·</span><br className="sm:hidden" /> CC0007 Science &amp; Technology for Humanity · Singapore
           </p>
           <div className="mt-9 flex flex-wrap gap-3">
             <Link to="/teaching" className="button-primary">Explore teaching and curriculum</Link>
