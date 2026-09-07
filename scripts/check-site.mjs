@@ -41,7 +41,7 @@ for (const asset of ['og.png', 'profile.json', 'cv.json', 'feed.xml', 'llms.txt'
 }
 
 const home = readFileSync(join(dist, 'index.html'), 'utf8');
-for (const phrase of ['AI Literacy for Higher Education', '1,700+', 'Nanyang Technological University']) {
+for (const phrase of ['AI Literacy for Higher Education', 'Project-Based Learning (PBL)', 'Nanyang Technological University']) {
   if (!home.includes(phrase)) failures.push(`/: missing positioning phrase "${phrase}"`);
 }
 

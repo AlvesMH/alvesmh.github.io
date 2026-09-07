@@ -52,7 +52,7 @@ export default function Home() {
 
       <Hero />
 
-
+      <main id="main-content">
         <section className="bg-white py-24 md:py-[112px]" aria-labelledby="literacy-thesis-title">
           <div className="site-shell statement-panel">
             <div>
@@ -165,6 +165,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+      </main>
     </>
   );
 }
