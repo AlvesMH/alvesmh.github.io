@@ -7,7 +7,7 @@ import fs from 'node:fs';
 const OUT_DIR = 'dist';
 
 const postRoutes = [
-  '/post/the-cost-of-making-an-expert',
+  '/post/when-ai-removes-the-first-rung',
   '/post/ai_advantage_services',
   '/post/agentic_ai_blog_post',
   '/post/redesigning-undergraduate-education',

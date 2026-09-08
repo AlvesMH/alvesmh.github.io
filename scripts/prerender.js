@@ -9,7 +9,7 @@ const template = readFileSync(join(distRoot, 'index.html'), 'utf8');
 const { render } = await import(pathToFileURL(serverEntry).href);
 
 const postSlugs = [
-  'the-cost-of-making-an-expert',
+  'when-ai-removes-the-first-rung',
   'ai_advantage_services',
   'agentic_ai_blog_post',
   'redesigning-undergraduate-education',

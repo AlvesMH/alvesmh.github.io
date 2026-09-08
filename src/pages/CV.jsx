@@ -26,7 +26,7 @@ export default function CV() {
 
       <header className="border-b border-[#c9cdd3] pb-11">
         <p className="section-kicker">Curriculum Vitae</p>
-        <h1 className="mt-3 text-[clamp(2.65rem,4.5vw,4.05rem)] font-semibold leading-[1.02] tracking-[-.04em] text-[#111318]">Hugo Martins, PhD</h1>
+        <h1 className="mt-3 text-[clamp(2.45rem,3.9vw,3.6rem)] font-semibold leading-[1.04] tracking-[-.038em] text-[#111318]">Hugo Martins, PhD</h1>
         <p className="mt-4 text-[20px] leading-[1.5] text-[#272b33]">AI Literacy · Higher Education Curriculum &amp; Assessment</p>
         <p className="mt-3 text-[14px] text-[#687181]">Lecturer, Nanyang Technological University · Singapore</p>
         <div className="no-print mt-6 flex flex-wrap gap-x-6 gap-y-3 text-[13px]">
@@ -39,7 +39,7 @@ export default function CV() {
 
       <section className="cv-summary no-print" aria-label="CV highlights">
         <div><span>Primary expertise</span><strong>AI literacy curriculum and assessment</strong></div>
-        <div><span>Teaching evidence</span><strong>1,700+ undergraduates across 42 tutorials classes</strong></div>
+        <div><span>Teaching evidence</span><strong>1,700+ undergraduates across 36 CC0007 tutorial classes</strong></div>
         <div><span>Professional lens</span><strong>Organisational behaviour and human–AI work</strong></div>
       </section>
 
@@ -56,7 +56,7 @@ export default function CV() {
 
           <Block id="impact" title="Selected impact">
             <div className="cv-impact-grid">
-              <div><strong>42</strong><span>CC0007 tutorial classes and counting</span></div>
+              <div><strong>36</strong><span>CC0007 tutorial classes</span></div>
               <div><strong>1,700+</strong><span>unique undergraduate students </span></div>
 
               <div><strong>Weekly</strong><span>AI-enabled learning using Gemini, NotebookLM and agent-building approaches</span></div>
@@ -68,14 +68,13 @@ export default function CV() {
             <h3>Nanyang Technological University — Part-Time Lecturer, Interdisciplinary Core Curriculum · 2024–Present</h3>
             <p><strong>CC0007 Science &amp; Technology for Humanity</strong></p>
             <ul>
-              <li>Led 42 tutorial classes, with 1,700+ unique undergraduate students.</li>
+              <li>Led 36 CC0007 tutorial classes, teaching 1,700+ unique undergraduate students.</li>
               <li>Co-created and delivered AI-literacy curriculum with generative AI and agentic tools embedded into weekly learning activities.</li>
               <li>Structured learning across foundational readiness, facilitated application and project-based mastery, moving students from guided tool use toward active auditing and agentic inquiry.</li>
               <li>Designed and facilitated work involving problem decomposition, information search, evidence review and synthesis, stakeholder analysis, persona-agent construction, simple agent development, and evaluation of AI-supported solutions.</li>
               <li>Integrated curated source libraries, citation-backed synthesis and human-intervention documentation to make data provenance, verification and student judgement visible.</li>
               <li>Supported a three-phase assessment path spanning collaborative research and problem framing, an interdisciplinary solution pitch, and individual synthesis and reflection.</li>
               <li>Designed learning around critical judgement, evidence verification, perspective-taking, responsible delegation and preservation of human agency.</li>
-              <li>Student Feedback on Teaching averaged approximately 4.3/5, with recurring strengths around feedback, approachability, participation and analytical thinking.</li>
             </ul>
             <br></br>
             <p><strong>CC0002 Navigating the Digital World</strong></p>

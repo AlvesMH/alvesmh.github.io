@@ -85,10 +85,8 @@ export default function Teaching() {
         <h1>Teaching AI literacy at university scale</h1>
         <p>I design learning that helps students use generative and agentic AI without outsourcing the knowledge, judgement and responsibility that make their work valuable.</p>
         <div className="evidence-line mt-10" aria-label="Selected teaching evidence">
-          <span><strong>42</strong><small>tutorial classes</small></span>
+          <span><strong>36</strong><small>CC0007 tutorial classes</small></span>
           <span><strong>1,700+</strong><small>undergraduates</small></span>
-          <span><strong>4</strong><small>consecutive semesters</small></span>
-          <span><strong>≈4.3/5</strong><small>average student feedback</small></span>
         </div>
       </header>
 
@@ -208,7 +206,7 @@ export default function Teaching() {
           <h2 id="teaching-contact-heading">Building serious AI capability in higher education</h2>
         </div>
         <div>
-          <p>I welcome conversations about AI-literacy curriculum, assessment redesign and responsible human–AI learning in Singapore, Saudi Arabia, the UAE and Europe.</p>
+          <p>I welcome focused conversations with educators and institutions about AI-literacy curriculum, assessment redesign and responsible human–AI learning.</p>
           <Link to="/contact" className="button-light mt-7">Start a conversation</Link>
         </div>
       </section>

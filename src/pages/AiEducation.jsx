@@ -48,10 +48,10 @@ export default function AiEducation() {
     </header>
 
     <div className="case-facts" aria-label="Case study at a glance">
-      <div><strong>42</strong><span>tutorial classes</span></div>
+      <div><strong>36</strong><span>CC0007 tutorial classes</span></div>
       <div><strong>1,700+</strong><span>students reached</span></div>
-      <div><strong>4</strong><span>consecutive semesters</span></div>
-      <div><strong>≈4.3/5</strong><span>student feedback</span></div>
+      <div><strong>3</strong><span>learning stages</span></div>
+      <div><strong>3</strong><span>assessment phases</span></div>
     </div>
 
     <div className="prose-profile">
@@ -173,7 +173,7 @@ export default function AiEducation() {
       <section>
         <h2>Implementation at scale</h2>
         <div>
-          <p>Across four consecutive semesters, I led 42 CC0007 tutorial classes reaching approximately 1,700+ unique undergraduate students. Student Feedback on Teaching across these classes averaged approximately 4.3/5, with recurring strengths around feedback quality, approachability, enthusiasm, participation and analytical thinking.</p>
+          <p>Across 36 CC0007 tutorial classes, I have taught approximately 1,700+ unique undergraduate students. This scale has made coherence, clear scaffolding and inspectable evidence of learning central to my practice.</p>
           <p>Scale makes coherence important. The three-tier structure provides a repeatable rhythm—prepare, practise, apply—while leaving room for students to pursue different problems, sources and stakeholder perspectives.</p>
         </div>
       </section>

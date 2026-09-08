@@ -10,7 +10,7 @@ export default function Footer() {
           <div>
             <p className="text-[17px] font-semibold tracking-[-0.015em] text-[#111318]">Hugo Martins, PhD</p>
             <p className="mt-3 max-w-[560px] text-[14px] leading-6 text-[#4b5360]">
-              AI literacy, curriculum and assessment for higher education. Based in Singapore; open to selected academic and learning-innovation opportunities in Singapore, Saudi Arabia, the UAE and Europe.
+              AI literacy, curriculum and assessment for higher education. Based in Singapore.
             </p>
           </div>
           <nav className="flex flex-wrap gap-x-6 gap-y-3 text-[13px] font-medium text-[#4b5360] md:justify-end" aria-label="Footer navigation">

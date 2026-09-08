@@ -11,7 +11,7 @@ export default function Hero() {
             AI Literacy
             <span className="block">for Higher Education</span>
           </h1>
-          <p className="mt-8 max-w-[680px] text-[19px] leading-[1.62] text-[#272b33] sm:text-[20px]">
+          <p className="mt-8 max-w-[680px] text-[18px] leading-[1.65] text-[#272b33] sm:text-[19px]">
             Applied and interdisciplinary AI-literacy curriculum, assessment and Project-Based Learning (PBL) for an AI-enabled world.
           </p>
           <p className="mt-4 max-w-[650px] text-[16px] leading-7 text-[#687181]">

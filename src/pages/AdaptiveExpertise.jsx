@@ -98,7 +98,7 @@ export default function AdaptiveExpertise() {
         <h2>Universities should prepare students not only to use AI, but to exercise judgement within AI-enabled systems.</h2>
         <div className="mt-8 flex flex-wrap gap-5">
           <Link to="/teaching" className="button-primary">Explore the teaching portfolio</Link>
-          <Link to="/post/the-cost-of-making-an-expert" className="button-secondary">Read the expertise essay</Link>
+          <Link to="/post/when-ai-removes-the-first-rung" className="button-secondary">Read the expertise essay</Link>
         </div>
         <p className="last-reviewed">Last reviewed September 2026.</p>
       </section>

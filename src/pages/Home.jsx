@@ -7,12 +7,18 @@ import { POSTS } from '../data/posts';
 import { personJsonLd } from '../data/site';
 import { ensureSlug, makePostPath } from '../utils/slugify';
 
+const literacyDimensions = [
+  ['Build knowledge', 'Develop enough disciplinary understanding and source awareness to recognise what matters—and when a fluent answer is wrong.'],
+  ['Direct the work', 'Frame the problem, define constraints, choose evidence and decide where human intervention is required.'],
+  ['Defend the result', 'Test assumptions and trade-offs, document consequential choices and remain accountable for the outcome.']
+];
+
 const principles = [
-  ['Deep knowledge', 'Students need enough substantive understanding to recognise when a confident answer is wrong.'],
-  ['Productive friction', 'Attempts, feedback, revision and reflection remain essential even when AI can produce an answer faster.'],
-  ['Problem framing', 'When solutions are abundant, defining the right problem and its stakeholders becomes more valuable.'],
-  ['Observed performance', 'Dialogue, defence and visible reasoning reveal capability more credibly than unverified artifacts alone.'],
-  ['Deliberate apprenticeship', 'Universities must create authentic practice when entry-level work no longer develops expertise automatically.']
+  ['Knowledge', 'Build a domain model', 'Students need enough substantive understanding to detect omissions, weak evidence and confident error.'],
+  ['Practice', 'Protect productive friction', 'Attempts, critique, revision and reflection turn accessible answers into durable capability.'],
+  ['Inquiry', 'Frame consequential problems', 'When solutions are abundant, defining the right problem, stakeholders and constraints becomes more valuable.'],
+  ['Evidence', 'Make performance observable', 'Dialogue, defence and visible reasoning reveal capability more credibly than a polished artifact alone.'],
+  ['Agency', 'Increase responsibility', 'Learners earn autonomy through authentic, interdisciplinary work in which judgement has visible consequences.']
 ];
 
 const selectedWork = [
@@ -53,15 +59,26 @@ export default function Home() {
       <Hero />
 
       <main id="main-content">
-        <section className="bg-white py-24 md:py-[112px]" aria-labelledby="literacy-thesis-title">
-          <div className="site-shell statement-panel">
-            <div>
+        <section className="literacy-thesis-section bg-white py-24 md:py-[108px]" aria-labelledby="literacy-thesis-title">
+          <div className="site-shell">
+            <div className="statement-panel statement-panel-literacy">
+              <div>
               <p className="section-kicker">A more demanding definition</p>
               <h2 id="literacy-thesis-title">AI literacy is more than tool fluency</h2>
+              </div>
+              <div className="statement-copy">
+                <p className="statement-lead">It is the capacity to work with AI without surrendering the knowledge, judgement and responsibility that make the work trustworthy.</p>
+                <p>That capacity matters more as generative systems move from producing answers to participating in research, analysis and multi-step workflows.</p>
+              </div>
             </div>
-            <div className="statement-copy">
-              <p>It is the ability to build knowledge, frame consequential problems, evaluate evidence, supervise AI-supported work and remain accountable for the result.</p>
-              <p>That is the capability universities must develop when AI can generate plausible answers and participate in increasingly complex workflows.</p>
+            <div className="literacy-dimensions" aria-label="Three dimensions of AI literacy">
+              {literacyDimensions.map(([title, text], index) => (
+                <article key={title}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -85,23 +102,27 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-[#f7f7f5] py-24 md:py-[112px]" aria-labelledby="expertise-title">
+        <section className="expertise-section bg-[#f7f7f5] py-24 md:py-[108px]" aria-labelledby="expertise-title">
           <div className="site-shell">
             <p className="section-kicker">Teaching philosophy</p>
-            <div className="grid gap-8 md:grid-cols-[7fr_5fr] md:items-end">
+            <div className="grid gap-8 md:grid-cols-[7fr_5fr] md:items-center">
               <h2 id="expertise-title" className="section-title max-w-[760px]">How do we make experts when AI removes the first rung?</h2>
-              <p className="section-lede !mt-0 md:pb-1">Education must preserve the practice through which knowledge becomes judgement.</p>
+              <div className="expertise-thesis">
+                <span>The central challenge</span>
+                <p>Education must deliberately recreate the practice through which knowledge becomes judgement.</p>
+              </div>
             </div>
-            <div className="principle-list mt-12">
-              {principles.map(([title, text], index) => (
+            <div className="expertise-pathway mt-12" aria-label="Pathway from knowledge to responsible agency">
+              {principles.map(([label, title, text], index) => (
                 <article key={title}>
                   <span>{String(index + 1).padStart(2, '0')}</span>
+                  <p className="expertise-pathway-label">{label}</p>
                   <h3>{title}</h3>
                   <p>{text}</p>
                 </article>
               ))}
             </div>
-            <Link to="/post/the-cost-of-making-an-expert" className="text-link mt-8 inline-block">Read the teaching philosophy essay →</Link>
+            <Link to="/post/when-ai-removes-the-first-rung" className="text-link mt-8 inline-block">Read the teaching philosophy essay →</Link>
           </div>
         </section>
 
@@ -157,7 +178,7 @@ export default function Home() {
             </div>
             <div>
               <p>My work is grounded in a PhD in Organisational Behaviour, higher-education and adult-learning qualifications, and practical experience designing AI-enabled learning at scale.</p>
-              <p>I am based in Singapore and open to selected academic and learning-innovation opportunities in Singapore, Saudi Arabia, the UAE and Europe.</p>
+              <p>My focus is how curriculum, assessment and applied interdisciplinary learning can preserve judgement and human responsibility as AI becomes more capable.</p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link to="/about" className="button-light">About my background</Link>
                 <Link to="/contact" className="button-dark-outline">Contact</Link>

@@ -19,7 +19,7 @@
 
 ## Writing
 - https://hugomartins.eu/ideas — essays on AI literacy, higher education, expertise and human capability
-- https://hugomartins.eu/post/the-cost-of-making-an-expert — teaching philosophy on expertise formation in an AI-enabled world
+- https://hugomartins.eu/post/when-ai-removes-the-first-rung — teaching philosophy on expertise formation in an AI-enabled world
 
 ## External profiles
 - https://github.com/AlvesMH

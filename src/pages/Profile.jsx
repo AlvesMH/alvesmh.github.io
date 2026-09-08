@@ -11,10 +11,10 @@ const focusAreas = [
 ];
 
 const impact = [
-  ['42', 'CC0007 tutorial classes'],
+  ['36', 'CC0007 tutorial classes'],
   ['1,700+', 'undergraduates reached'],
-  ['≈4.3/5', 'student feedback'],
-  ['4 semesters', 'continuous delivery'],
+  ['3 stages', 'scaffolded learning architecture'],
+  ['3 phases', 'assessment pathway'],
   ['2026', 'NTU conference presenter'],
   ['2026', 'invited industry-academic panelist']
 ];
@@ -34,7 +34,7 @@ export default function Profile() {
       <header className="grid gap-12 border-b border-[#c9cdd3] pb-16 md:grid-cols-[8fr_4fr] md:items-end">
         <div>
           <p className="section-kicker">Professional profile</p>
-          <h1 className="mt-3 text-[clamp(2.7rem,4.6vw,4.15rem)] font-semibold leading-[1.02] tracking-[-.04em] text-[#111318]">Hugo Martins, PhD</h1>
+          <h1 className="mt-3 text-[clamp(2.5rem,4vw,3.65rem)] font-semibold leading-[1.04] tracking-[-.038em] text-[#111318]">Hugo Martins, PhD</h1>
           <p className="mt-5 text-[21px] leading-[1.5] text-[#272b33]">AI Literacy · Higher Education Curriculum &amp; Assessment</p>
           <p className="mt-3 text-[14px] text-[#687181]">Lecturer, Nanyang Technological University · Singapore</p>
         </div>

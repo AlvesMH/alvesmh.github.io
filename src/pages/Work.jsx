@@ -77,7 +77,7 @@ export default function Work() {
             <p className="mt-5 text-[13px] text-[#687181]">2024–Present</p>
             <dl className="work-proof" aria-label="Selected case evidence">
               <div><dt>Scale</dt><dd>1,700+ students</dd></div>
-              <div><dt>Delivery</dt><dd>42 tutorial classes</dd></div>
+              <div><dt>Delivery</dt><dd>36 CC0007 tutorial classes</dd></div>
               <div><dt>Focus</dt><dd>Judgement with AI</dd></div>
             </dl>
           </div>

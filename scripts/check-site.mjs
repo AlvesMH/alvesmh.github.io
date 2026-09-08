@@ -10,7 +10,7 @@ const routes = [
   '/work/adaptive-expertise',
   '/work/human-ai-work',
   '/ideas',
-  '/post/the-cost-of-making-an-expert',
+  '/post/when-ai-removes-the-first-rung',
   '/about',
   '/profile',
   '/cv',

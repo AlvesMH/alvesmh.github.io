@@ -46,7 +46,7 @@ export default function About() {
           <h2>Current work</h2>
           <div className="editorial-copy">
             <p>I am an <strong>AI literacy educator and Lecturer at Nanyang Technological University in Singapore</strong>.</p>
-            <p>Across four consecutive semesters, I have led 42 CC0007 tutorial classes reaching approximately 1,700+ undergraduates. My teaching focuses on <strong>grounded inquiry, problem framing, evidence evaluation, assessment and responsible human–AI collaboration</strong>.</p>
+            <p>Across 36 CC0007 tutorial classes, I have taught approximately 1,700+ undergraduates. My teaching focuses on <strong>grounded inquiry, problem framing, evidence evaluation, assessment and responsible human–AI collaboration</strong>.</p>
             <p>I am particularly interested in how universities can prepare students to use generative and agentic AI without weakening the deep knowledge, productive practice and accountability through which expertise develops.</p>
             <p>I also build small AI systems because working prototypes make theoretical assumptions concrete. They force a practical question:</p>
             <p className="border-l-2 border-[#1d4f91] pl-5 font-medium text-[#272b33]">What should the AI do, what should the human continue to do, and how should the system shape that relationship?</p>

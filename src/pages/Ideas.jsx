@@ -13,7 +13,7 @@ const themes = {
 };
 
 const refinedExcerpts = {
-  'the-cost-of-making-an-expert': 'If AI removes the routine work through which novices once developed judgement, universities must deliberately rebuild the practice, feedback and accountable performance that make expertise possible.',
+  'when-ai-removes-the-first-rung': 'If AI removes the routine work through which novices once developed judgement, universities must deliberately rebuild the practice, feedback and accountable performance that make expertise possible.',
   ai_advantage_services: 'As access to increasingly capable AI becomes widespread, sustainable advantage depends less on owning better models and more on how organisations redesign work around them.',
   agentic_ai_blog_post: 'Agentic AI moves the challenge beyond prompting. People increasingly need to know what to delegate, how to supervise execution, when to intervene and how to remain accountable.',
   'redesigning-undergraduate-education': 'Higher education must prepare students not simply to use AI, but to perform the forms of cognitive work that become more valuable when routine production can be delegated.',

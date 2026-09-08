@@ -41,6 +41,7 @@ export function SiteApp({ PostComponent = ClientPost }) {
       <Route path="/about" element={<About />} />
       <Route path="/cv" element={<CV />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/post/the-cost-of-making-an-expert" element={<Navigate to="/post/when-ai-removes-the-first-rung" replace />} />
       <Route path="/post/:slug" element={<React.Suspense fallback={<main id="main-content" className="article-shell">Loading essay…</main>}><PostComponent /></React.Suspense>} />
       <Route path="/thank-you" element={<ThankYou />} />
       <Route path="/tools" element={<Tools />} />

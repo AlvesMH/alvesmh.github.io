@@ -79,9 +79,9 @@ export default function Contact() {
       <div className="grid gap-14 md:grid-cols-[5fr_7fr] md:gap-20">
         <section aria-labelledby="contact-heading">
           <p className="section-kicker">Contact</p>
-          <h1 id="contact-heading" className="mt-3 text-[clamp(2.65rem,4.5vw,4.1rem)] font-semibold leading-[1.02] tracking-[-.04em] text-[#111318]">Discuss a serious AI-literacy challenge</h1>
+          <h1 id="contact-heading" className="mt-3 text-[clamp(2.35rem,3.8vw,3.45rem)] font-semibold leading-[1.04] tracking-[-.038em] text-[#111318]">Discuss a serious AI-literacy challenge</h1>
           <p className="mt-7 text-[19px] leading-[1.65] text-[#4b5360]">I welcome focused conversations about curriculum strategy, assessment redesign, learning innovation, speaking and responsible human–AI work.</p>
-          <p className="mt-5 text-[14px] leading-6 text-[#687181]">Based in Singapore and open to selected higher-education and learning-innovation opportunities in Singapore, Saudi Arabia, the UAE and Europe.</p>
+          <p className="mt-5 text-[14px] leading-6 text-[#687181]">Based in Singapore.</p>
 
           <div className="mt-11 border-t border-[#c9cdd3] pt-7">
             <h2 className="text-[14px] font-semibold text-[#111318]">A useful first note includes</h2>
